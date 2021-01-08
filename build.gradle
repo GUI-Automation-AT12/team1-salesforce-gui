@@ -3,7 +3,7 @@ plugins {
     id 'checkstyle'
 }
 
-group 'gui.salesforce'
+group 'org.fundacionjala.salesforce'
 version '1.0'
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
@@ -19,6 +19,7 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.0'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
     testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '6.0.0'
     testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.0.0'
     testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.0.0'
