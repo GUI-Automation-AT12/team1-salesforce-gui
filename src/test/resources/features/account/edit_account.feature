@@ -13,7 +13,7 @@ Feature: Edit Account
         |  Phone            |  +591 77777778   |
     Then Account's new data should be displayed at details
       And Account's new data should be displayed in Accounts table
-      And the API request to get the Account should contain the new data
+      And the gotten data about the Opportunity should contain the new data
 
   @deleteAccount
   Scenario:User creates an Account, then edits it and verify creation and edition datetime
@@ -31,4 +31,4 @@ Feature: Edit Account
         |  Phone            |  +591 77777778   |
     Then Account's new data should be displayed at details
       And the creation and edition datetime should be the correct
-      And the API request to get the Account should contain the correct creation and edition datetime
+      And the gotten data about the Account should contain the correct creation and edition datetime

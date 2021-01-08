@@ -11,4 +11,4 @@ Feature: Create Opportunity
       |  Stage        |  Closed Won        |
     Then the new Opportunity should be present in Opportunities table
       And the new Opportunity should be present in Existent Account details
-      And the API request to get the Opportunity should contain the new data
+      And the gotten data about the Opportunity should contain the new data
