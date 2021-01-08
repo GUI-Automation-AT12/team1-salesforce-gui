@@ -9,5 +9,6 @@ Feature: Create Opportunity
       |  Account      |  Existent Account  |
       |  Close Date   |  today             |
       |  Stage        |  Closed Won        |
-    Then the new Opportunity should be present in Existent Account details
+    Then the new Opportunity should be present in Opportunities table
+      And the new Opportunity should be present in Existent Account details
       And the API request to get the Opportunity should contain the new data
