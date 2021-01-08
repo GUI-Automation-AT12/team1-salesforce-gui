@@ -13,5 +13,4 @@ Feature: Create Account
         |  Phone            |  +591 77778888     |
     Then Account's new data should be displayed at details
       And Account's new data should be displayed in Accounts table
-    When I get the Account info via API
-    Then the response should contain the Account new data
+      And the API request to get the Account should contain the new data
