@@ -1,11 +1,12 @@
 @Account
 Feature: Import Accounts
 
-  @deleteAccount
+  @deleteAccount @createAccount
   Scenario Outline: Import multiple Accounts using .csv files
     Given I log in to Salesforce with Account Owner User credentials
-    When I go to ACCOUNTS tab
-    And I selected "Import" option
+    When I go to "HOME" page
+    And I search the following name
+      | Armando Guerra |
     Then "Import your Data into Salesforce" should be displayed at title
     And I selected "Accounts and Contacts"
     And I selected "Add new records"
