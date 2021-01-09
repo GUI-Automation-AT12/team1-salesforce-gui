@@ -11,7 +11,7 @@ Feature: Import Accounts
     And I selected "Accounts and Contacts"
     And I selected "Add new records"
     And I selected "Email"
-    And I selected the following <option> with a valid file <file path>
+    And I import a new Account matching by "Email" with the following <filepath> as <option>
       | Option      | file path                  |
       | CSV         | config/account/csv.csv     |
       | Outlook CSV | config/account/outlook.csv |
