@@ -7,8 +7,7 @@ Feature: Edit Personal Information
   @restorePersonalInformation
   Scenario: Update personal information with the minimum values
     When I go to "PERSONAL INFORMATION PAGE"
-    And I verify that the title of the panel is "Personal Information"
-    And I edit my personal information with the following data" to be more specific
+    And I edit my personal information with the following data
       | First Name | Civil              |
       | Last Name  | Armando Guerra     |
       | Alias      | Guerra             |
