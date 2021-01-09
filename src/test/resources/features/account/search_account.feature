@@ -8,5 +8,5 @@ Feature: Search Account
     And I search the following name
       | Armando Guerra |
     Then I search these user name in the drop down menu
-    And I select the user name
-    And I validate the information
+    When I select the user name
+    And The Account's information should be displayed at details
