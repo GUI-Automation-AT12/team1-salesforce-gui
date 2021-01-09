@@ -17,6 +17,5 @@ Feature: Import Accounts
       | Outlook CSV | config/account/outlook.csv |
       | ACT! CSV    | config/account/act.csv     |
       | GMail CSV   | config/account/gmail.csv   |
-    Then I selected "Next" option
-    And I selected "Start Import" option
-    And I selected "Ok" option
+    Then The new record should be displayed at the table
+ 
