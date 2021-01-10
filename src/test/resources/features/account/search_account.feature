@@ -7,6 +7,6 @@ Feature: Search Account
     When I go to "HOME" page
     And I search the following name
       | Armando Guerra |
-    Then I search these account name in the drop down menu
+    Then I search the account name in the drop down menu
     When I select the account name
     And The Account's information should be displayed at details
