@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.unitTest.utils;
+package org.fundacionjala.salesforce.utils;
 
 import org.fundacionjala.salesforce.constants.Constants;
 
@@ -8,11 +8,11 @@ import java.util.Base64;
 /**
  * [SL] This class contains utilities for the project.
  */
-public final class Utils {
+public final class DecodingUtils {
     /**
      * [SL] Constructor.
      */
-    private Utils() {
+    private DecodingUtils() {
 
     }
     /**
