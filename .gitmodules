@@ -1,3 +1,4 @@
 [submodule "salesforce-core"]
 	path = salesforce-core
 	url = https://github.com/GUI-Automation-AT12/team1-salesforce-core
+	branch = develop
