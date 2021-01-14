@@ -63,11 +63,6 @@ task reRunBDDTests(type: Test) {
     scanForTestClasses = false
 }
 
-cucumberReports {
-    outputDir = file("${project.buildDir}/reports/cucumber")
-    reports = files('build/cucumber-reports/Cucumber.json')
-}
-
 dependencies {
     implementation project(':salesforce-core')
 }
