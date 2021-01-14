@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
  * Cucumber TestNG runner class.
  */
 @CucumberOptions(
-        plugin = {"pretty"},
+        plugin = {"pretty", "json:build/cucumber-reports/Cucumber.json"},
         features = {"src/test/resources/features/"},
         glue = {"org.fundacionjala.salesforce.cucumber.stepdefs"}
 )
