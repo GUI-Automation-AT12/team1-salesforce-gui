@@ -32,6 +32,16 @@ checkstyle {
     configFile = file("${rootProject.rootDir}/config/checkstyle/checkstyle.xml")
 }
 
+test {
+    useTestNG()
+    exclude 'org/fundacionjala/salesforce/runner/**'
+    include 'org/fundacionjala/salesforce/unitTest/**'
+    systemProperty 'usedefaultlisteners', false
+    systemProperty 'listener', 'com.epam.reportportal.testng.ReportPortalTestNGListener'
+    testLogging {
+        events 'PASSED', 'STARTED', 'FAILED', 'SKIPPED'
+    }
+}
 
 task executeBDDTests(type: Test) {
     useTestNG()
