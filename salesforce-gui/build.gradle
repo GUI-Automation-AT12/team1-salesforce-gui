@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.22"
 }
 
 group 'org.fundacionjala.salesforce'
@@ -31,6 +32,16 @@ checkstyle {
     configFile = file("${rootProject.rootDir}/config/checkstyle/checkstyle.xml")
 }
 
+test {
+    useTestNG()
+    exclude 'org/fundacionjala/salesforce/runner/**'
+    include 'org/fundacionjala/salesforce/unitTest/**'
+    systemProperty 'usedefaultlisteners', false
+    systemProperty 'listener', 'com.epam.reportportal.testng.ReportPortalTestNGListener'
+    testLogging {
+        events 'PASSED', 'STARTED', 'FAILED', 'SKIPPED'
+    }
+}
 
 task executeBDDTests(type: Test) {
     useTestNG()
@@ -51,6 +62,11 @@ task reRunBDDTests(type: Test) {
     }
     testLogging.showStandardStreams = true
     scanForTestClasses = false
+}
+
+cucumberReports {
+    outputDir = file("${project.buildDir}/reports/cucumber")
+    reports = files('build/cucumber-reports/Cucumber.json')
 }
 
 dependencies {
