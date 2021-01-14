@@ -7,9 +7,9 @@ Feature: Import Accounts
     When I go to "HOME" page
     And I search the following name
       | Armando Guerra |
-    Then "Import your Data into Salesforce" should be displayed at title
-    And I import a new Account matching by "Email" with the following <filepath> as <option>
-      | Option      | file path                  |
+    Then I should see a message "Import your Data into Salesforce"
+    And I import a new Account matching by "Email" with the following <filePath> as <Option>
+      | Option      | filePath                   |
       | CSV         | config/account/csv.csv     |
       | Outlook CSV | config/account/outlook.csv |
       | ACT! CSV    | config/account/act.csv     |

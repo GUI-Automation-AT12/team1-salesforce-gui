@@ -2,11 +2,17 @@
 Feature: Search Account
 
   @deleteAccount @createAccount
-  Scenario: Account search using the search tool and compare with the account created
+  Scenario Outline: Account search using the search tool and compare with the account created
     Given I log in to Salesforce with Account Owner User credentials
     When I go to "HOME" page
-    And I search the following name
-      | Armando Guerra |
-    Then I search the account name in the drop down menu
-    When I select the account name
-    And The Account's information should be displayed at details
+    And I set the following text <search> in the searching tool
+      | search        |
+      | Armando Lopez |
+      | Lopez         |
+      | Ar            |
+    Then the results in the Account section should match with the <filePath>
+      | filePath                     |
+      | searchByName.json            |
+      | searchByLastName.json        |
+      | searchByFirstCharacters.json |
+    And the details of each found account should contain the initial creation data
