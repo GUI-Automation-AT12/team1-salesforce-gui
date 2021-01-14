@@ -62,3 +62,7 @@ task reRunBDDTests(type: Test) {
     testLogging.showStandardStreams = true
     scanForTestClasses = false
 }
+
+dependencies {
+    implementation project(':salesforce-core')
+}
