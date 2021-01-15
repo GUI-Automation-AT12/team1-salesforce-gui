@@ -12,15 +12,21 @@ public class SalesforceProperties {
      * If singleInstance was not instanced before it create a new one, otherwise return the created.
      * @return singleInstance
      */
-    public static SalesforceProperties getInstance() throws PropertiesReadingException {
+    public static SalesforceProperties getInstance() {
         if (singleInstance == null) {
             singleInstance = new SalesforceProperties();
         }
         return singleInstance;
     }
 
-    private SalesforceProperties() throws PropertiesReadingException {
-        propertiesFileReader = new PropertiesFileReader(PROPERTIES_FILE_PATH);
+    private SalesforceProperties() {
+        try {
+            propertiesFileReader = new PropertiesFileReader(PROPERTIES_FILE_PATH);
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
     }
 
 
@@ -29,8 +35,16 @@ public class SalesforceProperties {
      *
      * @return base url.
      */
-    public String getBaseUrl() throws PropertiesReadingException {
-        return propertiesFileReader.getProperty("baseUrl");
+    public String getBaseUrl() {
+        String baseUrl = null;
+        try {
+            baseUrl = propertiesFileReader.getProperty("baseUrl");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return baseUrl;
+        }
     }
 
     /**
@@ -38,16 +52,32 @@ public class SalesforceProperties {
      *
      * @return base API Url
      */
-    public String getBaseApiUrl() throws PropertiesReadingException {
-        return propertiesFileReader.getProperty("baseApiUrl");
+    public String getBaseApiUrl() {
+        String baseApiUrl = null;
+        try {
+            baseApiUrl = propertiesFileReader.getProperty("baseApiUrl");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return baseApiUrl;
+        }
     }
 
     /**
-     * Gets the BaseApiUrl from the properties file.
+     * Gets the Api Login Url from the salesforce.properties file.
      *
      * @return API Login Url
      */
-    public String getApiLoginUrl() throws PropertiesReadingException {
-        return propertiesFileReader.getProperty("apiLoginUrl");
+    public String getApiLoginUrl() {
+        String apiLoginUrl = null;
+        try {
+            apiLoginUrl = propertiesFileReader.getProperty("apiLoginUrl");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return apiLoginUrl;
+        }
     }
 }
