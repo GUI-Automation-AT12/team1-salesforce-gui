@@ -13,6 +13,12 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
@@ -20,10 +26,11 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.0'
+    implementation 'com.google.guava:guava:29.0-jre'
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
-    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '6.0.0'
-    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.0.0'
-    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.0.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-java', version: '6.8.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.8.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.8.1'
     testImplementation group: 'io.qameta.allure', name: 'allure-cucumber6-jvm', version: '2.13.6'
 }
 
@@ -34,7 +41,7 @@ checkstyle {
 
 test {
     useTestNG()
-    exclude 'org/fundacionjala/salesforce/runner/*'
+    exclude 'org/fundacionjala/salesforce/runner/**'
     include 'org/fundacionjala/salesforce/unitTest/**'
     systemProperty 'usedefaultlisteners', false
     systemProperty 'listener', 'com.epam.reportportal.testng.ReportPortalTestNGListener'
@@ -66,19 +73,25 @@ task reRunBDDTests(type: Test) {
 
 cucumberReports {
     outputDir = file("${project.buildDir}/reports/cucumber")
+    buildId = '0'
     reports = files('build/cucumber-reports/Cucumber.json')
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            def tags = "not @skipScenario"
+            args = ['--plugin', 'pretty',
+                    '--plugin', 'json:build/cucumber-reports/Cucumber.json',
+                    '--tags', tags,
+                    '--glue', 'org.fundacionjala.salesforce.cucumber.stepdefs', 'src/test/resources/features/']
+        }
+    }
 }
 
 dependencies {
     implementation project(':salesforce-core')
-}
-
-task cucumber(type: JavaExec) {
-    dependsOn assemble, compileTestJava
-    main = "io.cucumber.core.cli.Main"
-    classpath += files(sourceSets.test.runtimeClasspath)
-    args = ['--plugin', 'pretty',
-            '--plugin','json:build/cucumber-reports/Cucumber.json',
-            '--glue', 'org.fundacionjala.salesforce.cucumber.stepdefs',
-            'src/test/resources/features/']
 }
