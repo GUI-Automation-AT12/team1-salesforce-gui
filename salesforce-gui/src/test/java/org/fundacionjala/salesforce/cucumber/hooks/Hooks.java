@@ -1,11 +1,13 @@
 package org.fundacionjala.salesforce.cucumber.hooks;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
+import org.testng.SkipException;
 
 import java.util.Date;
 
@@ -15,6 +17,7 @@ import java.util.Date;
 public class Hooks {
     /**
      * Takes a screenshot and attach to scenario if this scenario failed.
+     *
      * @param scenario
      */
     @After
@@ -24,5 +27,13 @@ public class Hooks {
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", new Date().getTime() + "");
         }
+    }
+
+    /**
+     * Skips a test scenario.
+     */
+    @Before(value = "@skipScenario", order = 0)
+    public void skipTestScenario() {
+        throw new SkipException("Test Skipped");
     }
 }
