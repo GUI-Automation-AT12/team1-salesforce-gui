@@ -34,20 +34,20 @@ public final class SalesforceProperties {
     }
 
     /**
+     * Gets the BaseLoginUrl from the properties file.
+     *
+     * @return base url.
+     */
+    public String getLoginUrl() throws PropertiesReadingException {
+        return propertiesFileReader.getProperty("loginUrl");
+    }
+
+    /**
      * Gets the BaseApiUrl from the properties file.
      *
      * @return base API Url
      */
     public String getBaseApiUrl() throws PropertiesReadingException {
         return propertiesFileReader.getProperty("baseApiUrl");
-    }
-
-    /**
-     * Gets the BaseApiUrl from the properties file.
-     *
-     * @return API Login Url
-     */
-    public String getApiLoginUrl() throws PropertiesReadingException {
-        return propertiesFileReader.getProperty("apiLoginUrl");
     }
 }
