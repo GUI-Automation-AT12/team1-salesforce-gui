@@ -3,8 +3,8 @@ package org.fundacionjala.salesforce.config;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.core.utils.PropertiesFileReader;
 
-public class SalesforceProperties {
-    private static final String PROPERTIES_FILE_PATH = "salesforce.properties";
+public final class SalesforceProperties {
+    private static final String PROPERTIES_FILE_PATH = "../salesforce.properties";
     private static SalesforceProperties singleInstance;
     private static PropertiesFileReader propertiesFileReader;
 

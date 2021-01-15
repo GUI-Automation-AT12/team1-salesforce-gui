@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.api;
+package org.fundacionjala.salesforce.unitTest.api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -7,7 +7,10 @@ import org.apache.http.entity.ContentType;
 import org.fundacionjala.salesforce.config.SalesforceProperties;
 import org.fundacionjala.salesforce.ui.entities.User;
 
-public class ApiAuthenticator {
+/**
+ * [MR] Class that build the requestSpecification to send requests to Salesforce API.
+ */
+public final class ApiAuthenticator {
 
     private static final String GRANT_TYPE_KEY = "grant_type";
     private static final String GRANT_TYPE_VAL = "password";
@@ -15,6 +18,9 @@ public class ApiAuthenticator {
     private static final String CLIENT_SECRET_KEY = "client_secret";
     private static final String USERNAME_KEY = "username";
     private static final String PASSWORD_KEY = "password";
+
+    private ApiAuthenticator() {
+    }
 
     /**
      * It try to get the credentials from salesforce API, sending a request for that purpose.
@@ -35,6 +41,7 @@ public class ApiAuthenticator {
 
     /**
      * Get requestSpecification and set main headers to build the request to send.
+     * @param user that contains the authentication information
      * @return the request built.
      */
     public static RequestSpecification getLoggedReqSpec(final User user) {
