@@ -34,7 +34,7 @@ checkstyle {
 
 test {
     useTestNG()
-    exclude 'org/fundacionjala/salesforce/runner/**'
+    exclude 'org/fundacionjala/salesforce/runner/*'
     include 'org/fundacionjala/salesforce/unitTest/**'
     systemProperty 'usedefaultlisteners', false
     systemProperty 'listener', 'com.epam.reportportal.testng.ReportPortalTestNGListener'
@@ -71,4 +71,14 @@ cucumberReports {
 
 dependencies {
     implementation project(':salesforce-core')
+}
+
+task cucumber(type: JavaExec) {
+    dependsOn assemble, compileTestJava
+    main = "io.cucumber.core.cli.Main"
+    classpath += files(sourceSets.test.runtimeClasspath)
+    args = ['--plugin', 'pretty',
+            '--plugin','json:build/cucumber-reports/Cucumber.json',
+            '--glue', 'org.fundacionjala.salesforce.cucumber.stepdefs',
+            'src/test/resources/features/']
 }
