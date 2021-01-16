@@ -2,7 +2,7 @@
 Feature: Edit Personal Information
 
   Background:
-    Given I log in to Salesforce with a valid Account
+    Given I log in to Salesforce with "Editable User" credentials
 
   @skipScenario @restorePersonalInformation
   Scenario: Update personal information with the minimum values

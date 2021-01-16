@@ -36,13 +36,13 @@ public class LoginSteps {
      * @throws IOException
      * @throws PropertiesReadingException
      */
-    @Given("^I log in to Salesforce with (.*?) credentials$")
+    @Given("I log in to Salesforce with {string} credentials")
     public void logInToSalesforce(final String userAlias) throws IOException, PropertiesReadingException {
 
         //To run only one scenario uncomment the lines below
-        /*TestExecutionProperties.setRootPath("../salesforce-core/");
-        TestPropertiesSetter.setDataProviderThreadCountProp();
-        TestPropertiesSetter.setTestBrowser();*/
+        //TestExecutionProperties.setRootPath("../salesforce-core/");
+        //TestPropertiesSetter.setDataProviderThreadCountProp();
+        //TestPropertiesSetter.setTestBrowser();
 
         //Updating User Entity to get credentials
         user = context.getUserByAlias(userAlias);

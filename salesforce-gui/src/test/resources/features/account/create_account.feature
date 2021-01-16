@@ -3,7 +3,7 @@ Feature: Create Account
 
   @skipScenario @deleteAccount
   Scenario: Create an Account from UI
-    Given I log in to Salesforce with Account Owner User credentials
+    Given I log in to Salesforce with "Account Owner User" credentials
     When I go to ACCOUNTS tab
       And I create an new Account with the following data
         |  Name             |  New Account       |

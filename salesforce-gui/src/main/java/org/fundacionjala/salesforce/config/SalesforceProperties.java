@@ -4,7 +4,7 @@ import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.core.utils.PropertiesFileReader;
 
 /**
- * [MR] Class that rad properties from salesforce.properties file.
+ * [MR] Class that read properties from salesforce.properties file.
  */
 public final class SalesforceProperties {
 
