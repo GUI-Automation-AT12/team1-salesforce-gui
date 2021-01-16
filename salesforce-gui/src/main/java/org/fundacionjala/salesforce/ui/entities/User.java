@@ -5,28 +5,15 @@ package org.fundacionjala.salesforce.ui.entities;
  */
 public class User {
 
+    private String alias;
     private String clientId;
     private String clientSecret;
     private String username;
     private String password;
 
     /**
-     * Constructor for User class with initial information.
-     * @param userClientId
-     * @param userClientSecret
-     * @param userUsername
-     * @param userPassword
-     */
-    public User(final String userClientId, final String userClientSecret,
-                final String userUsername, final String userPassword) {
-        this.clientId = userClientId;
-        this.clientSecret = userClientSecret;
-        this.username = userUsername;
-        this.password = userPassword;
-    }
-
-    /**
      * Get User's clientID.
+     *
      * @return clientId
      */
     public String getClientId() {
@@ -55,5 +42,53 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Get User's alias.
+     * @return alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * Set User's clientId.
+     * @param userClientId
+     */
+    public void setClientId(final String userClientId) {
+        this.clientId = userClientId;
+    }
+
+    /**
+     * Set User's clientSecret.
+     * @param userClientSecret
+     */
+    public void setClientSecret(final String userClientSecret) {
+        this.clientSecret = userClientSecret;
+    }
+
+    /**
+     * Set User's username.
+     * @param userUsername
+     */
+    public void setUsername(final String userUsername) {
+        this.username = userUsername;
+    }
+
+    /**
+     * Set User's password.
+     * @param userPassword
+     */
+    public void setPassword(final String userPassword) {
+        this.password = userPassword;
+    }
+
+    /**
+     * Set User's alias.
+     * @param userAlias
+     */
+    public void setAlias(final String userAlias) {
+        this.alias = userAlias;
     }
 }

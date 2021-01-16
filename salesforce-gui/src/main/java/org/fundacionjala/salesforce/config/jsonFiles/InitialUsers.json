@@ -1,0 +1,16 @@
+[
+    {
+        "alias": "Account Owner User",
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
+    },
+    {
+        "alias": "Other User",
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
+    }
+]

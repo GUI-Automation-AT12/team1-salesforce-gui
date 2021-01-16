@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.unitTest.api;
+package org.fundacionjala.salesforce.api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

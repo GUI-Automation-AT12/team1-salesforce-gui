@@ -12,7 +12,7 @@ import org.testng.SkipException;
 import java.util.Date;
 
 /**
- * This class contains hooks for the project.
+ * [SL] This class contains hooks for the project.
  */
 public class Hooks {
     /**

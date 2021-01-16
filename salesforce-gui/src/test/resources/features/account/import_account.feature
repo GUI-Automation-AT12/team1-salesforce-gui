@@ -3,7 +3,7 @@ Feature: Import Accounts
 
   @skipScenario @deleteAccount
   Scenario Outline: Import multiple Accounts using .csv files
-    Given I log in to Salesforce with Account Owner User credentials
+    Given I log in to Salesforce with "Account Owner User" credentials
     When I go to "ACCOUNT" page
       And I go Import section
       And I import a new Account matching by "Email" with the following <filePath> as <Option>

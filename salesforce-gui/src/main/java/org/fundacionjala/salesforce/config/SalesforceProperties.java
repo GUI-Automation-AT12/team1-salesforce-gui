@@ -3,6 +3,9 @@ package org.fundacionjala.salesforce.config;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.core.utils.PropertiesFileReader;
 
+/**
+ * [MR] Class that read properties from salesforce.properties file.
+ */
 public final class SalesforceProperties {
 
     private static final String PROPERTIES_FILE_PATH = "../salesforce.properties";
@@ -11,6 +14,7 @@ public final class SalesforceProperties {
 
     /**
      * If singleInstance was not instanced before it create a new one, otherwise return the created.
+     *
      * @return singleInstance
      */
     public static SalesforceProperties getInstance() {
@@ -32,14 +36,14 @@ public final class SalesforceProperties {
 
 
     /**
-     * Gets the BaseUrl from the properties file.
+     * Gets the Login Url from the properties file.
      *
-     * @return base url.
+     * @return login Url.
      */
-    public String getBaseUrl() {
+    public String getLoginUrl() {
         String baseUrl = null;
         try {
-            baseUrl = propertiesFileReader.getProperty("baseUrl");
+            baseUrl = propertiesFileReader.getProperty("loginUrl");
         } catch (PropertiesReadingException e) {
             e.printStackTrace();
             System.exit(1);
@@ -49,9 +53,9 @@ public final class SalesforceProperties {
     }
 
     /**
-     * Gets the BaseApiUrl from the properties file.
+     * Gets the BaseLoginUrl from the properties file.
      *
-     * @return base API Url
+     * @return base url.
      */
     public String getBaseApiUrl() {
         String baseApiUrl = null;
@@ -68,7 +72,7 @@ public final class SalesforceProperties {
     /**
      * Gets the Api Login Url from the salesforce.properties file.
      *
-     * @return API Login Url
+     * @return base API Url
      */
     public String getApiLoginUrl() {
         String apiLoginUrl = null;

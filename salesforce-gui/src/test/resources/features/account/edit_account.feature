@@ -3,7 +3,7 @@ Feature: Edit Account
 
   @skipScenario @restoreAccount
   Scenario: Edit Account from UI
-    Given I log in to Salesforce with Account Owner User credentials
+    Given I log in to Salesforce with "Account Owner User" credentials
     When I go to ACCOUNTS tab
       And I edit the Existent Account with the following data
         |  Name             |  Edited Account  |
@@ -17,7 +17,7 @@ Feature: Edit Account
 
   @skipScenario @createAccount @deleteAccount
   Scenario Outline: Edit the SLA Expiration Date should change in details
-    Given I log in to Salesforce with Account Owner User credentials
+    Given I log in to Salesforce with "Account Owner User" credentials
     When I go to ACCOUNTS tab
       And I go to Existent Account details
       And I edit the Account's SLA Expiration Date with the following <date>
