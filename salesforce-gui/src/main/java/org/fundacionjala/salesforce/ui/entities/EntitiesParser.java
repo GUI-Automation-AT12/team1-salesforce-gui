@@ -19,7 +19,7 @@ public final class EntitiesParser {
     private static List<User> userList = null;
 
     /**
-     * Get a list of Users from a from DefaultUsers json file.
+     * Get a list of Users from a from InitialUsers json file.
      * @return userList
      */
     public static List<User> getUsersListFromJson() throws IOException {

@@ -2,6 +2,9 @@ package org.fundacionjala.salesforce.runner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.fundacionjala.core.config.TestExecutionProperties;
+import org.fundacionjala.core.config.TestPropertiesSetter;
+import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -26,7 +29,10 @@ public final class Runner extends AbstractTestNGCucumberTests {
      * Executes code before all scenarios.
      */
     @BeforeTest
-    public void beforeAllScenarios() {
+    public void beforeAllScenarios() throws PropertiesReadingException {
+        TestExecutionProperties.setRootPath("../salesforce-core/");
+        TestPropertiesSetter.setDataProviderThreadCountProp();
+        TestPropertiesSetter.setTestBrowser();
     }
 
     /**
