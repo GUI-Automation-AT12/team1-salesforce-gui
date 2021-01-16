@@ -2,9 +2,6 @@ package org.fundacionjala.salesforce.cucumber.stepdefs;
 
 import io.cucumber.java.en.Given;
 import org.fundacionjala.core.api.client.RequestManager;
-import org.fundacionjala.core.config.TestExecutionProperties;
-import org.fundacionjala.core.config.TestPropertiesSetter;
-import org.fundacionjala.core.constans.BrowserConstants;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.ui.context.Context;
@@ -33,6 +30,12 @@ public class LoginSteps {
         this.context = sharedContext;
     }
 
+    /**
+     * Logs a user in Salesforce UI.
+     * @param userAlias
+     * @throws IOException
+     * @throws PropertiesReadingException
+     */
     @Given("^I log in to Salesforce with (.*?) credentials$")
     public void logInToSalesforce(final String userAlias) throws IOException, PropertiesReadingException {
 

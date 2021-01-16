@@ -19,6 +19,12 @@ public final class EntitiesParser {
     private static List<User> userList = null;
 
     /**
+     * Default constructor for EntitiesParser class.
+     */
+    private EntitiesParser() {
+    }
+
+    /**
      * Get a list of Users from a from InitialUsers json file.
      * @return userList
      */

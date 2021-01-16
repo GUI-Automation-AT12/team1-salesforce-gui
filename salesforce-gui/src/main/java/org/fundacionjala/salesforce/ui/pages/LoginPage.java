@@ -7,15 +7,15 @@ import org.openqa.selenium.support.FindBy;
 /**
  * [MR] Class that represent Salesforce Login page.
  */
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     @FindBy(id = "username")
-    WebElement usernameField;
+    private WebElement usernameField;
 
     @FindBy(id = "password")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(id = "Login")
-    WebElement loginBtn;
+    private WebElement loginBtn;
 
     private void setUsernameField(final String username) {
         GuiInteractioner.setInputText(usernameField, username);
@@ -29,6 +29,11 @@ public class LoginPage extends BasePage{
         GuiInteractioner.clickWebElement(loginBtn);
     }
 
+    /**
+     * Allows the browser to log in to Salesforce UI.
+     * @param username
+     * @param password
+     */
     public void login(final String username, final String password) {
         setUsernameField(username);
         setPasswordField(password);
