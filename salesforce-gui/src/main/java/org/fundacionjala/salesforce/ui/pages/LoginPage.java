@@ -4,6 +4,9 @@ import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * [MR] Class that represent Salesforce Login page.
+ */
 public class LoginPage extends BasePage{
     @FindBy(id = "username")
     WebElement usernameField;

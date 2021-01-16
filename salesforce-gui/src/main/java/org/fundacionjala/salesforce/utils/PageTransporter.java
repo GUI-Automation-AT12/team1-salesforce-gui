@@ -23,6 +23,5 @@ public final class PageTransporter {
      */
     public static void navigateToLoginPage() throws PropertiesReadingException, MalformedURLException {
         navigateTo(SalesforceProperties.getInstance().getLoginUrl());
-
     }
 }

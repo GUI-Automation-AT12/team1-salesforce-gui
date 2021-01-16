@@ -10,7 +10,7 @@ import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import java.util.Date;
 
 /**
- * This class contains hooks for the project.
+ * [SL] This class contains hooks for the project.
  */
 public class Hooks {
     /**
