@@ -36,7 +36,6 @@ configurations {
 
 cucumberReports {
     outputDir = file("${project.buildDir}/reports/cucumber")
-    buildId = '0'
     reports = files("${project.buildDir}/cucumber-reports/Cucumber.json")
 }
 
