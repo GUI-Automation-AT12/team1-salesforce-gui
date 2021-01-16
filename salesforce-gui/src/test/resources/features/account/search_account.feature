@@ -1,7 +1,7 @@
 @Account
 Feature: Search Account
 
-  @deleteAccount @createAccount
+  @skipScenario @deleteAccount @createAccount
   Scenario Outline: Account search using the search tool and compare with the account created
     Given I log in to Salesforce with Account Owner User credentials
     When I go to "HOME" page

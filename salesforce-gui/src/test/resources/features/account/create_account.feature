@@ -1,7 +1,7 @@
 @Account
 Feature: Create Account
 
-  @deleteAccount
+  @skipScenario @deleteAccount
   Scenario: Create an Account from UI
     Given I log in to Salesforce with Account Owner User credentials
     When I go to ACCOUNTS tab

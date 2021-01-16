@@ -1,7 +1,7 @@
 @Account
 Feature: Edit Account
 
-  @restoreAccount
+  @skipScenario @restoreAccount
   Scenario: Edit Account from UI
     Given I log in to Salesforce with Account Owner User credentials
     When I go to ACCOUNTS tab
@@ -15,7 +15,7 @@ Feature: Edit Account
       And Account's new data should be displayed in Accounts table
       And the gotten data about the Opportunity should contain the new data
 
-  @createAccount @deleteAccount
+  @skipScenario @createAccount @deleteAccount
   Scenario Outline: Edit the SLA Expiration Date should change in details
     Given I log in to Salesforce with Account Owner User credentials
     When I go to ACCOUNTS tab
