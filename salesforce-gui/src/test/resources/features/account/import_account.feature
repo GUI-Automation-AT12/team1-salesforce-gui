@@ -1,7 +1,7 @@
 @Account
 Feature: Import Accounts
 
-  @deleteAccount
+  @skipScenario @deleteAccount
   Scenario Outline: Import multiple Accounts using .csv files
     Given I log in to Salesforce with Account Owner User credentials
     When I go to "ACCOUNT" page
