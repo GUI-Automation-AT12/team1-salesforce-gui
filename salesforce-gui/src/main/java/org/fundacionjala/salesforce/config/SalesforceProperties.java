@@ -85,4 +85,55 @@ public final class SalesforceProperties {
             return apiLoginUrl;
         }
     }
+
+    /**
+     * Gets the skin from the salesforce.properties file.
+     *
+     * @return skin
+     */
+    public String getSkin() {
+        String skin = null;
+        try {
+            skin = propertiesFileReader.getProperty("skin");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return skin;
+        }
+    }
+
+    /**
+     * Gets the classicSkinUrl from the salesforce.properties file.
+     *
+     * @return classicSkinUrl
+     */
+    public String getClassicSkinUrl() {
+        String classicSkinUrl = null;
+        try {
+            classicSkinUrl = propertiesFileReader.getProperty("classicSkinUrl");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return classicSkinUrl;
+        }
+    }
+
+    /**
+     * Gets the lightningSkinUrl from the salesforce.properties file.
+     *
+     * @return lightningSkinUrl
+     */
+    public String getLightningSkinUrl() {
+        String lightningSkinUrl = null;
+        try {
+            lightningSkinUrl = propertiesFileReader.getProperty("lightningSkinUrl");
+        } catch (PropertiesReadingException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } finally {
+            return lightningSkinUrl;
+        }
+    }
 }

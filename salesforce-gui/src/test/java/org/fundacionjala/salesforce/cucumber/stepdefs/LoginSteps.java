@@ -6,7 +6,8 @@ import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.User;
-import org.fundacionjala.salesforce.ui.pages.LoginPage;
+import org.fundacionjala.salesforce.ui.commonPages.LoginPage;
+import org.fundacionjala.salesforce.ui.skins.SkinManager;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.io.IOException;
@@ -54,5 +55,6 @@ public class LoginSteps {
         PageTransporter.navigateToLoginPage();
         LoginPage loginPage = new LoginPage();
         loginPage.login(user.getUsername(), user.getPassword());
+        SkinManager.getInstance().getSkinFactory().goHomePage();
     }
 }
