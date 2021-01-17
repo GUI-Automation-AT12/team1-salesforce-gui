@@ -14,20 +14,30 @@ public final class PageTransporter {
 
     private static String instanceUrl;
 
-    static String getInstanceUrl() {
+    private PageTransporter() {
+    }
+
+    private static String getInstanceUrl() {
         if (instanceUrl == null) {
-            instanceUrl = initInstanceUrl();
+            try {
+                instanceUrl = initInstanceUrl();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
         return instanceUrl;
     }
 
-    private static String initInstanceUrl() {
+    private static String initInstanceUrl() throws MalformedURLException {
         WebDriverManager.getInstance().getWebDriverWait().until(
                 ExpectedConditions.not(ExpectedConditions.urlContains("login")));
-        return WebDriverManager.getInstance().getWebDriver().getCurrentUrl().split("\\.")[0].replace("--c", "");
-    }
-
-    private PageTransporter() {
+        String[] splitUrl = WebDriverManager.getInstance().getWebDriver().getCurrentUrl().split("\\.");
+        if (splitUrl.length > 0) {
+            return splitUrl[0].replace("--c", "");
+        } else {
+            throw new MalformedURLException("The URL is empty or incorrect.");
+        }
     }
 
     private static void navigateTo(final String url) throws MalformedURLException {
