@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.pages;
+package org.fundacionjala.salesforce.ui.commonPages;
 
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.openqa.selenium.support.PageFactory;

@@ -2,11 +2,14 @@ package org.fundacionjala.salesforce.cucumber.stepdefs;
 
 import io.cucumber.java.en.Given;
 import org.fundacionjala.core.api.client.RequestManager;
+import org.fundacionjala.core.config.TestExecutionProperties;
+import org.fundacionjala.core.config.TestPropertiesSetter;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.User;
-import org.fundacionjala.salesforce.ui.pages.LoginPage;
+import org.fundacionjala.salesforce.ui.commonPages.LoginPage;
+import org.fundacionjala.salesforce.ui.skins.SkinManager;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.io.IOException;
@@ -40,9 +43,9 @@ public class LoginSteps {
     public void logInToSalesforce(final String userAlias) throws IOException, PropertiesReadingException {
 
         //To run only one scenario uncomment the lines below
-        //TestExecutionProperties.setRootPath("../salesforce-core/");
-        //TestPropertiesSetter.setDataProviderThreadCountProp();
-        //TestPropertiesSetter.setTestBrowser();
+        TestExecutionProperties.setRootPath("../salesforce-core/");
+        TestPropertiesSetter.setDataProviderThreadCountProp();
+        TestPropertiesSetter.setTestBrowser();
 
         //Updating User Entity to get credentials
         user = context.getUserByAlias(userAlias);
@@ -54,5 +57,6 @@ public class LoginSteps {
         PageTransporter.navigateToLoginPage();
         LoginPage loginPage = new LoginPage();
         loginPage.login(user.getUsername(), user.getPassword());
+        SkinManager.getInstance().getSkinFactory().goHomePage();
     }
 }

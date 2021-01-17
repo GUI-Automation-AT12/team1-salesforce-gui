@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.pages;
+package org.fundacionjala.salesforce.ui.commonPages;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.openqa.selenium.WebElement;
@@ -31,8 +31,9 @@ public class LoginPage extends BasePage {
 
     /**
      * Allows the browser to log in to Salesforce UI.
-     * @param username
-     * @param password
+     *
+     * @param username to set
+     * @param password to set
      */
     public void login(final String username, final String password) {
         setUsernameField(username);
