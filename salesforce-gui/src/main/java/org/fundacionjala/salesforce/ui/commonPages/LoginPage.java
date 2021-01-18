@@ -40,4 +40,9 @@ public class LoginPage extends BasePage {
         setPasswordField(password);
         clickLoginBtn();
     }
+
+    @Override
+    protected void waitLoadPage() {
+
+    }
 }

@@ -6,8 +6,11 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * [MR] Base Page object, from this all pages should extend.
  */
-public class BasePage {
+public abstract class BasePage {
     protected BasePage() {
         PageFactory.initElements(WebDriverManager.getInstance().getWebDriver(), this);
+        waitLoadPage();
     }
+
+    protected abstract void waitLoadPage();
 }
