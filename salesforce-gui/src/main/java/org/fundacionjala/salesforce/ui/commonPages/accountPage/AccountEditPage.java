@@ -106,7 +106,6 @@ public class AccountEditPage extends BasePage {
      * @return a Map with the information required
      */
     public Map<String, String> getFormWebAsMap() {
-        GuiInteractioner.frameToBeAvailableAndSwitchToIt(iframeXpath);
         Map<String, String> fields = new HashMap<>();
         listFields.forEach(field -> {
             By id = By.id(String.format(baseNameEditForm, field));
