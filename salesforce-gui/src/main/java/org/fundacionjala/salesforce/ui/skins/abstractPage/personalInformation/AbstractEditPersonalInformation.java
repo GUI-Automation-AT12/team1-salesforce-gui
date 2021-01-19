@@ -42,21 +42,18 @@ public abstract class AbstractEditPersonalInformation extends BasePage {
     }
 
     /**
-     * This method update the data of the entities and web.
+     * This abstract method update the data of the entities and the web.
      *
      * @param formFields is a map with the all data to update
      */
-    public void update(final Map<String, String> formFields) {
-        setInformationToEntities(formFields);
-        changeDataFormWeb();
-    }
+    public abstract void update(Map<String, String> formFields);
 
     /**
      * Sets datatable to entities.
      *
      * @param formFields map with the all data to update
      */
-    private void setInformationToEntities(final Map<String, String> formFields) {
+    protected void setInformationToEntities(final Map<String, String> formFields) {
         HashMap<String, Runnable> strategyMap = composeStrategySetMap(formFields);
         formFields.keySet().forEach(key -> strategyMap.get(key).run());
     }
@@ -78,7 +75,7 @@ public abstract class AbstractEditPersonalInformation extends BasePage {
     /**
      * This method change the fields of the web for the datatable.
      */
-    private void changeDataFormWeb() {
+    protected void changeDataFormWeb() {
         HashMap<String, Supplier<String>> fields = composeStrategyGetMap();
         listFields.forEach(field -> {
             By id = By.id(String.format(baseNameEditForm, field));
@@ -104,15 +101,21 @@ public abstract class AbstractEditPersonalInformation extends BasePage {
      *
      * @return a Map with the information required
      */
-    public Map<String, String> getFormWebAsMap() {
+    protected Map<String, String> getWebForm() {
         Map<String, String> fields = new HashMap<>();
         listFields.forEach(field -> {
             By id = By.id(String.format(baseNameEditForm, field));
-            System.out.println(GuiInteractioner.getTextFromWebElement(id));
-            fields.put(field, GuiInteractioner.getAttributeOfWebElement(id, "value"));
+            fields.put(field, GuiInteractioner.getValueOfWebElement(id));
         });
         return fields;
     }
+
+    /**
+     * Returns a Map with all data of the form web.
+     *
+     * @return a Map with the information required
+     */
+    public abstract Map<String, String> getWebFromAsMap();
 
     /**
      * Gets personal information as map.
@@ -131,7 +134,7 @@ public abstract class AbstractEditPersonalInformation extends BasePage {
     /**
      * Clicks in the button save.
      */
-    public void saveData() {
+    protected void saveData() {
         GuiInteractioner.clickWebElement(saveBtn);
     }
 }

@@ -34,10 +34,8 @@ public class EditStep {
      */
     @And("I edit my personal information with the following data")
     public void editMyPersonalInformationWithTheFollowingData(final Map<String, String> formData) {
-
         personalInformation = SkinManager.getInstance().getSkinFactory().personalInformation();
         personalInformation.update(formData);
-        personalInformation.saveData();
     }
 
     /**
@@ -46,7 +44,7 @@ public class EditStep {
     @Then("The personal information table should be updated")
     public void validatePersonalInformationTableShouldBeUpdated() {
         Map<String, String> expected = personalInformation.getPersonalInformationAsMap();
-        Map<String, String> actual = personalInformation.getFormWebAsMap();
+        Map<String, String> actual = personalInformation.getWebFromAsMap();
         Assert.assertEquals(actual, expected);
     }
 }
