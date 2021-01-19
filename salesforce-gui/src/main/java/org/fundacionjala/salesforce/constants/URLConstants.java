@@ -9,7 +9,7 @@ import java.util.Map;
 public final class URLConstants {
     public static final Map<String, String> URL_CLASSIC = new HashMap<>();
     public static final Map<String, String> URL_LIGHTNING = new HashMap<>();
-    
+
     static {
         URL_LIGHTNING.put("PERSONAL INFORMATION", "settings/personal/PersonalInformation/home");
         URL_LIGHTNING.put("HOME", "page/home");
