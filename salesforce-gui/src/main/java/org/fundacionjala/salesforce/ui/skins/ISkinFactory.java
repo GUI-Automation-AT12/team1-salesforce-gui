@@ -1,5 +1,6 @@
 package org.fundacionjala.salesforce.ui.skins;
 
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
 import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
 
 import java.net.MalformedURLException;
@@ -15,4 +16,6 @@ public interface ISkinFactory {
      * @throws MalformedURLException
      */
     IHomePage goHomePage() throws MalformedURLException;
+
+    AbstractEditPersonalInformation personalInformation();
 }

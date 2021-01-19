@@ -3,7 +3,7 @@ package org.fundacionjala.salesforce.ui.entities;
 /**
  * [SL] Entity that represents a Personal Information in Salesforce.
  */
-public class Account {
+public class PersonalInformation {
 
     private String firstName;
     private String lastName;

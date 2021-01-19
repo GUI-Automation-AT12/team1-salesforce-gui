@@ -1,6 +1,8 @@
 package org.fundacionjala.salesforce.ui.skins;
 
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
 import org.fundacionjala.salesforce.ui.skins.classic.ClassicHomePage;
+import org.fundacionjala.salesforce.ui.skins.classic.personalInformation.EditPersonalInformationClassic;
 import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
@@ -20,5 +22,10 @@ public class ClassicSkinFactory implements ISkinFactory {
     public IHomePage goHomePage() throws MalformedURLException {
         PageTransporter.navigateToUrl("home/home.jsp?source=lex");
         return new ClassicHomePage();
+    }
+
+    @Override
+    public AbstractEditPersonalInformation personalInformation() {
+        return new EditPersonalInformationClassic();
     }
 }
