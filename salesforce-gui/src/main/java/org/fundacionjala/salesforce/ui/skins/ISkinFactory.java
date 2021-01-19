@@ -1,8 +1,9 @@
 package org.fundacionjala.salesforce.ui.skins;
 
-import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
+import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.net.MalformedURLException;
+import java.util.Set;
 
 /**
  * [MR] Interface for Skin Factories classes.
@@ -10,9 +11,10 @@ import java.net.MalformedURLException;
 public interface ISkinFactory {
 
     /**
-     * Allows to go to Home Page.
-     * @return IHomePage
+     * Goes to a specific page.
      * @throws MalformedURLException
      */
-    IHomePage goHomePage() throws MalformedURLException;
+    void goToPage(final String pageName) throws MalformedURLException;
+
+    void createNewAccount(final Set<String> formFields, final Account account);
 }
