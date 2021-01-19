@@ -23,7 +23,11 @@ public class LightningSkinFactory implements ISkinFactory {
         PageTransporter.navigateToUrl("page/home");
         return new LightningHomePage();
     }
-
+    /**
+     * Returns personalInformationPage.
+     *
+     * @return a EditPersonalInformationLightning
+     */
     @Override
     public AbstractEditPersonalInformation personalInformation() {
         return new EditPersonalInformationLightning();

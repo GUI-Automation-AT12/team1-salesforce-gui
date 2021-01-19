@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public final class ConstantsURL {
 
-    public static Map<String, String> URL_CLASSIC = new HashMap<>();
-    public static Map<String, String> URL_LIGHTNING = new HashMap<>();
+    public static final Map<String, String> URL_CLASSIC = new HashMap<>();
+    public static final Map<String, String> URL_LIGHTNING = new HashMap<>();
 
     static {
         URL_LIGHTNING.put("PERSONAL INFORMATION PAGE", "settings/personal/PersonalInformation/home");

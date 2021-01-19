@@ -24,6 +24,11 @@ public class ClassicSkinFactory implements ISkinFactory {
         return new ClassicHomePage();
     }
 
+    /**
+     * Returns personalInformationPage.
+     *
+     * @return a EditPersonalInformationClassic
+     */
     @Override
     public AbstractEditPersonalInformation personalInformation() {
         return new EditPersonalInformationClassic();

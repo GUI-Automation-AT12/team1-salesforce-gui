@@ -12,10 +12,16 @@ public interface ISkinFactory {
 
     /**
      * Allows to go to Home Page.
+     *
      * @return IHomePage
      * @throws MalformedURLException
      */
     IHomePage goHomePage() throws MalformedURLException;
 
+    /**
+     * Returns personalInformationPage.
+     *
+     * @return a AbstractEditPersonalInformation
+     */
     AbstractEditPersonalInformation personalInformation();
 }
