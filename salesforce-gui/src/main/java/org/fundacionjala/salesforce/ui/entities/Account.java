@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 public class Account {
     private String name;
@@ -15,6 +17,10 @@ public class Account {
     private String billingCity;
     private String phone;
     private String description;
+
+    public Set<String> getUpdatedFields() {
+        return updatedFields;
+    }
 
     /**
      * Gets Account's name.
@@ -144,6 +150,13 @@ public class Account {
         return description;
     }
 
+    public void setUpdatedFields(Set<String> updatedFields) {
+        this.updatedFields = updatedFields;
+    }
+
+    private Set<String> updatedFields;
+
+
     /**
      * Sets Account's description.
      *
@@ -175,5 +188,23 @@ public class Account {
     public void setInformation(final Map accountInfo) {
         HashMap<String, Runnable> strategyMap = composeMapStrategy(accountInfo);
         accountInfo.keySet().forEach(key -> strategyMap.get(key).run());
+    }
+
+    private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
+        HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
+        strategyMap.put(AccountConstants.NAME_KEY, () -> getName());
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getParentAccount().getName());
+        strategyMap.put(AccountConstants.SITE_KEY, () -> getSite());
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getPhone());
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getBillingCity());
+        strategyMap.put(AccountConstants.RATING_KEY, () -> getRating());
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> getDescription());
+        return strategyMap;
+    }
+
+    public Map<String, String> getAccountInfo() {
+        Map accountInfoMap = new HashMap<String, String>();
+        updatedFields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
+        return accountInfoMap;
     }
 }

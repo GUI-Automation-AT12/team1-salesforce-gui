@@ -5,6 +5,7 @@ import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.skins.iPages.IAccountCreationPage;
+import org.fundacionjala.salesforce.ui.skins.iPages.IAccountDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -96,8 +97,9 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
     }
 
     @Override
-    public void fillAccountInformation(Set<String> formFields, Account account) {
+    public IAccountDetailsPage fillAccountInformation(Set<String> formFields, Account account) {
         setInformation(formFields, account);
         clickSaveBtn();
+        return new LightningAccountDetailsPage();
     }
 }

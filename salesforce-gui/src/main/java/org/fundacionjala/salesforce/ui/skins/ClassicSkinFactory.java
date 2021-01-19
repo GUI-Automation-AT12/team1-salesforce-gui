@@ -38,4 +38,9 @@ public class ClassicSkinFactory implements ISkinFactory {
     public void createNewAccount(final Set<String> formFields, final Account account) {
         classicAccountCreationPage = classicAccountsPage.goToAccountCreation();
     }
+
+    @Override
+    public Map<String, String> getAccountDetails(Set<String> fields) {
+        return null;
+    }
 }

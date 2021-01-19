@@ -1,9 +1,12 @@
 package org.fundacionjala.salesforce.cucumber.stepdefs;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.testng.asserts.SoftAssert;
 
+import java.net.MalformedURLException;
 import java.util.Map;
 
 public class AccountSteps {
@@ -15,6 +18,27 @@ public class AccountSteps {
         //Updating Entity
         account = new Account();
         account.setInformation(accountInfo);
-        SkinManager.getInstance().getSkinFactory().createNewAccount(accountInfo.keySet(), account);
+        account.setUpdatedFields(accountInfo.keySet());
+
+        SkinManager.getInstance().getSkinFactory().createNewAccount(account.getUpdatedFields(), account);
+    }
+
+
+    @Then("Account's new data should be displayed at details")
+    public void accountSNewDataShouldBeDisplayedAtDetails() {
+        Map<String, String> actualAccountDetails = SkinManager.getInstance().getSkinFactory().getAccountDetails(account.getUpdatedFields());
+        Map<String, String> expectedAccountDetails = account.getAccountInfo();
+        SoftAssert softAssert = new SoftAssert();
+        actualAccountDetails.forEach((field, actualValue) -> {
+            softAssert.assertEquals(actualValue, expectedAccountDetails.get(field),
+            "The " + field + " from Account Details Page does not match with the " + field + " edited previously.");
+        });
+        softAssert.assertAll();
+    }
+
+
+    @And("Account's new data should be displayed in Accounts table")
+    public void accountSNewDataShouldBeDisplayedInAccountsTable() throws MalformedURLException {
+        SkinManager.getInstance().getSkinFactory().goToPage("Account");
     }
 }

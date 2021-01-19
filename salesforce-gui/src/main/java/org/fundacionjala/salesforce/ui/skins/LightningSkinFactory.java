@@ -1,8 +1,8 @@
 package org.fundacionjala.salesforce.ui.skins;
 
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountCreationPage;
 import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountCreationPopup;
+import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountsPage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
@@ -16,8 +16,9 @@ import java.util.Set;
  */
 public class LightningSkinFactory implements ISkinFactory {
 
-    private LightningAccountsPage lightningAccountsPage = new LightningAccountsPage();
-    private IAccountCreationPage lightningAccountCreationPopup;
+    private LightningAccountsPage accountsPage = new LightningAccountsPage();
+    private LightningAccountCreationPopup accountCreationPopup;
+    private LightningAccountDetailsPage accountDetailsPage;
 
     final static Map<String, String> urlMap = new HashMap<>();
 
@@ -37,8 +38,14 @@ public class LightningSkinFactory implements ISkinFactory {
 
     @Override
     public void createNewAccount(final Set<String> formFields, final Account account) {
-        lightningAccountCreationPopup = lightningAccountsPage.goToAccountCreation();
-        LightningAccountCreationPopup creationPopup = (LightningAccountCreationPopup) lightningAccountCreationPopup;
-        creationPopup.fillAccountInformation(formFields, account);
+        accountCreationPopup = (LightningAccountCreationPopup)accountsPage.goToAccountCreation();
+        accountDetailsPage = (LightningAccountDetailsPage)accountCreationPopup.fillAccountInformation(formFields, account);
     }
+
+    @Override
+    public Map<String, String> getAccountDetails(final Set<String> fields) {
+        return accountDetailsPage.getAccountDetails(fields);
+    }
+
+
 }

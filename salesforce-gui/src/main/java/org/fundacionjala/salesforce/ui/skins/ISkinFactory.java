@@ -3,6 +3,7 @@ package org.fundacionjala.salesforce.ui.skins;
 import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,4 +18,6 @@ public interface ISkinFactory {
     void goToPage(final String pageName) throws MalformedURLException;
 
     void createNewAccount(final Set<String> formFields, final Account account);
+
+    Map<String, String> getAccountDetails(final Set<String> fields);
 }
