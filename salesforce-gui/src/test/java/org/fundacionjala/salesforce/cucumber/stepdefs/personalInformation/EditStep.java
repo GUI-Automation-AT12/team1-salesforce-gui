@@ -2,12 +2,9 @@ package org.fundacionjala.salesforce.cucumber.stepdefs.personalInformation;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
 import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
-import org.fundacionjala.salesforce.utils.PageTransporter;
 
-import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.testng.Assert;
@@ -15,17 +12,6 @@ import org.testng.Assert;
 public class EditStep {
 
     private AbstractEditPersonalInformation personalInformation;
-
-    /**
-     * Goes to specific page.
-     *
-     * @param page
-     * @throws MalformedURLException
-     */
-    @When("I go to {string}")
-    public void goTo(final String page) throws MalformedURLException {
-        PageTransporter.navigateToPage(page);
-    }
 
     /**
      * Edits the personal information.
