@@ -2,7 +2,7 @@ package org.fundacionjala.salesforce.ui.skins;
 
 import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
 import org.fundacionjala.salesforce.ui.skins.classic.ClassicHomePage;
-import org.fundacionjala.salesforce.ui.skins.classic.personalInformation.EditPersonalInformationClassic;
+import org.fundacionjala.salesforce.ui.skins.classic.personalInformation.ClassicEditPersonalInformation;
 import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
@@ -27,10 +27,10 @@ public class ClassicSkinFactory implements ISkinFactory {
     /**
      * Returns personalInformationPage.
      *
-     * @return a EditPersonalInformationClassic
+     * @return a ClassicEditPersonalInformation
      */
     @Override
     public AbstractEditPersonalInformation personalInformation() {
-        return new EditPersonalInformationClassic();
+        return new ClassicEditPersonalInformation();
     }
 }

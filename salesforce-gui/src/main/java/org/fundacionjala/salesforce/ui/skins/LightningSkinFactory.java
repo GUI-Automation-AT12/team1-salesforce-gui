@@ -3,7 +3,7 @@ package org.fundacionjala.salesforce.ui.skins;
 import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
 import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
 import org.fundacionjala.salesforce.ui.skins.lightning.LightningHomePage;
-import org.fundacionjala.salesforce.ui.skins.lightning.personalInformation.EditPersonalInformationLightning;
+import org.fundacionjala.salesforce.ui.skins.lightning.personalInformation.LightningEditPersonalInformation;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.net.MalformedURLException;
@@ -26,10 +26,10 @@ public class LightningSkinFactory implements ISkinFactory {
     /**
      * Returns personalInformationPage.
      *
-     * @return a EditPersonalInformationLightning
+     * @return a LightningEditPersonalInformation
      */
     @Override
     public AbstractEditPersonalInformation personalInformation() {
-        return new EditPersonalInformationLightning();
+        return new LightningEditPersonalInformation();
     }
 }
