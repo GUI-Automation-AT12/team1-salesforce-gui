@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.commonPages.accountPage;
+package org.fundacionjala.salesforce.ui.skins.constants.personalInformation;
 
 /**
  * [SL] This class contains constant of accountPage.

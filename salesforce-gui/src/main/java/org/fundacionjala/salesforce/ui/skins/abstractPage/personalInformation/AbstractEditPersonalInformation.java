@@ -1,8 +1,9 @@
-package org.fundacionjala.salesforce.ui.commonPages.accountPage;
+package org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.entities.Account;
+import org.fundacionjala.salesforce.ui.skins.constants.personalInformation.Constants;
+import org.fundacionjala.salesforce.ui.entities.PersonalInformation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,13 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class AccountEditPage extends BasePage {
+public abstract class AbstractEditPersonalInformation extends BasePage {
+
     private String baseNameEditForm = "PersonalInformationSetup:editPage:pageBlock:%s";
     private List<String> listFields;
-    private Account personalInformation;
-
-    @FindBy(xpath = "//iframe [@title='Personal Information ~ Salesforce - Developer Edition']")
-    private WebElement iframeXpath;
+    private PersonalInformation personalInformation;
 
     @FindBy(xpath = "//input [@title='Save']")
     private WebElement saveBtn;
@@ -27,8 +26,8 @@ public class AccountEditPage extends BasePage {
     /**
      * Constructor.
      */
-    public AccountEditPage() {
-        personalInformation = new Account();
+    public AbstractEditPersonalInformation() {
+        personalInformation = new PersonalInformation();
         initListFieldsToUpdate();
     }
 
@@ -118,7 +117,7 @@ public class AccountEditPage extends BasePage {
     /**
      * Gets personal information as map.
      *
-     * @return a map of the entities of the Account
+     * @return a map of the entities of the PersonalInformation
      */
     public Map<String, String> getPersonalInformationAsMap() {
         Map<String, String> data = new HashMap<>();
@@ -134,13 +133,5 @@ public class AccountEditPage extends BasePage {
      */
     public void saveData() {
         GuiInteractioner.clickWebElement(saveBtn);
-    }
-
-    /**
-     * Method wait to load BoardPage.
-     */
-    @Override
-    protected void waitLoadPage() {
-        GuiInteractioner.frameToBeAvailableAndSwitchToIt(iframeXpath);
     }
 }
