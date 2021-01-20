@@ -1,6 +1,6 @@
 package org.fundacionjala.salesforce.ui.skins;
 
-import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
 
 import java.net.MalformedURLException;
@@ -21,7 +21,7 @@ public interface ISkinFactory {
     /**
      * Returns personalInformationPage.
      *
-     * @return a AbstractEditPersonalInformation
+     * @return a AbstractEditPersonalInformationPage
      */
-    AbstractEditPersonalInformation personalInformation();
+    AbstractEditPersonalInformationPage personalInformation();
 }

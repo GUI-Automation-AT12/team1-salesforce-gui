@@ -1,6 +1,7 @@
 package org.fundacionjala.salesforce.cucumber.stepdefs;
 
 import io.cucumber.java.en.Given;
+import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.core.config.TestExecutionProperties;
 import org.fundacionjala.core.config.TestPropertiesSetter;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
@@ -52,7 +53,7 @@ public class LoginSteps {
         user = context.getUserByAlias(userAlias);
 
         //Set User Authentication to use Salesforce API in next steps
-        context.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(user));
+        RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(user));
 
         //Login from UI
         PageTransporter.navigateToLoginPage();

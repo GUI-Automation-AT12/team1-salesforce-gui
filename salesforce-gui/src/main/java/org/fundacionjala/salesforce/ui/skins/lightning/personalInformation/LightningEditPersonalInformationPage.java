@@ -1,13 +1,13 @@
 package org.fundacionjala.salesforce.ui.skins.lightning.personalInformation;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
-import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformationPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Map;
 
-public class LightningEditPersonalInformation extends AbstractEditPersonalInformation {
+public class LightningEditPersonalInformationPage extends AbstractEditPersonalInformationPage {
 
     @FindBy(xpath = "//iframe [@title='Personal Information ~ Salesforce - Developer Edition']")
     private WebElement iframeXpath;

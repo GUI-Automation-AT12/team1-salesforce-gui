@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public abstract class AbstractEditPersonalInformation extends BasePage {
+public abstract class AbstractEditPersonalInformationPage extends BasePage {
 
     private String baseNameEditForm = "PersonalInformationSetup:editPage:pageBlock:%s";
     private List<String> listFields;
@@ -26,7 +26,7 @@ public abstract class AbstractEditPersonalInformation extends BasePage {
     /**
      * Constructor.
      */
-    public AbstractEditPersonalInformation() {
+    public AbstractEditPersonalInformationPage() {
         personalInformation = new PersonalInformation();
         initListFieldsToUpdate();
     }

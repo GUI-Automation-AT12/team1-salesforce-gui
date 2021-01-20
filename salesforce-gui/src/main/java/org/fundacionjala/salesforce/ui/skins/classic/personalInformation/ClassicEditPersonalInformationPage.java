@@ -1,14 +1,14 @@
 package org.fundacionjala.salesforce.ui.skins.classic.personalInformation;
 
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
-import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformationPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Map;
 
-public class ClassicEditPersonalInformation extends AbstractEditPersonalInformation {
+public class ClassicEditPersonalInformationPage extends AbstractEditPersonalInformationPage {
 
     @FindBy(xpath = "//input [@title='Save']")
     private WebElement saveBtn;

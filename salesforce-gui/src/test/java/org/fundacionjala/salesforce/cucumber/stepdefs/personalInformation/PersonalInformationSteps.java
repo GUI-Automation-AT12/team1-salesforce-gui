@@ -3,15 +3,15 @@ package org.fundacionjala.salesforce.cucumber.stepdefs.personalInformation;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
-import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformation;
+import org.fundacionjala.salesforce.ui.skins.abstractPage.personalInformation.AbstractEditPersonalInformationPage;
 
 import java.util.Map;
 
 import org.testng.Assert;
 
-public class EditStep {
+public class PersonalInformationSteps {
 
-    private AbstractEditPersonalInformation personalInformation;
+    private AbstractEditPersonalInformationPage personalInformation;
 
     /**
      * Edits the personal information.
