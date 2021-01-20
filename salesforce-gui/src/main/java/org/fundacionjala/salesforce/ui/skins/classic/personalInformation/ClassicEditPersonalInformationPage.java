@@ -14,7 +14,7 @@ public class ClassicEditPersonalInformationPage extends AbstractEditPersonalInfo
     private WebElement saveBtn;
 
     /**
-     * This abstract method update the data of the entities and the web.
+     * [SL] This abstract method update the data of the entities and the web.
      *
      * @param formFields is a map with the all data to update
      */
@@ -26,7 +26,7 @@ public class ClassicEditPersonalInformationPage extends AbstractEditPersonalInfo
     }
 
     /**
-     * Returns a Map with all data of the form web.
+     * [SL] Returns a Map with all data of the form web.
      *
      * @return a Map with the information required
      */
@@ -36,7 +36,7 @@ public class ClassicEditPersonalInformationPage extends AbstractEditPersonalInfo
     }
 
     /**
-     * Method wait to load BoardPage.
+     * [SL] Method wait to load BoardPage.
      */
     @Override
     protected void waitLoadPage() {

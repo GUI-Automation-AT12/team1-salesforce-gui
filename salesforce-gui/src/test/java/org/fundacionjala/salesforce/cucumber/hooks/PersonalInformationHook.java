@@ -10,7 +10,7 @@ public class PersonalInformationHook {
     static final int STATUS_OK_NO_CONTENT = 204;
 
     /**
-     * Restore the data of the user to the default data.
+     * [SL] Restore the data of the user to the default data.
      */
     @After(value = "@restorePersonalInformation", order = 1)
     public void personalInformationRestore() {

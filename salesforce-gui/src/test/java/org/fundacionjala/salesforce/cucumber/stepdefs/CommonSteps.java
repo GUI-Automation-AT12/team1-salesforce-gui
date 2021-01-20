@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 public class CommonSteps {
 
     /**
-     * Goes to specific page.
+     * [SL] Goes to specific page.
      *
      * @param page
      * @throws MalformedURLException

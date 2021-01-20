@@ -24,7 +24,7 @@ public class LightningSkinFactory implements ISkinFactory {
         return new LightningHomePage();
     }
     /**
-     * Returns personalInformationPage.
+     * [SL] Returns personalInformationPage.
      *
      * @return a LightningEditPersonalInformationPage
      */

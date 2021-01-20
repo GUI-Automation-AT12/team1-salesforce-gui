@@ -24,7 +24,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     private WebElement saveBtn;
 
     /**
-     * Constructor.
+     * [SL] Constructor.
      */
     public AbstractEditPersonalInformationPage() {
         personalInformation = new PersonalInformation();
@@ -32,7 +32,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * This method initialize the fields to update.
+     * [SL] This method initialize the fields to update.
      */
     private void initListFieldsToUpdate() {
         listFields = new ArrayList<>();
@@ -42,14 +42,14 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * This abstract method update the data of the entities and the web.
+     * [SL] This abstract method update the data of the entities and the web.
      *
      * @param formFields is a map with the all data to update
      */
     public abstract void update(Map<String, String> formFields);
 
     /**
-     * Sets datatable to entities.
+     * [SL] Sets datatable to entities.
      *
      * @param formFields map with the all data to update
      */
@@ -59,7 +59,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * Returns a map with the methods for set personal information.
+     * [SL] Returns a map with the methods for set personal information.
      *
      * @param formFields
      * @return a map with the methods.
@@ -73,7 +73,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * This method change the fields of the web for the datatable.
+     * [SL] This method change the fields of the web for the datatable.
      */
     protected void changeDataFormWeb() {
         HashMap<String, Supplier<String>> fields = composeStrategyGetMap();
@@ -84,7 +84,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * Returns a map with the methods for get personal information.
+     * [SL] Returns a map with the methods for get personal information.
      *
      * @return a map with the methods.
      */
@@ -97,7 +97,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * Returns a Map with all data of the form web.
+     * [SL] Returns a Map with all data of the form web.
      *
      * @return a Map with the information required
      */
@@ -111,14 +111,14 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * Returns a Map with all data of the form web.
+     * [SL] Returns a Map with all data of the form web.
      *
      * @return a Map with the information required
      */
     public abstract Map<String, String> getWebFromAsMap();
 
     /**
-     * Gets personal information as map.
+     * [SL] Gets personal information as map.
      *
      * @return a map of the entities of the PersonalInformation
      */
@@ -132,7 +132,7 @@ public abstract class AbstractEditPersonalInformationPage extends BasePage {
     }
 
     /**
-     * Clicks in the button save.
+     * [SL] Clicks in the button save.
      */
     protected void saveData() {
         GuiInteractioner.clickWebElement(saveBtn);

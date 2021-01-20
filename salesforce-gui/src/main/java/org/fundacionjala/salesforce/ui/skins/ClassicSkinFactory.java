@@ -25,7 +25,7 @@ public class ClassicSkinFactory implements ISkinFactory {
     }
 
     /**
-     * Returns personalInformationPage.
+     * [SL] Returns personalInformationPage.
      *
      * @return a ClassicEditPersonalInformationPage
      */
