@@ -1,7 +1,6 @@
 package org.fundacionjala.salesforce.ui.PersonalInformation;
 
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
-import org.fundacionjala.salesforce.ui.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
