@@ -1,11 +1,11 @@
-package org.fundacionjala.salesforce.ui.skins.lightning;
+package org.fundacionjala.salesforce.ui.account.accountCreationPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.ui.account.accountDetailsPage.LightningAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountCreationPage;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.account.accountDetailsPage.IAccountDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

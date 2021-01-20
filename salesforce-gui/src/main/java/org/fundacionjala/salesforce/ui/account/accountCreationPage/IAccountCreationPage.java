@@ -1,5 +1,6 @@
-package org.fundacionjala.salesforce.ui.skins.iPages;
+package org.fundacionjala.salesforce.ui.account.accountCreationPage;
 
+import org.fundacionjala.salesforce.ui.account.accountDetailsPage.IAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.util.Set;

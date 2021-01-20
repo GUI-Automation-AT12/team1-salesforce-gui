@@ -1,8 +1,8 @@
 package org.fundacionjala.salesforce.ui.skins;
 
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.ui.skins.classic.ClassicAccountsPage;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountCreationPage;
+import org.fundacionjala.salesforce.ui.account.accountsPage.ClassicAccountsPage;
+import org.fundacionjala.salesforce.ui.account.accountCreationPage.IAccountCreationPage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.net.MalformedURLException;

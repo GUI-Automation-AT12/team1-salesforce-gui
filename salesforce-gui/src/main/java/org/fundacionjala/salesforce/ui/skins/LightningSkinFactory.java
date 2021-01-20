@@ -1,9 +1,9 @@
 package org.fundacionjala.salesforce.ui.skins;
 
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountCreationPopup;
-import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountDetailsPage;
-import org.fundacionjala.salesforce.ui.skins.lightning.LightningAccountsPage;
+import org.fundacionjala.salesforce.ui.account.accountCreationPage.LightningAccountCreationPopup;
+import org.fundacionjala.salesforce.ui.account.accountDetailsPage.LightningAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.account.accountsPage.LightningAccountsPage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.net.MalformedURLException;

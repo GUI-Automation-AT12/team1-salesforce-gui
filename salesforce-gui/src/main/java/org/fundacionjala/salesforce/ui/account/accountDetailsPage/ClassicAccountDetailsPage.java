@@ -1,7 +1,6 @@
-package org.fundacionjala.salesforce.ui.skins.classic;
+package org.fundacionjala.salesforce.ui.account.accountDetailsPage;
 
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountDetailsPage;
 
 import java.util.Map;
 import java.util.Set;

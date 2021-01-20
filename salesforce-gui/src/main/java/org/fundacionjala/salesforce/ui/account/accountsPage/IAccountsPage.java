@@ -1,4 +1,6 @@
-package org.fundacionjala.salesforce.ui.skins.iPages;
+package org.fundacionjala.salesforce.ui.account.accountsPage;
+
+import org.fundacionjala.salesforce.ui.account.accountCreationPage.IAccountCreationPage;
 
 /**
  * [MR] Interface for salesforce AccountsPage independent of the skin.

@@ -1,9 +1,9 @@
-package org.fundacionjala.salesforce.ui.skins.classic;
+package org.fundacionjala.salesforce.ui.account.accountsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountCreationPage;
-import org.fundacionjala.salesforce.ui.skins.iPages.IAccountsPage;
+import org.fundacionjala.salesforce.ui.account.accountCreationPage.ClassicAccountCreationPage;
+import org.fundacionjala.salesforce.ui.account.accountCreationPage.IAccountCreationPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
