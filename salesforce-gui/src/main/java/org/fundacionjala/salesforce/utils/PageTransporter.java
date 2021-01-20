@@ -68,4 +68,8 @@ public final class PageTransporter {
         }
         navigateTo(getInstanceUrl() + skinUrl + url);
     }
+
+    public static String getCurrentUrl() {
+        return WebDriverManager.getInstance().getWebDriver().getCurrentUrl();
+    }
 }

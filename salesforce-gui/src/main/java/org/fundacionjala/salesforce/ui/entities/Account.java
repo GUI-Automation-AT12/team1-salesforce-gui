@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class Account {
+
+    private String id;
     private String name;
     private Account parentAccount;
     private String site;
@@ -17,9 +19,24 @@ public class Account {
     private String billingCity;
     private String phone;
     private String description;
+    private Set<String> updatedFields;
 
-    public Set<String> getUpdatedFields() {
-        return updatedFields;
+    /**
+     * Gets Account's id.
+     *
+     * @return id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets Account's id
+     *
+     * @param accountId
+     */
+    public void setId(String accountId) {
+        this.id = accountId;
     }
 
     /**
@@ -150,13 +167,6 @@ public class Account {
         return description;
     }
 
-    public void setUpdatedFields(Set<String> updatedFields) {
-        this.updatedFields = updatedFields;
-    }
-
-    private Set<String> updatedFields;
-
-
     /**
      * Sets Account's description.
      *
@@ -164,6 +174,24 @@ public class Account {
      */
     public void setDescription(final String accountDescription) {
         this.description = accountDescription;
+    }
+
+    /**
+     * Gets Account's updatedFields.
+     *
+     * @return updatedFields
+     */
+    public Set<String> getUpdatedFields() {
+        return updatedFields;
+    }
+
+    /**
+     * Sets Account's updatedFields.
+     *
+     * @param accountUpdatedFields to set
+     */
+    public void setUpdatedFields(Set<String> accountUpdatedFields) {
+        this.updatedFields = accountUpdatedFields;
     }
 
     private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> accountInfo) {
@@ -205,6 +233,12 @@ public class Account {
     public Map<String, String> getAccountInfo() {
         Map accountInfoMap = new HashMap<String, String>();
         updatedFields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
+        return accountInfoMap;
+    }
+
+    public Map<String, String> getAccountInfo(final Set<String> fields) {
+        Map accountInfoMap = new HashMap<String, String>();
+        fields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return accountInfoMap;
     }
 }

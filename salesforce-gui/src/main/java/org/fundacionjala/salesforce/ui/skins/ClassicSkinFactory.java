@@ -43,4 +43,14 @@ public class ClassicSkinFactory implements ISkinFactory {
     public Map<String, String> getAccountDetails(Set<String> fields) {
         return null;
     }
+
+    @Override
+    public String getAccountId() {
+        return null;
+    }
+
+    @Override
+    public Map<String, String> getAccountDataFromTable(String accountId) {
+        return null;
+    }
 }

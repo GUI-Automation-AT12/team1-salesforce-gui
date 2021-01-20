@@ -10,6 +10,7 @@ import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.User;
 import org.fundacionjala.salesforce.ui.commonPages.LoginPage;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.fundacionjala.salesforce.utils.DecodingUtils;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class LoginSteps {
         //Login from UI
         PageTransporter.navigateToLoginPage();
         LoginPage loginPage = new LoginPage();
-        loginPage.login(user.getUsername(), user.getPassword());
+        loginPage.login(user.getUsername(), DecodingUtils.base64Decode(user.getPassword()));
         SkinManager.getInstance().getSkinFactory().goToPage("home");
     }
 }

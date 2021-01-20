@@ -34,11 +34,20 @@ public class AccountSteps {
             "The " + field + " from Account Details Page does not match with the " + field + " edited previously.");
         });
         softAssert.assertAll();
+        account.setId(SkinManager.getInstance().getSkinFactory().getAccountId());
     }
 
 
-    @And("Account's new data should be displayed in Accounts table")
+    @Then("Account's new data should be displayed in Accounts table")
     public void accountSNewDataShouldBeDisplayedInAccountsTable() throws MalformedURLException {
-        SkinManager.getInstance().getSkinFactory().goToPage("Account");
+        SkinManager.getInstance().getSkinFactory().goToPage("ACCOUNTS");
+        Map<String, String> actualTableData = SkinManager.getInstance().getSkinFactory().getAccountDataFromTable(account.getId());
+        Map<String, String> expectedTableData = account.getAccountInfo(actualTableData.keySet());
+        SoftAssert softAssert = new SoftAssert();
+        actualTableData.forEach((field, actualValue) -> {
+            softAssert.assertEquals(actualValue, expectedTableData.get(field),
+                    "The " + field + " of Account from Accounts Table does not match with the " + field + " edited previously.");
+        });
+        softAssert.assertAll();
     }
 }

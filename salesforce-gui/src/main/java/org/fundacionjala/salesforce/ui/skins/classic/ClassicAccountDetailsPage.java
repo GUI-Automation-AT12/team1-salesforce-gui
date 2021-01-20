@@ -11,4 +11,9 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
     public Map<String, String> getAccountDetails(Set<String> formFields) {
         return null;
     }
+
+    @Override
+    public String getAccountId() {
+        return null;
+    }
 }

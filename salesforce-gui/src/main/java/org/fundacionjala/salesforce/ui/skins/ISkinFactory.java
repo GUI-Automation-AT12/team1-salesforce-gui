@@ -20,4 +20,8 @@ public interface ISkinFactory {
     void createNewAccount(final Set<String> formFields, final Account account);
 
     Map<String, String> getAccountDetails(final Set<String> fields);
+
+    String getAccountId();
+
+    Map<String, String> getAccountDataFromTable(final String accountId);
 }

@@ -47,5 +47,13 @@ public class LightningSkinFactory implements ISkinFactory {
         return accountDetailsPage.getAccountDetails(fields);
     }
 
+    @Override
+    public String getAccountId() {
+        return accountDetailsPage.getAccountId();
+    }
 
+    @Override
+    public Map<String, String> getAccountDataFromTable(final String accountId) {
+        return accountsPage.getAccountDataFromTable(accountId);
+    }
 }

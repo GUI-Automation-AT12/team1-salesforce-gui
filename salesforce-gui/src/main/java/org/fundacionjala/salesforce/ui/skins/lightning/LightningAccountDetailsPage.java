@@ -3,8 +3,8 @@ package org.fundacionjala.salesforce.ui.skins.lightning;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.skins.iPages.IAccountDetailsPage;
+import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +15,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
+
+    private static final int ACCOUNT_STRING_SIZE = 8;
 
     @FindBy(xpath = "//ul[@role='tablist']/li[@title='Details']/a")
     private WebElement detailsTab;
@@ -59,14 +61,15 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
 
     @Override
     public Map<String, String> getAccountDetails(final Set<String> fields) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         clickDetailsTab();
         Map accountInfoMap = new HashMap<String, String>();
         fields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return accountInfoMap;
+    }
+
+    @Override
+    public String getAccountId() {
+        String currentUrl = PageTransporter.getCurrentUrl();
+        return currentUrl.substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
     }
 }
