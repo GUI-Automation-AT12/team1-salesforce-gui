@@ -35,7 +35,7 @@ public class Account {
      *
      * @param accountId
      */
-    public void setId(String accountId) {
+    public void setId(final String accountId) {
         this.id = accountId;
     }
 

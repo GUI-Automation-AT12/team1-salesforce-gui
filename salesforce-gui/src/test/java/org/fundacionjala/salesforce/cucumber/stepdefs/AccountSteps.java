@@ -1,7 +1,11 @@
 package org.fundacionjala.salesforce.cucumber.stepdefs;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.restassured.response.Response;
+import org.fundacionjala.core.api.client.RequestManager;
+import org.fundacionjala.salesforce.api.ApiResponseDataExtractor;
+import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
 import org.testng.asserts.SoftAssert;
@@ -13,6 +17,17 @@ public class AccountSteps {
 
     private Account account;
 
+    //Context
+    private final Context context;
+
+    /**
+     * Adds Dependency injection to share Context information.
+     * @param sharedContext
+     */
+    public AccountSteps(final Context sharedContext) {
+        this.context = sharedContext;
+    }
+
     @Then("I create an Account with the following data")
     public void createAnAccountWithTheFollowingData(final Map accountInfo) {
         //Updating Entity
@@ -21,6 +36,9 @@ public class AccountSteps {
         account.setUpdatedFields(accountInfo.keySet());
 
         SkinManager.getInstance().getSkinFactory().createNewAccount(account.getUpdatedFields(), account);
+
+        account.setId(SkinManager.getInstance().getSkinFactory().getAccountId());
+        context.setAccount(account);
     }
 
 
@@ -34,7 +52,6 @@ public class AccountSteps {
             "The " + field + " from Account Details Page does not match with the " + field + " edited previously.");
         });
         softAssert.assertAll();
-        account.setId(SkinManager.getInstance().getSkinFactory().getAccountId());
     }
 
 
@@ -47,6 +64,24 @@ public class AccountSteps {
         actualTableData.forEach((field, actualValue) -> {
             softAssert.assertEquals(actualValue, expectedTableData.get(field),
                     "The " + field + " of Account from Accounts Table does not match with the " + field + " edited previously.");
+        });
+        softAssert.assertAll();
+    }
+
+    @Then("the gotten data via API about the Account should contain the new data")
+    public void theGottenDataAboutTheAccountViaAPIShouldContainTheNewData() {
+        Response response = RequestManager.get("/Account/" + account.getId());
+        Map<String, String> actualApiResponseData = ApiResponseDataExtractor.getAccountDataFromApi(response, account.getUpdatedFields());
+        Map<String, String> expectedApiResponseData = account.getAccountInfo();
+        SoftAssert softAssert = new SoftAssert();
+        actualApiResponseData.forEach((field, actualValue) -> {
+            if(!field.equals(AccountConstants.PARENT_ACCOUNT_KEY)) {
+                softAssert.assertEquals(actualValue, expectedApiResponseData.get(field),
+                        "The " + field + " from Account API response does not match with the " + field + " edited previously.");
+            } else {
+                softAssert.assertEquals(actualValue, account.getParentAccount().getId(),
+                        "The " + field + " from Account API response does not match with the " + field + " edited previously.");
+            }
         });
         softAssert.assertAll();
     }

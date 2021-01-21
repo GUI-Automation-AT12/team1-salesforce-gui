@@ -1,8 +1,10 @@
 package org.fundacionjala.salesforce.ui.skins;
 
+import io.restassured.response.Response;
 import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.net.MalformedURLException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 

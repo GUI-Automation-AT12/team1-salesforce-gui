@@ -1,6 +1,7 @@
 package org.fundacionjala.salesforce.ui.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
+import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.account.accountDetailsPage.IAccountDetailsPage;
@@ -8,6 +9,7 @@ import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +71,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
 
     @Override
     public String getAccountId() {
+        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.not(ExpectedConditions.urlContains("new")));
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
     }
