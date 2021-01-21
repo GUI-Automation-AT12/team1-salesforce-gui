@@ -1,7 +1,7 @@
 package org.fundacionjala.salesforce.ui.skins;
 
-import org.fundacionjala.salesforce.ui.PersonalInformation.AbstractEditPersonalInformationPage;
-import org.fundacionjala.salesforce.ui.PersonalInformation.LightningEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.LightningEditPersonalInformationPage;
 
 /**
  * [MR] Factory Class that provides page objects related to Lightning Skin.

@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.PersonalInformation;
+package org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.ui.commonPages.BasePage;

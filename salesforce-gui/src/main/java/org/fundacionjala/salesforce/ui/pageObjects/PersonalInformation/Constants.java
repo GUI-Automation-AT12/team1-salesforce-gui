@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.PersonalInformation;
+package org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation;
 
 /**
  * [SL] This class contains constant of accountPage.

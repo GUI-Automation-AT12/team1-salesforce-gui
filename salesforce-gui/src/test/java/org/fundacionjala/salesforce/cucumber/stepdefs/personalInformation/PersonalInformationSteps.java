@@ -3,7 +3,7 @@ package org.fundacionjala.salesforce.cucumber.stepdefs.personalInformation;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
-import org.fundacionjala.salesforce.ui.PersonalInformation.AbstractEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 
 import java.util.Map;
 
