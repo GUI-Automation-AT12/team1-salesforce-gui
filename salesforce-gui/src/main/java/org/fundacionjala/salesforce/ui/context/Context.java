@@ -1,7 +1,5 @@
 package org.fundacionjala.salesforce.ui.context;
 
-import io.restassured.specification.RequestSpecification;
-import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.salesforce.ui.entities.EntitiesParser;
 import org.fundacionjala.salesforce.ui.entities.User;
 
