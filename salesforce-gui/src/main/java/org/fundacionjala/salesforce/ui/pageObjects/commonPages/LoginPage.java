@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.commonPages;
+package org.fundacionjala.salesforce.ui.pageObjects.commonPages;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.openqa.selenium.WebElement;

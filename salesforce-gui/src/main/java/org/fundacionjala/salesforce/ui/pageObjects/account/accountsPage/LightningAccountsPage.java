@@ -1,10 +1,10 @@
-package org.fundacionjala.salesforce.ui.account.accountsPage;
+package org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
-import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.account.accountCreationPage.IAccountCreationPage;
-import org.fundacionjala.salesforce.ui.account.accountCreationPage.LightningAccountCreationPopup;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.IAccountCreationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.LightningAccountCreationPopup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +42,12 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
         return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(locator, accountId)));
     }
 
+    /**
+     *
+     * @param accountId
+     * @return
+     */
+    @Override
     public Map<String, String> getAccountDataFromTable(final String accountId) {
         Map<String, String> accountInfo = new HashMap<>();
         accountInfo.put(AccountConstants.NAME_KEY, getTextFromXpathFormattingId(accountNameXpath, accountId));

@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.account.accountDetailsPage;
+package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import java.util.Map;
 import java.util.Set;

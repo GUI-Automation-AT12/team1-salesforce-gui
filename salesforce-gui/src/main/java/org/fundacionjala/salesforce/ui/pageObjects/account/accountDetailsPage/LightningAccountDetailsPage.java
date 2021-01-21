@@ -1,10 +1,9 @@
-package org.fundacionjala.salesforce.ui.account.accountDetailsPage;
+package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.constants.AccountConstants;
-import org.fundacionjala.salesforce.ui.commonPages.BasePage;
-import org.fundacionjala.salesforce.ui.account.accountDetailsPage.IAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
