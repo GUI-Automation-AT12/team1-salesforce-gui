@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 /**
  * [MR] Testing api authentication and sending get request without password encoding.
  */
-
 public class ApiAuthenticationTest {
 
     static final int OK_STATUS_CODE = 200;

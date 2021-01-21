@@ -16,6 +16,9 @@ import org.testng.asserts.SoftAssert;
 import java.net.MalformedURLException;
 import java.util.Map;
 
+/**
+ * [MR] StepDefinitions class for salesforce Accounts.
+ */
 public class AccountSteps {
 
     private Account account;

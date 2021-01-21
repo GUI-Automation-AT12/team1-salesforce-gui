@@ -5,6 +5,9 @@ import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.util.Set;
 
+/**
+ * [MR]  AccountCreationPage independent of the skin.
+ */
 public interface IAccountCreationPage {
 
     /**

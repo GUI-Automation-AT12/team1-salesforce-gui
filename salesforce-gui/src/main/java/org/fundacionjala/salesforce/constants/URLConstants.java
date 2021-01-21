@@ -3,6 +3,9 @@ package org.fundacionjala.salesforce.constants;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * [SL] This class contains the alias of the URLs classic and lightning.
+ */
 public final class URLConstants {
     public static final Map<String, String> URL_CLASSIC = new HashMap<>();
     public static final Map<String, String> URL_LIGHTNING = new HashMap<>();

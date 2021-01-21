@@ -3,6 +3,9 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * [MR] AccountDetailsPage independent o the skin.
+ */
 public interface IAccountDetailsPage {
     /**
      * Gets specific data from Account Details.

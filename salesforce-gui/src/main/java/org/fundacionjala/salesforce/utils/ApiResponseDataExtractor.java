@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * [MR] Util for get data from API response.
+ */
 public final class ApiResponseDataExtractor {
 
     private ApiResponseDataExtractor() {

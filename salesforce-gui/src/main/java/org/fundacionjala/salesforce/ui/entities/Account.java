@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+/**
+ * [MR] Class that represent Account records in salesforce.
+ */
 public class Account {
 
     private String id;

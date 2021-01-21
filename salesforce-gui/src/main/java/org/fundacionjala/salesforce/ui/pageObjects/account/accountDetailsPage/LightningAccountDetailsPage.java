@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
+/**
+ * [MR] LightningAccountDetailsPage object
+ */
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private static final int ACCOUNT_STRING_SIZE = 8;

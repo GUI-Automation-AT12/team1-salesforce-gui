@@ -5,6 +5,9 @@ import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * [MR] ClassicAccountDetailsPage object.
+ */
 public class ClassicAccountDetailsPage extends BasePage implements IAccountDetailsPage {
     /**
      * Gets specific data from Account Details.

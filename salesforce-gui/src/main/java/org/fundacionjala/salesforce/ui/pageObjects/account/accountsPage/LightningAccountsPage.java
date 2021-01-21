@@ -11,6 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * [MR] LightningAccountsPage object
+ */
 public class LightningAccountsPage extends BasePage implements IAccountsPage {
 
     private String accountNameXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"

@@ -13,6 +13,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * [MR] LightningAccountCreationPopup object
+ */
 public class LightningAccountCreationPopup extends BasePage implements IAccountCreationPage {
     @FindBy(xpath = "//label/span[.='Account Name']/../../input")
     private WebElement nameTextBox;

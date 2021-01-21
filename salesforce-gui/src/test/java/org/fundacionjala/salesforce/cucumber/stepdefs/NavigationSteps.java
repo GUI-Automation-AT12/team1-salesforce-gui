@@ -5,6 +5,9 @@ import org.fundacionjala.salesforce.utils.PageTransporter;
 
 import java.net.MalformedURLException;
 
+/**
+ * [MR] StepDef class to navigation steps.
+ */
 public class NavigationSteps {
 
     /**
