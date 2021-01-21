@@ -28,6 +28,8 @@ public class AccountSteps {
     //Context
     private final Context context;
 
+    private String incorrectAssertionMessage = "The %1$s from %2$s does not match with the %1$s edited previously.";
+
     /**
      * Adds Dependency injection to share Context information.
      * @param sharedContext
@@ -65,8 +67,8 @@ public class AccountSteps {
         Map<String, String> expectedAccountDetails = account.getAccountInfo();
         SoftAssert softAssert = new SoftAssert();
         actualAccountDetails.forEach((field, actualValue) -> {
-            softAssert.assertEquals(actualValue, expectedAccountDetails.get(field),
-            "The " + field + " from Account Details Page does not match with the " + field + " edited previously.");
+            softAssert.assertTrue(actualValue.startsWith(expectedAccountDetails.get(field)),
+            String.format(incorrectAssertionMessage, field, "Account Details Page"));
         });
         softAssert.assertAll();
     }
@@ -85,8 +87,7 @@ public class AccountSteps {
         SoftAssert softAssert = new SoftAssert();
         actualTableData.forEach((field, actualValue) -> {
             softAssert.assertEquals(actualValue, expectedTableData.get(field),
-                    "The " + field + " of Account from Accounts Table does not match with the "
-                            + field + " edited previously.");
+                    String.format(incorrectAssertionMessage, field, "Account Table"));
         });
         softAssert.assertAll();
     }
@@ -104,12 +105,10 @@ public class AccountSteps {
         actualApiResponseData.forEach((field, actualValue) -> {
             if (!field.equals(AccountConstants.PARENT_ACCOUNT_KEY)) {
                 softAssert.assertEquals(actualValue, expectedApiResponseData.get(field),
-                        "The " + field + " from Account API response does not match with the "
-                                + field + " edited previously.");
+                        String.format(incorrectAssertionMessage, field, "Account API response"));
             } else {
                 softAssert.assertEquals(actualValue, account.getParentAccount().getId(),
-                        "The " + field + " from Account API response does not match with the "
-                                + field + " edited previously.");
+                        String.format(incorrectAssertionMessage, field, "Account API response"));
             }
         });
         softAssert.assertAll();

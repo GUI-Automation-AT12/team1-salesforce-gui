@@ -9,9 +9,9 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.ClassicA
  */
 public class ClassicSkinFactory implements ISkinFactory {
 
-    private ClassicAccountsPage accountsPage;
-    private ClassicAccountCreationPage accountCreationPage;
-    private ClassicAccountDetailsPage accountDetailsPage;
+    private ClassicAccountsPage accountsPage = new ClassicAccountsPage();
+    private ClassicAccountCreationPage accountCreationPage =  new ClassicAccountCreationPage();
+    private ClassicAccountDetailsPage accountDetailsPage = new ClassicAccountDetailsPage();
 
     /**
      * Gets SkinFactory's Accounts Page.

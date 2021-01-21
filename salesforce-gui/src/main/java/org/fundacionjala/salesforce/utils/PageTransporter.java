@@ -1,9 +1,11 @@
 package org.fundacionjala.salesforce.utils;
 
+import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.config.SalesforceProperties;
 import org.fundacionjala.salesforce.constants.Constants;
 import org.fundacionjala.salesforce.constants.URLConstants;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.net.MalformedURLException;
@@ -90,7 +92,11 @@ public final class PageTransporter {
         String skin = SalesforceProperties.getInstance().getSkin();
         switch (skin) {
             case Constants.SKIN_CLASSIC:
-                navigateToUrl(URLConstants.URL_CLASSIC.get(page));
+                if (getCurrentUrl().contains("lightning")) {
+                    GuiInteractioner.clickWebElement(By.cssSelector(".profileTrigger"));
+                    GuiInteractioner.clickWebElement(By.cssSelector(".switch-to-aloha"));
+                }
+                navigateToUrl(URLConstants.URL_CLASSIC.get(page) + "?source=lex");
                 break;
             case Constants.SKIN_LIGHTNING:
                 navigateToUrl(URLConstants.URL_LIGHTNING.get(page));

@@ -28,9 +28,6 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
     @FindBy(xpath = "//a[@title='New']")
     private WebElement newAccountBtn;
 
-    @FindBy(css = "div.actionBody")
-    private WebElement newAccountModal;
-
     private void clickNewAccountBtn() {
         GuiInteractioner.clickWebElement(newAccountBtn);
     }

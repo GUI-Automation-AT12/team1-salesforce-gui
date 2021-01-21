@@ -17,45 +17,12 @@ import java.util.Set;
  * [MR] LightningAccountCreationPopup object.
  */
 public class LightningAccountCreationPopup extends BasePage implements IAccountCreationPage {
-    @FindBy(xpath = "//label/span[.='Account Name']/../../input")
-    private WebElement nameTextBox;
 
-    @FindBy(xpath = "//label/span[.='Account Site']/../../input")
-    private WebElement siteTextBox;
-
-    @FindBy(xpath = "//label/span[.='Phone']/../../input")
-    private WebElement phoneTextBox;
-
-    @FindBy(xpath = "//label/span[.='Parent Account']/../../div//input")
+    @FindBy(xpath = "//span[.='Parent Account']/../../div//input")
     private WebElement parentAccountSearchBox;
 
     private String parentAccountXpath = "//div[.='%s'][contains(@class,'primaryLabel')]";
 
-    @FindBy(xpath = "//span/span[.='Rating']/../../div/div/div")
-    private WebElement ratingDropdown;
-
-    private String selectedRatingXpath = "//a[.='%s']";
-
-    @FindBy(xpath = "//label/span[.='Billing City']/../../input")
-    private WebElement billingCityTextBox;
-
-    @FindBy(xpath = "//label/span[.='Description']/../../textarea")
-    private WebElement descriptionTextArea;
-
-    @FindBy(css = "button[title='Save']")
-    private WebElement saveBtn;
-
-    private void fillNameTextBox(final String text) {
-        GuiInteractioner.setInputText(nameTextBox, text);
-    }
-
-    private void fillSiteTextBox(final String text) {
-        GuiInteractioner.setInputText(siteTextBox, text);
-    }
-
-    private void fillPhoneTextBox(final String text) {
-        GuiInteractioner.setInputText(phoneTextBox, text);
-    }
 
     private void fillParentAccountTextBox(final String text) {
         GuiInteractioner.setInputText(parentAccountSearchBox, text);
@@ -63,30 +30,35 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
         GuiInteractioner.clickWebElement(by);
     }
 
-    private void fillRatingDropdown(final String option) {
-        GuiInteractioner.clickWebElement(ratingDropdown);
-        By by = By.xpath(String.format(selectedRatingXpath, option));
-        GuiInteractioner.clickWebElement(by);
+    private String inputLocatorXpath = "//span[.='%1$s']/../../%2$s";
+
+    private void fillTextBox(final String labelName, final String tagType, final String text) {
+        By by = By.xpath(String.format(inputLocatorXpath, labelName, tagType));
+        GuiInteractioner.setInputText(by, text);
     }
 
-    private void fillBillingCityTextBox(final String text) {
-        GuiInteractioner.setInputText(billingCityTextBox, text);
-    }
+    private String dropdownLocatorXpath = "//span[.='%s' and @class='']/../../div";
 
-    private void fillDescriptionTextArea(final String text) {
-        GuiInteractioner.setInputText(descriptionTextArea, text);
+
+    private String selectedXpath = "//a[.='%s']";
+
+    private void fillDropdown(final String labelName, final String option) {
+        GuiInteractioner.clickWebElement(By.xpath(String.format(dropdownLocatorXpath, labelName)));
+        GuiInteractioner.clickWebElement(By.xpath(String.format(selectedXpath, option)));
     }
 
     private HashMap<String, Runnable> composeMapStrategy(final Account account) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> fillNameTextBox(account.getName()));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> fillSiteTextBox(account.getSite()));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> fillPhoneTextBox(account.getPhone()));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> fillTextBox("Account Name", "input", account.getName()));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> fillTextBox("Account Site", "input", account.getSite()));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> fillTextBox("Phone", "input", account.getPhone()));
         strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
                 fillParentAccountTextBox(account.getParentAccount().getName()));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> fillRatingDropdown(account.getRating()));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> fillBillingCityTextBox(account.getBillingCity()));
-        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> fillDescriptionTextArea(account.getDescription()));
+        strategyMap.put(AccountConstants.RATING_KEY, () -> fillDropdown("Rating", account.getRating()));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () ->
+                fillTextBox("Billing City", "input", account.getBillingCity()));
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
+                fillTextBox("Description", "textarea", account.getDescription()));
         return strategyMap;
     }
 
@@ -94,6 +66,9 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
         HashMap<String, Runnable> strategyMap = composeMapStrategy(account);
         formFields.forEach(key -> strategyMap.get(key).run());
     }
+
+    @FindBy(css = "button[title='Save']")
+    private WebElement saveBtn;
 
     private void clickSaveBtn() {
         GuiInteractioner.clickWebElement(saveBtn);

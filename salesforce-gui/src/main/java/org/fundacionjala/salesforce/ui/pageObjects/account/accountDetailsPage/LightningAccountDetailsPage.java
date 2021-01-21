@@ -1,7 +1,6 @@
 package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
-import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
@@ -29,37 +28,22 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
         GuiInteractioner.clickWebElement(detailsTab);
     }
 
-    private String lightningFormattedTextXpath = "//span[.='%s']/../../div[2]//lightning-formatted-text";
+    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
 
-    private String linkWithChildXpath = "//span[.='%s']/../../div[2]//a/*";
-
-    private String linkWithoutChildXpath = "//span[.='%s']/../../div[2]//a";
-
-    private String getTextFromBy(final By by) {
-        return GuiInteractioner.getTextFromWebElement(by);
-    }
-
-    private String getTextFromTextDetail(final String fieldName) {
-        return getTextFromBy(By.xpath(String.format(lightningFormattedTextXpath, fieldName)));
-    }
-
-    private String getTextFromChildOfLinkDetail(final String fieldName) {
-        return getTextFromBy(By.xpath(String.format(linkWithChildXpath, fieldName)));
-    }
-
-    private String getTextFromLinkDetail(final String fieldName) {
-        return getTextFromBy(By.xpath(String.format(linkWithoutChildXpath, fieldName)));
+    private String getTextFromDetail(final String fieldName, final String tagType) {
+        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
     }
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
         HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromTextDetail("Account Name"));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromTextDetail("Rating"));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromTextDetail("Account Site"));
-        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> getTextFromTextDetail("Description"));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromChildOfLinkDetail("Billing Address"));
-        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromChildOfLinkDetail("Parent Account"));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromLinkDetail("Phone"));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromDetail("Account Name", "lightning-formatted-text"));
+        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromDetail("Rating", "lightning-formatted-text"));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromDetail("Account Site", "lightning-formatted-text"));
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
+                getTextFromDetail("Description", "lightning-formatted-text"));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromDetail("Billing Address", "a/div"));
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromDetail("Parent Account", "a/span"));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone", "a"));
         return strategyMap;
     }
 
@@ -84,8 +68,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
      */
     @Override
     public String getAccountId() {
-        WebDriverManager.getInstance().getWebDriverWait()
-                .until(ExpectedConditions.not(ExpectedConditions.urlContains("new")));
+        getDriverWait().until(ExpectedConditions.not(ExpectedConditions.urlContains("new")));
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.
                 substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
