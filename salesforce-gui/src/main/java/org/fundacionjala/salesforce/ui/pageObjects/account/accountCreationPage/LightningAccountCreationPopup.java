@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * [MR] LightningAccountCreationPopup object
+ * [MR] LightningAccountCreationPopup object.
  */
 public class LightningAccountCreationPopup extends BasePage implements IAccountCreationPage {
     @FindBy(xpath = "//label/span[.='Account Name']/../../input")

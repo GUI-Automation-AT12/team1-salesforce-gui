@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Map;
 
 /**
- * [MR] ClassicAccountsPage object
+ * [MR] ClassicAccountsPage object.
  */
 public class ClassicAccountsPage extends BasePage implements IAccountsPage {
 

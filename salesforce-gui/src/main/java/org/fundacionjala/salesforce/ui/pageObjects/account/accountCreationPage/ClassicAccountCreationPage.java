@@ -8,7 +8,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IA
 import java.util.Set;
 
 /**
- * [MR] ClassicAccountCreationPage object
+ * [MR] ClassicAccountCreationPage object.
  */
 public class ClassicAccountCreationPage extends BasePage implements IAccountCreationPage {
 

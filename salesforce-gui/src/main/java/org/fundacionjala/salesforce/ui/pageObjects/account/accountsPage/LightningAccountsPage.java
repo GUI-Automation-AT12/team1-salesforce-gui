@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * [MR] LightningAccountsPage object
+ * [MR] LightningAccountsPage object.
  */
 public class LightningAccountsPage extends BasePage implements IAccountsPage {
 

@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 /**
- * [MR] LightningAccountDetailsPage object
+ * [MR] LightningAccountDetailsPage object.
  */
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
