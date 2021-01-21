@@ -15,6 +15,7 @@ import java.util.Date;
  * [SL] This class contains hooks for the project.
  */
 public class Hooks {
+
     /**
      * Takes a screenshot and attach to scenario if this scenario failed.
      *

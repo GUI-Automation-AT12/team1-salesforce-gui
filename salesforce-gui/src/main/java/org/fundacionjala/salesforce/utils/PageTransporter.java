@@ -2,7 +2,9 @@ package org.fundacionjala.salesforce.utils;
 
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.config.SalesforceProperties;
+import org.fundacionjala.salesforce.constants.ConstantsURL;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.fundacionjala.salesforce.constants.Constants;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,5 +69,25 @@ public final class PageTransporter {
             skinUrl = SalesforceProperties.getInstance().getLightningSkinUrl();
         }
         navigateTo(getInstanceUrl() + skinUrl + url);
+    }
+
+    /**
+     * [SL] Navigate to specific page.
+     *
+     * @param page
+     * @throws MalformedURLException
+     */
+    public static void navigateToPage(final String page) throws MalformedURLException {
+        String skin = SalesforceProperties.getInstance().getSkin();
+        switch (skin) {
+            case Constants.SKIN_CLASSIC:
+                navigateToUrl(ConstantsURL.URL_CLASSIC.get(page));
+                break;
+            case Constants.SKIN_LIGHTNING:
+                navigateToUrl(ConstantsURL.URL_LIGHTNING.get(page));
+                break;
+            default:
+                navigateToUrl(ConstantsURL.URL_LIGHTNING.get(page));
+        }
     }
 }

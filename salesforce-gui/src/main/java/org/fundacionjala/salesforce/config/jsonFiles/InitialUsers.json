@@ -7,6 +7,13 @@
         "password": ""
     },
     {
+        "alias": "Editable User",
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
+    },
+    {
         "alias": "Other User",
         "clientId": "",
         "clientSecret": "",

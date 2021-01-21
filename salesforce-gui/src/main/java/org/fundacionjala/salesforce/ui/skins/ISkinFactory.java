@@ -1,8 +1,7 @@
 package org.fundacionjala.salesforce.ui.skins;
 
-import org.fundacionjala.salesforce.ui.skins.iPages.IHomePage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 
-import java.net.MalformedURLException;
 
 /**
  * [MR] Interface for Skin Factories classes.
@@ -10,9 +9,9 @@ import java.net.MalformedURLException;
 public interface ISkinFactory {
 
     /**
-     * Allows to go to Home Page.
-     * @return IHomePage
-     * @throws MalformedURLException
+     * Returns personalInformationPage.
+     *
+     * @return a AbstractEditPersonalInformationPage
      */
-    IHomePage goHomePage() throws MalformedURLException;
+    AbstractEditPersonalInformationPage personalInformation();
 }

@@ -17,4 +17,8 @@ public final class Constants {
     /** ASCII Printable. **/
     public static final int ASCII_PRINTABLE_START = 32;
     public static final int ASCII_PRINTABLE_END = 126;
+
+    /** Skin name. **/
+    public static final String SKIN_CLASSIC = "classic";
+    public static final String SKIN_LIGHTNING = "lightning";
 }
