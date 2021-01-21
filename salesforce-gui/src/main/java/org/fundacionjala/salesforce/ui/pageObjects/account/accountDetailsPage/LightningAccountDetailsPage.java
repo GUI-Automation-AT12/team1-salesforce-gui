@@ -32,7 +32,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
 
     private String linkWithoutChildXpath = "//span[.='%s']/../../div[2]//a";
 
-    private String getTextFromBy(By by) {
+    private String getTextFromBy(final By by) {
         return GuiInteractioner.getTextFromWebElement(by);
     }
 
@@ -60,6 +60,12 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
         return strategyMap;
     }
 
+    /**
+     * Gets specific data from Account Details.
+     *
+     * @param fields to specify required data
+     * @return Account Details as Map
+     */
     @Override
     public Map<String, String> getAccountDetails(final Set<String> fields) {
         clickDetailsTab();
@@ -68,10 +74,17 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
         return accountInfoMap;
     }
 
+    /**
+     * Gets Account Id from the URL.
+     *
+     * @return Account Id
+     */
     @Override
     public String getAccountId() {
-        WebDriverManager.getInstance().getWebDriverWait().until(ExpectedConditions.not(ExpectedConditions.urlContains("new")));
+        WebDriverManager.getInstance().getWebDriverWait()
+                .until(ExpectedConditions.not(ExpectedConditions.urlContains("new")));
         String currentUrl = PageTransporter.getCurrentUrl();
-        return currentUrl.substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
+        return currentUrl.
+                substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
     }
 }

@@ -22,10 +22,11 @@ public class ApiAuthenticationTest {
     public void getting200StatusCodeFromSalesforceApi() {
         User user = new User();
         user.setAlias("User Alias");
-        user.setClientId("3MVG9kBt168mda__Ksae0V6SChML_UMpkbG9MEr_zbEtJglmauhYjjCUKVyGYgoJzSX1YJWo3p0Gw_ziNXSq1");
-        user.setClientSecret("61FBD3DEF612DCC0C4D166696E12411AE7EC0048624610A5E2493DAF30BDAE6A");
+        user.setClientId("M01WRzlrQnQxNjhtZGFfX0tzYWUwVjZTQ2hNTF9VTXBrYkc5TU"
+                + "VyX3piRXRKZ2xtYXVoWWpqQ1VLVnlHWWdvSnpTWDFZSldvM3AwR3dfemlOWFNxMQ");
+        user.setClientSecret("NjFGQkQzREVGNjEyRENDMEM0RDE2NjY5NkUxMjQxMUFFN0VDMDA0ODYyNDYxMEE1RTI0OTNEQUYzMEJEQUU2QQ");
         user.setUsername("mirko@fjala.com");
-        user.setPassword("72440446mfrr");
+        user.setPassword("NzI0NDA0NDZtZnJy");
         RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(user));
         Response response = RequestManager.get("/Account");
         Assert.assertEquals(response.getStatusCode(), OK_STATUS_CODE, "The response did not get '200 OK' status code");

@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.api;
+package org.fundacionjala.salesforce.utils;
 
 import io.restassured.response.Response;
 import org.fundacionjala.salesforce.constants.AccountConstants;
@@ -24,6 +24,12 @@ public final class ApiResponseDataExtractor {
         return strategyMap;
     }
 
+    /**
+     * Extracts Account data for selected fields from API response.
+     * @param response to extract data
+     * @param fields selected to get data
+     * @return account Info as Map
+     */
     public static Map<String, String> getAccountDataFromApi(final Response response, final Set<String> fields) {
         Map<String, String> accountInfoMap = new HashMap<>();
         fields.forEach(field -> accountInfoMap.put(field, composeStrategyAccountMap(response).get(field)));

@@ -8,8 +8,16 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IA
 import java.util.Set;
 
 public class ClassicAccountCreationPage extends BasePage implements IAccountCreationPage {
+
+    /**
+     * Fill Account information to create a new one.
+     *
+     * @param formFields to fill
+     * @param account entity to get information to fill
+     * @return AccountDetailsPage of the new account
+     */
     @Override
-    public IAccountDetailsPage fillAccountInformation(Set<String> formFields, Account account) {
+    public IAccountDetailsPage fillAccountInformation(final Set<String> formFields, final Account account) {
         return new ClassicAccountDetailsPage();
     }
 }

@@ -10,9 +10,24 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.IAccount
  */
 public interface ISkinFactory {
 
+    /**
+     * Gets SkinFactory's Accounts Page.
+     *
+     * @return AccountsPage
+     */
     IAccountsPage getAccountsPage();
 
+    /**
+     * Gets SkinFactory's Account Creation Page.
+     *
+     * @return AccountCreationPage
+     */
     IAccountCreationPage getAccountCreationPage();
 
+    /**
+     * Gets SkinFactory's Account Details Page.
+     *
+     * @return AccountDetailsPage
+     */
     IAccountDetailsPage getAccountDetailsPage();
 }

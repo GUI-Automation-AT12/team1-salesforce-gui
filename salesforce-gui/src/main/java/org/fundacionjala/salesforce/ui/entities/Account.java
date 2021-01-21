@@ -31,7 +31,7 @@ public class Account {
     }
 
     /**
-     * Sets Account's id
+     * Sets Account's id.
      *
      * @param accountId
      */
@@ -49,7 +49,7 @@ public class Account {
     }
 
     /**
-     * Sets Account's name
+     * Sets Account's name.
      *
      * @param accountName to set
      */
@@ -190,7 +190,7 @@ public class Account {
      *
      * @param accountUpdatedFields to set
      */
-    public void setUpdatedFields(Set<String> accountUpdatedFields) {
+    public void setUpdatedFields(final Set<String> accountUpdatedFields) {
         this.updatedFields = accountUpdatedFields;
     }
 
@@ -230,12 +230,23 @@ public class Account {
         return strategyMap;
     }
 
+    /**
+     * Gets Account's info of updated fields as Map.
+     *
+     * @return accountInfoMap
+     */
     public Map<String, String> getAccountInfo() {
         Map accountInfoMap = new HashMap<String, String>();
         updatedFields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return accountInfoMap;
     }
 
+    /**
+     * Gets Account's info specific fields as Map.
+     *
+     * @param fields to get info
+     * @return accountInfoMap
+     */
     public Map<String, String> getAccountInfo(final Set<String> fields) {
         Map accountInfoMap = new HashMap<String, String>();
         fields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));

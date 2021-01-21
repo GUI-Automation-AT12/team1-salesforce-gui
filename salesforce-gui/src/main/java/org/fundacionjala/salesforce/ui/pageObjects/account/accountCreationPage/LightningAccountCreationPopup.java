@@ -42,35 +42,35 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
     @FindBy(css = "button[title='Save']")
     private WebElement saveBtn;
 
-    public void fillNameTextBox(final String text) {
+    private void fillNameTextBox(final String text) {
         GuiInteractioner.setInputText(nameTextBox, text);
     }
 
-    public void fillSiteTextBox(final String text) {
+    private void fillSiteTextBox(final String text) {
         GuiInteractioner.setInputText(siteTextBox, text);
     }
 
-    public void fillPhoneTextBox(final String text) {
+    private void fillPhoneTextBox(final String text) {
         GuiInteractioner.setInputText(phoneTextBox, text);
     }
 
-    public void fillParentAccountTextBox(final String text) {
+    private void fillParentAccountTextBox(final String text) {
         GuiInteractioner.setInputText(parentAccountSearchBox, text);
         By by = By.xpath(String.format(parentAccountXpath, text));
         GuiInteractioner.clickWebElement(by);
     }
 
-    public void fillRatingDropdown(final String option) {
+    private void fillRatingDropdown(final String option) {
         GuiInteractioner.clickWebElement(ratingDropdown);
         By by = By.xpath(String.format(selectedRatingXpath, option));
         GuiInteractioner.clickWebElement(by);
     }
 
-    public void fillBillingCityTextBox(final String text) {
+    private void fillBillingCityTextBox(final String text) {
         GuiInteractioner.setInputText(billingCityTextBox, text);
     }
 
-    public void fillDescriptionTextArea(final String text) {
+    private void fillDescriptionTextArea(final String text) {
         GuiInteractioner.setInputText(descriptionTextArea, text);
     }
 
@@ -96,8 +96,15 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
         GuiInteractioner.clickWebElement(saveBtn);
     }
 
+    /**
+     * Fill Account information to create a new one.
+     *
+     * @param formFields to fill
+     * @param account entity to get information to fill
+     * @return AccountDetailsPage of the new account
+     */
     @Override
-    public IAccountDetailsPage fillAccountInformation(Set<String> formFields, Account account) {
+    public IAccountDetailsPage fillAccountInformation(final Set<String> formFields, final Account account) {
         setInformation(formFields, account);
         clickSaveBtn();
         return new LightningAccountDetailsPage();

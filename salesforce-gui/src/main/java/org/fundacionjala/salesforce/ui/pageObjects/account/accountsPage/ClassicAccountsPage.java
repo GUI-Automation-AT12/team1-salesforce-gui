@@ -18,14 +18,25 @@ public class ClassicAccountsPage extends BasePage implements IAccountsPage {
         GuiInteractioner.clickWebElement(newAccountBtn);
     }
 
+    /**
+     * Drives the user to account creation.
+     *
+     * @return AccountCreationPage
+     */
     @Override
     public IAccountCreationPage goToAccountCreation() {
         clickNewAccountBtn();
         return new ClassicAccountCreationPage();
     }
 
+    /**
+     * Gets data for an specific Account from Accounts Table.
+     *
+     * @param accountId to get data
+     * @return Account Data as Map
+     */
     @Override
-    public Map<String, String> getAccountDataFromTable(final String accountId){
+    public Map<String, String> getAccountDataFromTable(final String accountId) {
         return null;
     }
 }

@@ -8,7 +8,18 @@ import java.util.Map;
  * [MR] Interface for salesforce AccountsPage independent of the skin.
  */
 public interface IAccountsPage {
+    /**
+     * Drives the user to account creation.
+     *
+     * @return AccountCreationPage
+     */
     IAccountCreationPage goToAccountCreation();
 
-    Map<String, String> getAccountDataFromTable(final String accountId);
+    /**
+     * Gets data for an specific Account from Accounts Table.
+     *
+     * @param accountId to get data
+     * @return Account Data as Map
+     */
+    Map<String, String> getAccountDataFromTable(String accountId);
 }

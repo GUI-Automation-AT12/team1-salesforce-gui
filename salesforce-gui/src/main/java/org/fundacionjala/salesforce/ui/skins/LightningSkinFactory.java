@@ -13,16 +13,31 @@ public class LightningSkinFactory implements ISkinFactory {
     private LightningAccountCreationPopup accountCreationPopup = new LightningAccountCreationPopup();
     private LightningAccountDetailsPage accountDetailsPage = new LightningAccountDetailsPage();
 
+    /**
+     * Gets SkinFactory's Accounts Page.
+     *
+     * @return AccountsPage
+     */
     @Override
     public LightningAccountsPage getAccountsPage() {
         return accountsPage;
     }
 
+    /**
+     * Gets SkinFactory's Account Creation Page.
+     *
+     * @return AccountCreationPage
+     */
     @Override
     public LightningAccountCreationPopup getAccountCreationPage() {
         return accountCreationPopup;
     }
 
+    /**
+     * Gets SkinFactory's Account Details Page.
+     *
+     * @return AccountDetailsPage
+     */
     @Override
     public LightningAccountDetailsPage getAccountDetailsPage() {
         return accountDetailsPage;

@@ -6,11 +6,22 @@ import java.util.Map;
 import java.util.Set;
 
 public class ClassicAccountDetailsPage extends BasePage implements IAccountDetailsPage {
+    /**
+     * Gets specific data from Account Details.
+     *
+     * @param fields to specify required data
+     * @return Account Details as Map
+     */
     @Override
-    public Map<String, String> getAccountDetails(Set<String> formFields) {
+    public Map<String, String> getAccountDetails(final Set<String> fields) {
         return null;
     }
 
+    /**
+     * Gets Account Id from the URL.
+     *
+     * @return Account Id
+     */
     @Override
     public String getAccountId() {
         return null;

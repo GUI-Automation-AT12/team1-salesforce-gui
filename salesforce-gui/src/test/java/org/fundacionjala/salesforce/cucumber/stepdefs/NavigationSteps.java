@@ -6,6 +6,13 @@ import org.fundacionjala.salesforce.utils.PageTransporter;
 import java.net.MalformedURLException;
 
 public class NavigationSteps {
+
+    /**
+     * Goes to some page.
+     *
+     * @param pageName of page to go
+     * @throws MalformedURLException
+     */
     @When("I go to {string} page")
     public void goToPage(final String pageName) throws MalformedURLException {
         PageTransporter.navigateToPage(pageName);

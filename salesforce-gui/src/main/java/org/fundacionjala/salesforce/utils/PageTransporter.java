@@ -71,6 +71,11 @@ public final class PageTransporter {
         navigateTo(getInstanceUrl() + skinUrl + url);
     }
 
+    /**
+     * Gets Current Url from the driver.
+     *
+     * @return currentUrl
+     */
     public static String getCurrentUrl() {
         return WebDriverManager.getInstance().getWebDriver().getCurrentUrl();
     }

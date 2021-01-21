@@ -8,19 +8,19 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.L
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
 
 public class LightningAccountsPage extends BasePage implements IAccountsPage {
 
-    @FindBy(xpath = "//tbody/tr/th/span/a")
-    private List<WebElement> accountLinks;
+    private String accountNameXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
+            + "//a[@data-refid]";
 
-    private String accountNameXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]//a[@data-refid]";
+    private String accountSiteXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
+            + "/td[not(contains(@class,'lock'))]//span[contains(@data-aura-class,'OutputText')]";
 
-    private String accountSiteXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]/td[not(contains(@class,'lock'))]//span[contains(@data-aura-class,'OutputText')]";
-
-    private String accountPhoneXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]//span[contains(@data-aura-class,'OutputPhone')]";
+    private String accountPhoneXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
+            + "//span[contains(@data-aura-class,'OutputPhone')]";
 
     @FindBy(xpath = "//a[@title='New']")
     private WebElement newAccountBtn;
@@ -32,6 +32,11 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
         GuiInteractioner.clickWebElement(newAccountBtn);
     }
 
+    /**
+     * Drives the user to account creation.
+     *
+     * @return AccountCreationPage
+     */
     @Override
     public IAccountCreationPage goToAccountCreation() {
         clickNewAccountBtn();
@@ -43,9 +48,10 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
     }
 
     /**
+     * Gets data for an specific Account from Accounts Table.
      *
-     * @param accountId
-     * @return
+     * @param accountId to get data
+     * @return Account Data as Map
      */
     @Override
     public Map<String, String> getAccountDataFromTable(final String accountId) {

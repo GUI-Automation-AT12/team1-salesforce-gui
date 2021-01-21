@@ -11,6 +11,8 @@ import org.fundacionjala.salesforce.ui.context.Context;
  */
 public class AccountHooks {
 
+    private static final int OK_STATUS_CODE = 200;
+
     //Context
     private final Context context;
 
@@ -28,7 +30,7 @@ public class AccountHooks {
     @After(value = "@deleteAccount", order = 1)
     public void deleteAccount() {
         Response response = RequestManager.get("/Account/" + context.getAccount().getId());
-        if (response.statusCode() == 200) {
+        if (response.statusCode() == OK_STATUS_CODE) {
             RequestManager.delete("/Account/" + context.getAccount().getId());
         }
         WebDriverManager.getInstance().quit();
