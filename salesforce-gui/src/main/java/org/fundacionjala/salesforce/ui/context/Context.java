@@ -14,33 +14,13 @@ import java.util.List;
  */
 public class Context {
 
-    private RequestManager requestManager;
     private List<User> usersList;
 
     /**
      * Constructor for Context class.
      */
     public Context() {
-        requestManager = null;
         this.usersList = new ArrayList<>();
-    }
-
-    /**
-     * Sets request specification.
-     *
-     * @param requestSpe
-     */
-    public void setRequestSpec(final RequestSpecification requestSpe) {
-        requestManager.setRequestSpec(requestSpe);
-    }
-
-    /**
-     * Gets request requestManager.
-     *
-     * @return requestManager
-     */
-    public RequestManager getRequestSpec() {
-        return requestManager;
     }
 
     private void setUsersListFromJson() throws IOException {

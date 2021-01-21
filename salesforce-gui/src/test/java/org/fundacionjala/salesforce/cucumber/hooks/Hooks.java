@@ -17,17 +17,6 @@ import java.util.Date;
  */
 public class Hooks {
 
-    private Context context;
-
-    /**
-     * Initializes an instance of Context class.
-     *
-     * @param dataContext
-     */
-    public Hooks(final Context dataContext) {
-        this.context = dataContext;
-    }
-
     /**
      * Takes a screenshot and attach to scenario if this scenario failed.
      *
