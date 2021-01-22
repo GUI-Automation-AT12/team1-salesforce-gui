@@ -1,8 +1,8 @@
 package org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
-import org.fundacionjala.salesforce.ui.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.entities.PersonalInformation;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -6,18 +6,22 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * [MR] Base Page object, from this all pages should extend.
+ * [MR-SL] Base Page object, from this all pages should extend.
  */
-public class BasePage {
+public abstract class BasePage {
 
     private WebDriver driver;
 
     private WebDriverWait driverWait;
 
-    protected BasePage() {
-        PageFactory.initElements(WebDriverManager.getInstance().getWebDriver(), this);
+    /**
+     * Constructor for BasePage class.
+     */
+    public BasePage() {
         driver = WebDriverManager.getInstance().getWebDriver();
         driverWait = WebDriverManager.getInstance().getWebDriverWait();
+        PageFactory.initElements(driver, this);
+        waitLoadPage();
     }
 
     /**
@@ -37,4 +41,6 @@ public class BasePage {
     public WebDriverWait getDriverWait() {
         return driverWait;
     }
+
+    protected abstract void waitLoadPage();
 }

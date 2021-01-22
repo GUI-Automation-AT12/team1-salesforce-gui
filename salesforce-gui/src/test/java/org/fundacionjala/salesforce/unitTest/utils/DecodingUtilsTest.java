@@ -1,6 +1,6 @@
 package org.fundacionjala.salesforce.unitTest.utils;
 
-import org.fundacionjala.salesforce.constants.Constants;
+import org.fundacionjala.salesforce.constants.GenericConstants;
 import org.fundacionjala.salesforce.utils.DecodingUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,7 +28,7 @@ public class DecodingUtilsTest {
     public void base64DecodeInvalidCode() {
         String textEncode = "SVsbG8gV29ybGQuLi4Oi";
         String actual = DecodingUtils.base64Decode(textEncode);
-        String expected = Constants.INVALID_TEXT_ENCODE;
+        String expected = GenericConstants.INVALID_TEXT_ENCODE;
         Assert.assertEquals(actual, expected);
     }
 
@@ -39,7 +39,7 @@ public class DecodingUtilsTest {
     public void asciiPrintableCharacter() {
         String message = "This character '%c' is not printable";
         SoftAssert softAssertion = new SoftAssert();
-        for (char ch = Constants.ASCII_PRINTABLE_START; ch <= Constants.ASCII_PRINTABLE_END; ch++) {
+        for (char ch = GenericConstants.ASCII_PRINTABLE_START; ch <= GenericConstants.ASCII_PRINTABLE_END; ch++) {
             softAssertion.assertTrue(DecodingUtils.isPrintable(ch), String.format(message, ch));
         }
         softAssertion.assertAll();
@@ -52,7 +52,7 @@ public class DecodingUtilsTest {
     public void asciiNotPrintableCharacter() {
         String message = "This character '%c' is printable";
         SoftAssert softAssertion = new SoftAssert();
-        for (char ch = 0; ch < Constants.ASCII_PRINTABLE_START; ch++) {
+        for (char ch = 0; ch < GenericConstants.ASCII_PRINTABLE_START; ch++) {
             softAssertion.assertFalse(DecodingUtils.isPrintable(ch), String.format(message, ch));
         }
         softAssertion.assertAll();

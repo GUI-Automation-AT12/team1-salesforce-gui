@@ -38,4 +38,6 @@ public interface ISkinFactory {
      * @return a AbstractEditPersonalInformationPage
      */
     AbstractEditPersonalInformationPage personalInformation();
+
+
 }

@@ -6,7 +6,7 @@ Feature: Edit Personal Information
 
   @restorePersonalInformation
   Scenario: Update personal information with the minimum values
-    When I go to "PERSONAL INFORMATION PAGE"
+    When I go to "PERSONAL INFORMATION" page
     And I edit my personal information with the following data
       | firstName | Civil          |
       | lastName  | Armando Guerra |

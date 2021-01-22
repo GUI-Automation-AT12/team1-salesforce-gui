@@ -1,6 +1,6 @@
 package org.fundacionjala.salesforce.utils;
 
-import org.fundacionjala.salesforce.constants.Constants;
+import org.fundacionjala.salesforce.constants.GenericConstants;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
@@ -33,7 +33,7 @@ public final class DecodingUtils {
         if (isValidString(textDecode)) {
             return textDecode;
         } else {
-            return Constants.INVALID_TEXT_ENCODE;
+            return GenericConstants.INVALID_TEXT_ENCODE;
         }
     }
 
@@ -60,6 +60,6 @@ public final class DecodingUtils {
      * @return true if between 32 and 126 inclusive
      */
     public static boolean isPrintable(final char character) {
-        return character >= Constants.ASCII_PRINTABLE_START && character <= Constants.ASCII_PRINTABLE_END;
+        return character >= GenericConstants.ASCII_PRINTABLE_START && character <= GenericConstants.ASCII_PRINTABLE_END;
     }
 }

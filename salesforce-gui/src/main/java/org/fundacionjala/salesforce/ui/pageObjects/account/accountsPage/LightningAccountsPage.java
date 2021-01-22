@@ -61,4 +61,8 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
         accountInfo.put(AccountConstants.PHONE_KEY, getTextFromXpathFormattingId(accountPhoneXpath, accountId));
         return accountInfo;
     }
+
+    @Override
+    protected void waitLoadPage() {
+    }
 }
