@@ -3,6 +3,7 @@ package org.fundacionjala.salesforce.ui.skins;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.IAccountCreationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.IAccountsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 
 
 /**
@@ -30,4 +31,11 @@ public interface ISkinFactory {
      * @return AccountDetailsPage
      */
     IAccountDetailsPage getAccountDetailsPage();
+
+    /**
+     * Returns personalInformationPage.
+     *
+     * @return a AbstractEditPersonalInformationPage
+     */
+    AbstractEditPersonalInformationPage personalInformation();
 }

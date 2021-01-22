@@ -8,6 +8,7 @@ import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.User;
+
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.LoginPage;
 import org.fundacionjala.salesforce.utils.DecodingUtils;
 import org.fundacionjala.salesforce.utils.PageTransporter;
@@ -27,6 +28,7 @@ public class LoginSteps {
 
     /**
      * Adds Dependency injection to share Context information.
+     *
      * @param sharedContext
      */
     public LoginSteps(final Context sharedContext) {
@@ -35,6 +37,7 @@ public class LoginSteps {
 
     /**
      * Logs a user in Salesforce UI.
+     *
      * @param userAlias
      * @throws IOException
      * @throws PropertiesReadingException

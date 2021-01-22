@@ -2,15 +2,13 @@
 Feature: Edit Personal Information
 
   Background:
-    Given I log in to Salesforce with "Editable User" credentials
+    Given I log in to Salesforce with "Account Owner User" credentials
 
-  @skipScenario @restorePersonalInformation
+  @restorePersonalInformation
   Scenario: Update personal information with the minimum values
     When I go to "PERSONAL INFORMATION PAGE"
-      And I edit my personal information with the following data
-        | First Name | Civil              |
-        | Last Name  | Armando Guerra     |
-        | Alias      | Guerra             |
-        | Email      | armando@guerra.com |
-        | Nickname   | user661user        |
+    And I edit my personal information with the following data
+      | firstName | Civil          |
+      | lastName  | Armando Guerra |
+      | alias     | Guerra         |
     Then The personal information table should be updated

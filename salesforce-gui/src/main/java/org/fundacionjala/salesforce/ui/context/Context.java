@@ -12,6 +12,7 @@ import java.util.List;
  * [MR] Context class to share between Step Definitions.
  */
 public class Context {
+
     private List<User> usersList;
     private Account account;
 
@@ -29,6 +30,7 @@ public class Context {
 
     /**
      * Searches for a specific User in userList by a provided alias.
+     *
      * @param alias provided alias
      * @return User if the alias matches, otherwise return null.
      */

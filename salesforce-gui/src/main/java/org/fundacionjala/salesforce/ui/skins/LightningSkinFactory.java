@@ -3,6 +3,8 @@ package org.fundacionjala.salesforce.ui.skins;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.LightningAccountCreationPopup;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.LightningAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.LightningAccountsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.LightningEditPersonalInformationPage;
 
 /**
  * [MR] Factory Class that provides page objects related to Lightning Skin.
@@ -41,5 +43,15 @@ public class LightningSkinFactory implements ISkinFactory {
     @Override
     public LightningAccountDetailsPage getAccountDetailsPage() {
         return accountDetailsPage;
+    }
+
+    /**
+     * [SL] Returns personalInformationPage.
+     *
+     * @return a LightningEditPersonalInformationPage
+     */
+    @Override
+    public AbstractEditPersonalInformationPage personalInformation() {
+        return new LightningEditPersonalInformationPage();
     }
 }

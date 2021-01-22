@@ -92,7 +92,7 @@ public final class PageTransporter {
         String skin = SalesforceProperties.getInstance().getSkin();
         switch (skin) {
             case Constants.SKIN_CLASSIC:
-                if (getCurrentUrl().contains("lightning")) {
+                if (getCurrentUrl().contains(Constants.SKIN_LIGHTNING)) {
                     GuiInteractioner.clickWebElement(By.cssSelector(".profileTrigger"));
                     GuiInteractioner.clickWebElement(By.cssSelector(".switch-to-aloha"));
                 }

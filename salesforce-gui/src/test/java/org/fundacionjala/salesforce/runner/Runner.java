@@ -4,6 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.fundacionjala.core.config.TestExecutionProperties;
 import org.fundacionjala.core.config.TestPropertiesSetter;
+import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.core.throwables.PropertiesReadingException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -40,5 +41,6 @@ public final class Runner extends AbstractTestNGCucumberTests {
      */
     @AfterTest
     public void afterAllScenarios() {
+        WebDriverManager.getInstance().quit();
     }
 }
