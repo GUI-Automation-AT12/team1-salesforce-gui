@@ -6,6 +6,7 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.http.entity.ContentType;
 import org.fundacionjala.salesforce.config.SalesforceProperties;
 import org.fundacionjala.salesforce.ui.entities.User;
+import org.fundacionjala.salesforce.utils.DecodingUtils;
 
 /**
  * [MR] Class that build the requestSpecification to send requests to Salesforce API.
@@ -31,10 +32,10 @@ public final class ApiAuthenticator {
         RestAssured.baseURI = SalesforceProperties.getInstance().getApiLoginUrl();
         Response response = RestAssured.given()
                 .param(GRANT_TYPE_KEY, GRANT_TYPE_VAL)
-                .param(CLIENT_ID_KEY, user.getClientId())
-                .param(CLIENT_SECRET_KEY, user.getClientSecret())
+                .param(CLIENT_ID_KEY, DecodingUtils.base64Decode(user.getClientId()))
+                .param(CLIENT_SECRET_KEY, DecodingUtils.base64Decode(user.getClientSecret()))
                 .param(USERNAME_KEY, user.getUsername())
-                .param(PASSWORD_KEY, user.getPassword())
+                .param(PASSWORD_KEY, DecodingUtils.base64Decode(user.getPassword()))
                 .when().post();
         return response;
     }

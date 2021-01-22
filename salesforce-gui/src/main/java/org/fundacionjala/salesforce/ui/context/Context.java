@@ -1,5 +1,6 @@
 package org.fundacionjala.salesforce.ui.context;
 
+import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.entities.EntitiesParser;
 import org.fundacionjala.salesforce.ui.entities.User;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class Context {
 
     private List<User> usersList;
+    private Account account;
 
     /**
      * Constructor for Context class.
@@ -23,6 +25,7 @@ public class Context {
 
     private void setUsersListFromJson() throws IOException {
         this.usersList = EntitiesParser.getUsersListFromJson();
+        this.account = null;
     }
 
     /**
@@ -41,5 +44,23 @@ public class Context {
             }
         }
         return null;
+    }
+
+    /**
+     * Set Context's Account to share into StepDef classes.
+     *
+     * @param contextAccount
+     */
+    public void setAccount(final Account contextAccount) {
+        this.account = contextAccount;
+    }
+
+    /**
+     * Gets Context's Account.
+     *
+     * @return account
+     */
+    public Account getAccount() {
+        return this.account;
     }
 }

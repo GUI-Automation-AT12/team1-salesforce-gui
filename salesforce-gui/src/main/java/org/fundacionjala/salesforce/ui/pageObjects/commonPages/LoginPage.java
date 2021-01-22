@@ -1,4 +1,4 @@
-package org.fundacionjala.salesforce.ui.commonPages;
+package org.fundacionjala.salesforce.ui.pageObjects.commonPages;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.openqa.selenium.WebElement;
@@ -39,10 +39,5 @@ public class LoginPage extends BasePage {
         setUsernameField(username);
         setPasswordField(password);
         clickLoginBtn();
-    }
-
-    @Override
-    protected void waitLoadPage() {
-
     }
 }
