@@ -1,7 +1,7 @@
 @Opportunity
 Feature: Create Opportunity
 
-  @skipScenario @createAccount @deleteOpportunity
+  @deleteOpportunity
   Scenario: Create an Opportunity that depends of an Account
     Given I log in to Salesforce with "Opportunity Owner User" credentials
     When I create a new Opportunity with the following data
