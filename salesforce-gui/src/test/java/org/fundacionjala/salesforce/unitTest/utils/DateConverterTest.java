@@ -3,6 +3,8 @@ package org.fundacionjala.salesforce.unitTest.utils;
 import org.fundacionjala.salesforce.utils.DateConverter;
 import org.junit.Assert;
 import org.testng.annotations.Test;
+
+import java.time.DateTimeException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,10 +42,19 @@ public class DateConverterTest {
     @Test
     public void dateConversionForYesterdayTest() {
         Calendar calendar = Calendar.getInstance();
-        Date actual = DateConverter.convertTextToDate("YESTERday");
+        Date actual = DateConverter.convertTextToDate("YESTERDAY");
         calendar.add(Calendar.DAY_OF_YEAR, -1);
         Date expected = calendar.getTime();
         Assert.assertEquals(actual.toString(), expected.toString());
+    }
+
+    /**
+     * Test String Conversion to date for INCORRECT date.
+     */
+    @Test(expectedExceptions = DateTimeException.class,
+            expectedExceptionsMessageRegExp = "Invalid String to parse to a valid day.")
+    public void propertiesFileReaderInstantiationWithIncorrectFileTest() {
+        DateConverter.convertTextToDate("INCORRECT");
     }
 
     /**
@@ -56,4 +67,6 @@ public class DateConverterTest {
         String notExpected = calendar.getTime().toString();
         Assert.assertNotEquals(actual, notExpected);
     }
+
+
 }
