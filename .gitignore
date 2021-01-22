@@ -36,4 +36,4 @@ bin/
 .classpath
 .project
 .settings/
-InitialUsers.json
+*.json
