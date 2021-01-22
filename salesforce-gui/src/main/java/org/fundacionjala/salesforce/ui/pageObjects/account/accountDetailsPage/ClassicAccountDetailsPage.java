@@ -59,4 +59,8 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
     }
+
+    @Override
+    protected void waitLoadPage() {
+    }
 }

@@ -11,12 +11,14 @@ public final class URLConstants {
     public static final Map<String, String> URL_LIGHTNING = new HashMap<>();
 
     static {
-        URL_LIGHTNING.put("PERSONAL INFORMATION PAGE", "settings/personal/PersonalInformation/home");
+        URL_LIGHTNING.put("PERSONAL INFORMATION", "settings/personal/PersonalInformation/home");
         URL_LIGHTNING.put("HOME", "page/home");
         URL_LIGHTNING.put("ACCOUNTS", "o/Account/list");
-        URL_CLASSIC.put("PERSONAL INFORMATION PAGE", "setup/personalInformationSetup.apexp");
+        URL_LIGHTNING.put("OPPORTUNITIES", "o/Opportunity/list");
+        URL_CLASSIC.put("PERSONAL INFORMATION", "setup/personalInformationSetup.apexp");
         URL_CLASSIC.put("HOME", "home/home.jsp");
         URL_CLASSIC.put("ACCOUNTS", "001/o");
+        URL_LIGHTNING.put("OPPORTUNITIES", "006/o");
     }
 
     /**

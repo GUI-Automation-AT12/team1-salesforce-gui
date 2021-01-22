@@ -3,15 +3,15 @@ package org.fundacionjala.salesforce.constants;
 /**
  * [SL] This class offers constant for the salesforce-gui.
  */
-public final class Constants {
+public final class GenericConstants {
     /**
      * Constructor.
      */
-    private Constants() {
+    private GenericConstants() {
 
     }
 
-    /** Encode/Decode Constants. **/
+    /** Encode/Decode GenericConstants. **/
     public static final String INVALID_TEXT_ENCODE = "Invalid encode text.";
 
     /** ASCII Printable. **/

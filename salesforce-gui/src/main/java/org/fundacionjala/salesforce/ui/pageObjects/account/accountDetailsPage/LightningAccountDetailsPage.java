@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
@@ -36,14 +37,20 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
         HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromDetail("Account Name", "lightning-formatted-text"));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromDetail("Rating", "lightning-formatted-text"));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromDetail("Account Site", "lightning-formatted-text"));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromDetail("Account Name",
+                TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
+        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromDetail("Rating",
+                TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromDetail("Account Site",
+                TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
         strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
-                getTextFromDetail("Description", "lightning-formatted-text"));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromDetail("Billing Address", "a/div"));
-        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromDetail("Parent Account", "a/span"));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone", "a"));
+                getTextFromDetail("Description", TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromDetail("Billing Address",
+                TagConstants.A_TAG + TagConstants.SLASH + TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromDetail("Parent Account",
+                TagConstants.A_TAG + TagConstants.SLASH + TagConstants.SPAN_TAG));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone",
+                TagConstants.A_TAG));
         return strategyMap;
     }
 
@@ -72,5 +79,9 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.
                 substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
+    }
+
+    @Override
+    protected void waitLoadPage() {
     }
 }

@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.ClassicAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.entities.Account;
@@ -19,6 +20,8 @@ import java.util.Set;
  */
 public class ClassicAccountCreationPage extends BasePage implements IAccountCreationPage {
 
+
+
     @FindBy(css = "input[name='save']")
     private WebElement saveBtn;
 
@@ -26,15 +29,12 @@ public class ClassicAccountCreationPage extends BasePage implements IAccountCrea
 
     private String selectLocatorXpath = "//td[preceding-sibling::td/label[text()='%s']][1]//select";
 
-    private static final String INPUT_TYPE = "input";
-    private static final String TEXTAREA_TYPE = "textarea";
-
     private void clickSaveBtn() {
         GuiInteractioner.clickWebElement(saveBtn);
     }
 
-    private void fillTextBox(final String labelName, final String type, final String textToFill) {
-        By inputLocator = By.xpath(String.format(inputLocatorXpath, labelName, type));
+    private void fillTextBox(final String labelName, final String tagType, final String textToFill) {
+        By inputLocator = By.xpath(String.format(inputLocatorXpath, labelName, tagType));
         GuiInteractioner.setInputText(inputLocator, textToFill);
     }
 
@@ -46,16 +46,19 @@ public class ClassicAccountCreationPage extends BasePage implements IAccountCrea
 
     private HashMap<String, Runnable> composeMapStrategy(final Account account) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> fillTextBox("Account Name", INPUT_TYPE, account.getName()));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> fillTextBox("Account Site", INPUT_TYPE, account.getSite()));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> fillTextBox("Phone", INPUT_TYPE, account.getPhone()));
-        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
-                fillTextBox("Parent Account", INPUT_TYPE, account.getParentAccount().getName()));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> fillTextBox("Account Name",
+                TagConstants.INPUT_TAG, account.getName()));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> fillTextBox("Account Site",
+                TagConstants.INPUT_TAG, account.getSite()));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> fillTextBox("Phone",
+                TagConstants.INPUT_TAG, account.getPhone()));
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> fillTextBox("Parent Account",
+                TagConstants.INPUT_TAG, account.getParentAccount().getName()));
         strategyMap.put(AccountConstants.RATING_KEY, () -> fillDropdown("Rating", account.getRating()));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () ->
-                fillTextBox("Billing City", INPUT_TYPE, account.getBillingCity()));
-        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
-                fillTextBox("Description", TEXTAREA_TYPE, account.getDescription()));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> fillTextBox("Billing City",
+                TagConstants.INPUT_TAG, account.getBillingCity()));
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> fillTextBox("Description",
+                TagConstants.TEXTAREA_TAG, account.getDescription()));
         return strategyMap;
     }
 
@@ -76,5 +79,9 @@ public class ClassicAccountCreationPage extends BasePage implements IAccountCrea
         setInformation(formFields, account);
         clickSaveBtn();
         return new ClassicAccountDetailsPage();
+    }
+
+    @Override
+    protected void waitLoadPage() {
     }
 }
