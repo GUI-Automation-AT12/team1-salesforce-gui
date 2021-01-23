@@ -1,19 +1,31 @@
 @Account
 Feature: Import Accounts
 
-  @skipScenario @deleteAccount
+  @deleteAccounts
   Scenario Outline: Import multiple Accounts using .csv files
     Given I log in to Salesforce with "Account Owner User" credentials
-    When I go to "ACCOUNT" page
-      And I go Import section
-      And I import a new Account matching by "Email" with the following <filePath> as <Option>
-    Then the Mapped Salesforce Object column should not contain "Unmapped" for any entry
-      And the Mapped Fields value should be "7" and Unmapped Field should be "0"
-      And the Data Load Job Details should contain correct importation data
-      And the new records should be displayed at the Accounts table with "New This Week" option
+    When I go to "ACCOUNTS" page
+      And I import a new Account matching by "<matchContactBy>" with the file "<filePath>" and the "<option>"
+    Then the auto-mapped fields table should contain the next data
+        | Mapped Salesforce Object | CSV Header         |
+        | Account: Account Name    | AccountName        |
+        | Contact: Last Name       | ContactLastName    |
+        | Account: Website         | AccountWebsite     |
+        | Account: Phone           | AccountPhone       |
+        | Account: Description     | AccountDescription |
+        | Contact: Email           | Email              |
+      And the Mapped Fields value should be 6 and Unmapped Field should be 0
+      And the Data Load Job Details should contain the following importation data
+        | Content Type      | CSV    |
+        | Operation         | Insert |
+        | Progress          | 100%   |
+        | Records Processed | 6      |
+        | Status            | Closed |
+    When I click the "View Result" link to download file
+    Then the downloaded file should not contain false Success and any errors
+    When I store the Id of imported Accounts from the downloaded file
+    Then the new Accounts should be in New This Week view at Account page
     Examples:
-      | Option      | filePath                   |
-      | CSV         | config/account/csv.csv     |
-      | Outlook CSV | config/account/outlook.csv |
-      | ACT! CSV    | config/account/act.csv     |
-      | GMail CSV   | config/account/gmail.csv   |
+        | option      | matchContactBy | filePath                 |
+        | CSV         | Email          | importAccountCSV.csv     |
+        | Outlook CSV | Email          | importAccountOutlook.csv |

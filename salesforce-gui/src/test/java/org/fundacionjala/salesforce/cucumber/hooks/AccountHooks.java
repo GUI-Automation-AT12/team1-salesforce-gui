@@ -12,12 +12,11 @@ import org.fundacionjala.salesforce.ui.context.Context;
 public class AccountHooks {
 
     private static final int OK_STATUS_CODE = 200;
-
-    //Context
     private final Context context;
 
     /**
      * Adds Dependency injection to share Context information.
+     *
      * @param sharedContext
      */
     public AccountHooks(final Context sharedContext) {
@@ -34,5 +33,16 @@ public class AccountHooks {
             RequestManager.delete("/Account/" + context.getAccount().getId());
         }
         WebDriverManager.getInstance().quit();
+    }
+
+    /**
+     * [SL] Hook that delete an Account saved in Context via API.
+     */
+    @After(value = "@deleteAccounts", order = 1)
+    public void deleteAccounts() {
+        for (String accountId : context.getAccountIdList()) {
+            System.out.println(accountId.replace("\"", ""));
+            RequestManager.delete("/Account/" + accountId.replace("\"", ""));
+        }
     }
 }

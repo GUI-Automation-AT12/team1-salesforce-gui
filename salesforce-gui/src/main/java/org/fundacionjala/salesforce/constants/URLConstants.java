@@ -19,6 +19,12 @@ public final class URLConstants {
         URL_CLASSIC.put("HOME", "home/home.jsp");
         URL_CLASSIC.put("ACCOUNTS", "001/o");
         URL_LIGHTNING.put("OPPORTUNITIES", "006/o");
+        URL_LIGHTNING.put("ACCOUNT PAGE", "o/Account/list?filterName=Recent");
+    }
+
+    static {
+        URL_CLASSIC.put("PERSONAL INFORMATION PAGE", "setup/personalInformationSetup.apexp");
+        URL_CLASSIC.put("ACCOUNT PAGE", "001/o?source=lex");
     }
 
     /**

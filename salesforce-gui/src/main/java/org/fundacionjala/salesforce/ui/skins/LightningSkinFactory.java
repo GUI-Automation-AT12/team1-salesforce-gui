@@ -1,7 +1,10 @@
 package org.fundacionjala.salesforce.ui.skins;
 
-import org.fundacionjala.salesforce.ui.import_account.AbstractImportAccountPage;
-import org.fundacionjala.salesforce.ui.import_account.LightningImportAccount;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.AbstractImportAccountPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.LightningImportAccountPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.LightningAccountCreationPopup;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.LightningAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.LightningAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.LightningEditPersonalInformationPage;
 
@@ -10,23 +13,52 @@ import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.Lightning
  */
 public class LightningSkinFactory implements ISkinFactory {
 
+    private LightningAccountsPage accountsPage = new LightningAccountsPage();
+    private LightningAccountCreationPopup accountCreationPopup = new LightningAccountCreationPopup();
+    private LightningAccountDetailsPage accountDetailsPage = new LightningAccountDetailsPage();
+
+    /**
+     * Gets SkinFactory's Accounts Page.
+     *
+     * @return AccountsPage
+     */
+    @Override
+    public LightningAccountsPage getAccountsPage() {
+        return accountsPage;
+    }
+
+    /**
+     * Gets SkinFactory's Account Creation Page.
+     *
+     * @return AccountCreationPage
+     */
+    @Override
+    public LightningAccountCreationPopup getAccountCreationPage() {
+        return accountCreationPopup;
+    }
+
+    /**
+     * Gets SkinFactory's Account Details Page.
+     *
+     * @return AccountDetailsPage
+     */
+    @Override
+    public LightningAccountDetailsPage getAccountDetailsPage() {
+        return accountDetailsPage;
+    }
+
     /**
      * [SL] Returns personalInformationPage.
      *
      * @return a LightningEditPersonalInformationPage
      */
     @Override
-    public AbstractEditPersonalInformationPage personalInformation() {
+    public final AbstractEditPersonalInformationPage personalInformationPage() {
         return new LightningEditPersonalInformationPage();
     }
 
-    /**
-     * Returns importAccountPage.
-     *
-     * @return a AbstractImportAccountPage
-     */
     @Override
-    public AbstractImportAccountPage importAccount() {
-        return new LightningImportAccount();
+    public final AbstractImportAccountPage importAccountPage() {
+        return new LightningImportAccountPage();
     }
 }

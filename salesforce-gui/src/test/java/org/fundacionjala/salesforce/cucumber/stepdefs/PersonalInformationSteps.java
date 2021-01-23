@@ -1,7 +1,7 @@
 package org.fundacionjala.salesforce.cucumber.stepdefs;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
 
@@ -21,7 +21,7 @@ public class PersonalInformationSteps {
      *
      * @param formData
      */
-    @And("I edit my personal information with the following data")
+    @When("I edit my personal information with the following data")
     public void editMyPersonalInformationWithTheFollowingData(final Map<String, String> formData) {
         personalInformation = SkinManager.getInstance().getSkinFactory().personalInformation();
         personalInformation.update(formData);
