@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.context;
 
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.entities.EntitiesParser;
+import org.fundacionjala.salesforce.ui.entities.Opportunity;
 import org.fundacionjala.salesforce.ui.entities.User;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class Context {
 
     private List<User> usersList;
     private Account account;
+    private Opportunity opportunity;
 
     /**
      * Constructor for Context class.
@@ -62,5 +64,14 @@ public class Context {
      */
     public Account getAccount() {
         return this.account;
+    }
+
+    /**
+     * Set Context's Opportunity to share into StepDef classes.
+     *
+     * @param contextOpportunity
+     */
+    public void setOpportunity(final Opportunity contextOpportunity) {
+        this.opportunity = contextOpportunity;
     }
 }

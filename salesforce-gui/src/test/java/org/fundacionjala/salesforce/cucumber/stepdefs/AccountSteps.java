@@ -44,7 +44,7 @@ public class AccountSteps {
      * @param accountInfo to create a new Account
      */
     @When("I create an Account with the following data")
-    public void createAnAccountWithTheFollowingData(final Map accountInfo) {
+    public void createAnAccount(final Map accountInfo) {
         //Updating Entity
         account = new Account();
         account.setInformation(accountInfo);

@@ -5,6 +5,9 @@ import java.time.DateTimeException;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * [MR] Util class to handle Dates in Salesforce.
+ */
 public final class DateConverter {
 
     /**

@@ -8,6 +8,9 @@ import org.fundacionjala.salesforce.ui.skins.SkinManager;
 
 import java.util.Map;
 
+/**
+ * [MR] StepDefinitions class for salesforce Opportunities.
+ */
 public class OpportunitySteps {
 
     private Opportunity opportunity;
@@ -30,6 +33,16 @@ public class OpportunitySteps {
      * @param opportunityInfo as map
      */
     @When("I create a new Opportunity with the following data")
-    public void iCreateANewOpportunityWithTheFollowingData(final Map opportunityInfo) {
+    public void createANewOpportunity(final Map opportunityInfo) {
+        //Updating Entity
+        opportunity = new Opportunity();
+        opportunity.setInformation(opportunityInfo);
+        opportunity.setUpdatedFields(opportunityInfo.keySet());
+
+        skin.getOpportunitiesPage().goToOpportunityCreation();
+        skin.getOpportunityCreationPage().fillOpportunityInformation(opportunity.getUpdatedFields(), opportunity);
+
+        opportunity.setId(skin.getOpportunityDetailsPage().getOpportunityId());
+        context.setOpportunity(opportunity);
     }
 }
