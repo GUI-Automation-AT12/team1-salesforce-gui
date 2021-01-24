@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
@@ -25,13 +26,16 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
         HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromTextDetail("Account Name", "div"));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromTextDetail("Rating", "div"));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromTextDetail("Account Site", "div"));
-        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> getTextFromTextDetail("Description", "div"));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromTextDetail("Billing Address", "div"));
-        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromTextDetail("Parent Account", "a"));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromTextDetail("Phone", "div"));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromTextDetail("Account Name", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromTextDetail("Rating", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromTextDetail("Account Site", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
+                getTextFromTextDetail("Description", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () ->
+                getTextFromTextDetail("Billing Address", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
+                getTextFromTextDetail("Parent Account", TagConstants.A_TAG));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromTextDetail("Phone", TagConstants.DIV_TAG));
         return strategyMap;
     }
 

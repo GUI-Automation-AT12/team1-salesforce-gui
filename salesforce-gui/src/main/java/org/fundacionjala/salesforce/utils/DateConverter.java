@@ -44,6 +44,6 @@ public final class DateConverter {
      * @return formatted String
      */
     public static String convertDateToFormattedText(final Date date) {
-        return new SimpleDateFormat("dd/MM/yyyy").format(date);
+        return new SimpleDateFormat("d/M/yyyy").format(date);
     }
 }

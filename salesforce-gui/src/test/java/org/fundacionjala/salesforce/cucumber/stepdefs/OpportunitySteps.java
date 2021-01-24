@@ -1,10 +1,12 @@
 package org.fundacionjala.salesforce.cucumber.stepdefs;
 
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Opportunity;
 import org.fundacionjala.salesforce.ui.skins.ISkinFactory;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Map;
 
@@ -19,6 +21,8 @@ public class OpportunitySteps {
 
     //Context
     private final Context context;
+
+    private String incorrectAssertionMessage = "The %1$s from %2$s does not match with the %1$s edited previously.";
 
     /**
      * Adds Dependency injection to share Context information.
@@ -44,5 +48,21 @@ public class OpportunitySteps {
 
         opportunity.setId(skin.getOpportunityDetailsPage().getOpportunityId());
         context.setOpportunity(opportunity);
+    }
+
+    /**
+     * [MR] Checks that the Details Page contains the data stored before.
+     */
+    @Then("Opportunity's data should be displayed at details")
+    public void verifyOpportunityDataIsDisplayedAtDetails() {
+        Map<String, String> actualOpportunityDetails = skin.getOpportunityDetailsPage().
+                getOpportunityDetails(opportunity.getUpdatedFields());
+        Map<String, String> expectedOpportunityDetails = opportunity.getOpportunityInfo();
+        SoftAssert softAssert = new SoftAssert();
+        actualOpportunityDetails.forEach((field, actualValue) -> {
+            softAssert.assertEquals(actualValue,expectedOpportunityDetails.get(field),
+                    String.format(incorrectAssertionMessage, field, "Opportunity Details Page"));
+        });
+        softAssert.assertAll();
     }
 }

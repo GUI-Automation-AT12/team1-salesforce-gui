@@ -61,7 +61,7 @@ public class AccountSteps {
      * Makes assertions for Account Details and the recently account entity.
      */
     @Then("Account's new data should be displayed at details")
-    public void accountSNewDataShouldBeDisplayedAtDetails() {
+    public void verifyAccountDataIsDisplayedAtDetails() {
         Map<String, String> actualAccountDetails = skin.getAccountDetailsPage().
                 getAccountDetails(account.getUpdatedFields());
         Map<String, String> expectedAccountDetails = account.getAccountInfo();
