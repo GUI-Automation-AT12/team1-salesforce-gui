@@ -6,6 +6,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreati
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.LightningOpportunityCreationPopup;
 import org.openqa.selenium.By;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +60,7 @@ public class LightningOpportunitiesPage extends AbstractOpportunitiesPage {
                 getTextFromXpathFormattingId(stageXpath, opportunityId));
         accountInfo.put(OpportunityConstants.CLOSE_DATE_KEY,
                 getTextFromXpathFormattingId(closeDateXPath, opportunityId));
+        accountInfo.values().removeAll(Collections.singleton(null));
         return accountInfo;
     }
 }

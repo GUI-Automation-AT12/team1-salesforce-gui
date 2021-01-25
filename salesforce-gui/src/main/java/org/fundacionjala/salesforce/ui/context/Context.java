@@ -16,6 +16,7 @@ public class Context {
 
     private List<User> usersList;
     private Account account;
+
     private Opportunity opportunity;
 
     /**
@@ -73,5 +74,14 @@ public class Context {
      */
     public void setOpportunity(final Opportunity contextOpportunity) {
         this.opportunity = contextOpportunity;
+    }
+
+    /**
+     * Gets Context's Opportunity.
+     *
+     * @return opportunity
+     */
+    public Opportunity getOpportunity() {
+        return opportunity;
     }
 }

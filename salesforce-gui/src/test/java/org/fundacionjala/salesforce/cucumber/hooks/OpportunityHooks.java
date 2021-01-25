@@ -8,9 +8,9 @@ import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.ui.context.Context;
 
 /**
- * [MR] Hooks for scenarios related to Accounts.
+ * [MR] Hooks for scenarios related to Opportunities.
  */
-public class AccountHooks {
+public class OpportunityHooks {
 
     //Context
     private final Context context;
@@ -19,18 +19,18 @@ public class AccountHooks {
      * Adds Dependency injection to share Context information.
      * @param sharedContext
      */
-    public AccountHooks(final Context sharedContext) {
+    public OpportunityHooks(final Context sharedContext) {
         this.context = sharedContext;
     }
 
     /**
-     * Hook that delete an Account saved in Context via API.
+     * Hook that deletes an Opportunity saved in Context via API.
      */
-    @After(value = "@deleteAccount", order = 1)
-    public void deleteAccount() {
-        Response response = RequestManager.get("/Account/" + context.getAccount().getId());
+    @After(value = "@deleteOpportunity", order = 1)
+    public void deleteOpportunity() {
+        Response response = RequestManager.get("/Opportunity/" + context.getOpportunity().getId());
         if (response.statusCode() == HttpStatus.SC_OK) {
-            RequestManager.delete("/Account/" + context.getAccount().getId());
+            RequestManager.delete("/Opportunity/" + context.getOpportunity().getId());
         }
         WebDriverManager.getInstance().quit();
     }

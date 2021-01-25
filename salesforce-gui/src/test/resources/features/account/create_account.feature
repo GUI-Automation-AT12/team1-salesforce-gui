@@ -15,4 +15,4 @@ Feature: Create Account
         |  Description      |  An important account recorded by the user!  |
     Then Account's new data should be displayed at details
       And Account's new data should be displayed in Accounts table
-      And the gotten data via API about the Account should contain the new data
+      And the API response about the Account should contain the new data

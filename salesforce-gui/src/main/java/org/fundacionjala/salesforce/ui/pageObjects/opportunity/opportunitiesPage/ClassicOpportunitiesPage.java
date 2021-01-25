@@ -5,7 +5,9 @@ import org.fundacionjala.salesforce.constants.OpportunityConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.ClassicOpportunityCreationPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +34,11 @@ public class ClassicOpportunitiesPage extends AbstractOpportunitiesPage {
     }
 
     private String getTextFromXpathFormattingId(final String locator, final String opportunityId) {
-        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(locator, opportunityId)));
+        try {
+            return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(locator, opportunityId)));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     /**
@@ -49,6 +55,7 @@ public class ClassicOpportunitiesPage extends AbstractOpportunitiesPage {
                 getTextFromXpathFormattingId(accountXpath, opportunityId));
         accountInfo.put(OpportunityConstants.CLOSE_DATE_KEY,
                 getTextFromXpathFormattingId(closeDateXpath, opportunityId));
+        accountInfo.values().removeAll(Collections.singleton(null));
         return accountInfo;
     }
 }

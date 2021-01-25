@@ -1,5 +1,6 @@
 package org.fundacionjala.salesforce.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.util.Calendar;
@@ -45,5 +46,21 @@ public final class DateConverter {
      */
     public static String convertDateToFormattedText(final Date date) {
         return new SimpleDateFormat("d/M/yyyy").format(date);
+    }
+
+    /**
+     * Convert a String date to formatted String for Salesforce.
+     * @param dateToParse as String
+     * @param sourceFormat of the String
+     * @return formatted String
+     */
+    public static String convertStringToFormattedText(final String dateToParse, final String sourceFormat) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(sourceFormat);
+            return new SimpleDateFormat("d/M/yyyy").format(formatter.parse(dateToParse));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

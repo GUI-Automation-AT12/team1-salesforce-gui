@@ -95,11 +95,11 @@ public class AccountSteps {
     /**
      * [MR] Makes assertions with the data gotten via API and the edited fields of the account entity.
      */
-    @Then("the gotten data via API about the Account should contain the new data")
-    public void verifyThatTheGottenDataAboutTheAccountViaAPIContainsTheNewData() {
+    @Then("the API response about the Account should contain the new data")
+    public void verifyThatTheApiResponseAboutTheAccountContainsTheNewData() {
         Response response = RequestManager.get("/Account/" + account.getId());
         Map<String, String> actualApiResponseData = ApiResponseDataExtractor
-                .getAccountDataFromApi(response, account.getUpdatedFields());
+                .getDataFromApi(response, account.getUpdatedFields());
         Map<String, String> expectedApiResponseData = account.getAccountInfo();
         SoftAssert softAssert = new SoftAssert();
         actualApiResponseData.forEach((field, actualValue) -> {

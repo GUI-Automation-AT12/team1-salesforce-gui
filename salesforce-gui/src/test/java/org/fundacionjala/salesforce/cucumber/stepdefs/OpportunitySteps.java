@@ -2,11 +2,14 @@ package org.fundacionjala.salesforce.cucumber.stepdefs;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.response.Response;
+import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.salesforce.constants.OpportunityConstants;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Opportunity;
 import org.fundacionjala.salesforce.ui.skins.ISkinFactory;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.fundacionjala.salesforce.utils.ApiResponseDataExtractor;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.testng.asserts.SoftAssert;
 
@@ -98,5 +101,28 @@ public class OpportunitySteps {
         PageTransporter.navigateToPage("ACCOUNT_DETAILS", opportunity.getAccount().getId());
         assertTrue(skin.getAccountDetailsPage().isOpportunityInList(opportunity.getId()),
                 "The Opportunity: " + opportunity.getName() + " is not present in related Account details.");
+    }
+
+    /**
+     * [MR] Check if the API response contains the data of the new Opportunity.
+     */
+    @Then("the API response about the Opportunity should contain the new data")
+    public void verifyIfTheApiResponseAboutTheOpportunityContainsTheNewData() {
+        Response response = RequestManager.get("/Opportunity/" + opportunity.getId());
+        Map<String, String> actualApiResponseData = ApiResponseDataExtractor
+                .getDataFromApi(response, opportunity.getUpdatedFields());
+        Map<String, String> expectedApiResponseData = opportunity.getOpportunityInfo();
+        SoftAssert softAssert = new SoftAssert();
+        //
+        actualApiResponseData.forEach((field, actualValue) -> {
+            if (!field.equals(OpportunityConstants.ACCOUNT_KEY)) {
+                softAssert.assertEquals(actualValue, expectedApiResponseData.get(field),
+                        String.format(incorrectAssertionMessage, field, "Account API response"));
+            } else {
+                softAssert.assertEquals(actualValue, opportunity.getAccount().getId(),
+                        String.format(incorrectAssertionMessage, field, "Account API response"));
+            }
+        });
+        softAssert.assertAll();
     }
 }
