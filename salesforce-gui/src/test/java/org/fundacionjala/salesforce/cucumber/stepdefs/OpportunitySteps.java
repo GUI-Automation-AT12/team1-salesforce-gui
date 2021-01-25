@@ -13,6 +13,8 @@ import org.testng.asserts.SoftAssert;
 import java.net.MalformedURLException;
 import java.util.Map;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * [MR] StepDefinitions class for salesforce Opportunities.
  */
@@ -85,5 +87,16 @@ public class OpportunitySteps {
                     String.format(incorrectAssertionMessage, field, "Account Table"));
         });
         softAssert.assertAll();
+    }
+
+    /**
+     * [MR] Check if the opportunity is present in the related Account Details Page.
+     * @throws MalformedURLException
+     */
+    @Then("the new Opportunity should be present in Account details")
+    public void verifyThatTheNewOpportunityIsPresentInExistentAccountDetails() throws MalformedURLException {
+        PageTransporter.navigateToPage("ACCOUNT_DETAILS", opportunity.getAccount().getId());
+        assertTrue(skin.getAccountDetailsPage().isOpportunityInList(opportunity.getId()),
+                "The Opportunity: " + opportunity.getName() + " is not present in related Account details.");
     }
 }

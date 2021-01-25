@@ -6,6 +6,7 @@ import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +22,9 @@ import java.util.function.Supplier;
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private static final int ACCOUNT_STRING_SIZE = 8;
+
+    private String opportunityToSearchXpath =
+            "//div[contains(@class,'normal')]//article[.//span[@title='Opportunities']]//a[contains(@href,'%s')]";
 
     @FindBy(xpath = "//ul[@role='tablist']/li[@title='Details']/a")
     private WebElement detailsTab;
@@ -79,6 +83,22 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.
                 substring(currentUrl.indexOf("Account/") + ACCOUNT_STRING_SIZE, currentUrl.indexOf("/view"));
+    }
+
+    /**
+     * [MR] Search for an specific Opportunity in the Account Details Page.
+     *
+     * @param opportunityId to search
+     * @return true if the opportunity is present, otherwise returns false
+     */
+    @Override
+    public boolean isOpportunityInList(final String opportunityId) {
+        try {
+            getDriver().findElement(By.xpath(String.format(opportunityToSearchXpath, opportunityId)));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Override

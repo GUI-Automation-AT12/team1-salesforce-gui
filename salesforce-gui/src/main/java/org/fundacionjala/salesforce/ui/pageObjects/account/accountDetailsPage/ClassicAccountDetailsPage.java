@@ -6,6 +6,7 @@ import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
@@ -19,6 +20,9 @@ import java.util.function.Supplier;
 public class ClassicAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private String accountInfoXpath = "//td[preceding-sibling::td[text()='%1$s']][1]//%2$s";
+
+    private String opportunityToSearchXpath =
+            "//div[contains(@id,'RelatedOpportunityList_body')]//th/a[contains(@href, '%s')]";
 
     private String getTextFromTextDetail(final String fieldName, final String tagType) {
         return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
@@ -62,6 +66,22 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
         getDriverWait().until(ExpectedConditions.not(ExpectedConditions.urlContains("/e")));
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+    }
+
+    /**
+     * [MR] Search for an specific Opportunity in the Account Details Page.
+     *
+     * @param opportunityId to search
+     * @return true if the opportunity is present, otherwise returns false
+     */
+    @Override
+    public boolean isOpportunityInList(final String opportunityId) {
+        try {
+            getDriver().findElement(By.xpath(String.format(opportunityToSearchXpath, opportunityId)));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Override
