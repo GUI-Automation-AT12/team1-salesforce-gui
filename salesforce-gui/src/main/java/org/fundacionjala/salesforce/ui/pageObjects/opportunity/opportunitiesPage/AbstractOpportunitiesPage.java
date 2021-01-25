@@ -6,6 +6,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreati
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Map;
+
 /**
  * [MR] Class that represents Opportunities Page independent of the skin.
  */
@@ -19,7 +21,7 @@ public abstract class AbstractOpportunitiesPage extends BasePage {
     }
 
     /**
-     * Clicks the New Opportunity button.
+     * [MR] Clicks the New Opportunity button.
      */
     protected void clickNewOpportunityBtn() {
         GuiInteractioner.clickWebElement(newOpportunityBtn);
@@ -31,4 +33,11 @@ public abstract class AbstractOpportunitiesPage extends BasePage {
      * @return OpportunityCreationPage
      */
     public abstract AbstractOpportunityCreationPage goToOpportunityCreation();
+
+    /**
+     * [MR] Gets data of an opportunity in the Opportunities table.
+     * @param opportunityId to get data
+     * @return opportunity's data as Map
+     */
+    public abstract Map<String, String> getOpportunityDataFromTable(String opportunityId);
 }

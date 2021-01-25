@@ -2,12 +2,15 @@ package org.fundacionjala.salesforce.cucumber.stepdefs;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.fundacionjala.salesforce.constants.OpportunityConstants;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Opportunity;
 import org.fundacionjala.salesforce.ui.skins.ISkinFactory;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.testng.asserts.SoftAssert;
 
+import java.net.MalformedURLException;
 import java.util.Map;
 
 /**
@@ -60,8 +63,26 @@ public class OpportunitySteps {
         Map<String, String> expectedOpportunityDetails = opportunity.getOpportunityInfo();
         SoftAssert softAssert = new SoftAssert();
         actualOpportunityDetails.forEach((field, actualValue) -> {
-            softAssert.assertEquals(actualValue,expectedOpportunityDetails.get(field),
+            softAssert.assertEquals(actualValue, expectedOpportunityDetails.get(field),
                     String.format(incorrectAssertionMessage, field, "Opportunity Details Page"));
+        });
+        softAssert.assertAll();
+    }
+
+    /**
+     * [MR] Checks if the opportunity is in the table and its data is the correct.
+     */
+    @Then("Opportunity's data should be displayed in Opportunities table")
+    public void verifyOpportunityDataIsDisplayedInOpportunitiesTable() throws MalformedURLException {
+        PageTransporter.navigateToPage("OPPORTUNITIES");
+        Map<String, String> actualTableData = skin.getOpportunitiesPage().
+                getOpportunityDataFromTable(opportunity.getId());
+        Map<String, String> expectedTableData = opportunity.getOpportunityInfo(actualTableData.keySet());
+        expectedTableData.put(OpportunityConstants.ACCOUNT_SITE_KEY, opportunity.getAccount().getSite());
+        SoftAssert softAssert = new SoftAssert();
+        actualTableData.forEach((field, actualValue) -> {
+            softAssert.assertEquals(actualValue, expectedTableData.get(field),
+                    String.format(incorrectAssertionMessage, field, "Account Table"));
         });
         softAssert.assertAll();
     }

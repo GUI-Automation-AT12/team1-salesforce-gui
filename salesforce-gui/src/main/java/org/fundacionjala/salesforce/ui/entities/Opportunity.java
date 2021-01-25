@@ -182,7 +182,8 @@ public class Opportunity {
      */
     public Map<String, String> getOpportunityInfo(final Set<String> fields) {
         Map opportunityInfoMap = new HashMap<String, String>();
-        fields.forEach(field -> opportunityInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
+        fields.forEach(field -> opportunityInfoMap.put(
+                field, composeStrategyGetterMap().getOrDefault(field, () -> null).get()));
         return opportunityInfoMap;
     }
 }
