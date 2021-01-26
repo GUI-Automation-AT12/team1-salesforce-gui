@@ -1,23 +1,23 @@
 [
     {
         "alias": "Account Owner User",
-        "clientId": "M01WRzlrQnQxNjhtZGFfX2dYNU12T3lTWGNmRWxwZVJicEJycENlb1R1VVl4WFl0MVdZREdBSmdhSWU1dm9DLllwMmhrZFA3Ui5XX2dEcmRoSXhscQ==",
-        "clientSecret": "Mzk0RDFGODBDREI1MUE3RTk3RTMwQzFGNDREMkFFODY4RDJERTFCMzFFMTQ5MjI1QjM0NjJDNkFBNkZBM0U4RQ==",
-        "username": "samuel.loza@fundacion-jala.org",
-        "password": "MVF3ZXJ0eTEyMw=="
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
     },
     {
         "alias": "Editable User",
-        "clientId": "M01WRzlrQnQxNjhtZGFfX2dYNU12T3lTWGNmRWxwZVJicEJycENlb1R1VVl4WFl0MVdZREdBSmdhSWU1dm9DLllwMmhrZFA3Ui5XX2dEcmRoSXhscQ==",
-        "clientSecret": "Mzk0RDFGODBDREI1MUE3RTk3RTMwQzFGNDREMkFFODY4RDJERTFCMzFFMTQ5MjI1QjM0NjJDNkFBNkZBM0U4RQ==",
-        "username": "samuel.loza@fundacion-jala.org",
-        "password": "MVF3ZXJ0eTEyMw=="
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
     },
     {
         "alias": "Other User",
-        "clientId": "M01WRzlrQnQxNjhtZGFfX2dYNU12T3lTWGNmRWxwZVJicEJycENlb1R1VVl4WFl0MVdZREdBSmdhSWU1dm9DLllwMmhrZFA3Ui5XX2dEcmRoSXhscQ==",
-        "clientSecret": "Mzk0RDFGODBDREI1MUE3RTk3RTMwQzFGNDREMkFFODY4RDJERTFCMzFFMTQ5MjI1QjM0NjJDNkFBNkZBM0U4RQ==",
-        "username": "samuel.loza@fundacion-jala.org",
-        "password": "MVF3ZXJ0eTEyMw=="
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
     }
 ]

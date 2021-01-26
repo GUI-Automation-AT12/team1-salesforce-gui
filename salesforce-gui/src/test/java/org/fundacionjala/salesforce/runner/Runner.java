@@ -41,6 +41,6 @@ public final class Runner extends AbstractTestNGCucumberTests {
      */
     @AfterTest
     public void afterAllScenarios() {
-        WebDriverManager.getInstance().getWebDriver().quit();
+        WebDriverManager.getInstance().quit();
     }
 }
