@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.utils.PageTransporter;
+import org.fundacionjala.salesforce.utils.TableUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -38,7 +39,7 @@ public class LightningImportAccountListPage extends AbstractAccountListPage {
         getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(billingState));
         GuiInteractioner.loadDynamicTable(scroll);
 
-        List<Map<String, String>> elements = GuiInteractioner.parseDynamicTableAsList(headerTable, contentTable,
+        List<Map<String, String>> elements = TableUtils.parseDynamicTableAsList(headerTable, contentTable,
                 rowId, "data-recordid");
         return elements;
     }
