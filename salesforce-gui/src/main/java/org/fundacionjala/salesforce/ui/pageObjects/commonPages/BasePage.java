@@ -42,5 +42,8 @@ public abstract class BasePage {
         return driverWait;
     }
 
+    /**
+     * [SL] Method wait to load BoardPage.
+     */
     protected abstract void waitLoadPage();
 }

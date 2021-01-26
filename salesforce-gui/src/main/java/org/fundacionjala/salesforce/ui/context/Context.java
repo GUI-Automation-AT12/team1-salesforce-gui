@@ -15,14 +15,14 @@ public class Context {
 
     private List<User> usersList;
     private Account account;
-    private List<String> accountIdList;
+    private List<Account> accountList;
 
     /**
      * Constructor for Context class.
      */
     public Context() {
         this.usersList = new ArrayList<>();
-        accountIdList = new ArrayList<>();
+        accountList = new ArrayList<>();
     }
 
     private void setUsersListFromJson() throws IOException {
@@ -71,8 +71,8 @@ public class Context {
      *
      * @return account
      */
-    public List<String> getAccountIdList() {
-        return accountIdList;
+    public List<Account> getAccountList() {
+        return accountList;
     }
 
     /**
@@ -80,8 +80,7 @@ public class Context {
      *
      * @param contextAccountIdList list with all account ids
      */
-    public void setAccountIdList(final List<String> contextAccountIdList) {
-        accountIdList = contextAccountIdList;
+    public void setAccountList(final List<Account> contextAccountIdList) {
+        accountList.addAll(contextAccountIdList);
     }
-
 }

@@ -1,21 +1,24 @@
 package org.fundacionjala.salesforce.utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
  * [SL] This class read a csv file.
  */
-public final class CSVUtil {
+public final class CSVParse {
 
     /**
      * [SL] Constructor.
      */
-    private CSVUtil() {
+    private CSVParse() {
 
     }
 
@@ -26,20 +29,10 @@ public final class CSVUtil {
      * @return a List of arrays with all data of the csv
      * @throws IOException
      */
-    public static List<String[]> readCSVFile(final String filePath) throws IOException {
-        int count = 0;
-        List<String[]> content = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                if (count != 0) {
-                    content.add(line.split(","));
-                }
-                count++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return content;
+    public static List<CSVRecord> getRecords(final String filePath) throws IOException {
+        InputStream inputStream = new FileInputStream(filePath);
+        InputStreamReader input = new InputStreamReader(inputStream);
+        CSVParser csvParser = CSVFormat.EXCEL.withFirstRecordAsHeader().parse(input);
+        return csvParser.getRecords();
     }
 }

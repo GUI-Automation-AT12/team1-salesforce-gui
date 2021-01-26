@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.ui.context.Context;
+import org.fundacionjala.salesforce.ui.entities.Account;
 
 /**
  * [MR] Hooks for scenarios related to Accounts.
@@ -40,9 +41,8 @@ public class AccountHooks {
      */
     @After(value = "@deleteAccounts", order = 1)
     public void deleteAccounts() {
-        for (String accountId : context.getAccountIdList()) {
-            System.out.println(accountId.replace("\"", ""));
-            RequestManager.delete("/Account/" + accountId.replace("\"", ""));
+        for (Account account : context.getAccountList()) {
+            RequestManager.delete("/Account/" + account.getId());
         }
     }
 }

@@ -4,6 +4,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.Abs
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.LightningImportAccountPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.LightningAccountCreationPopup;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.LightningAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.LightningImportAccountListPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.LightningAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.LightningEditPersonalInformationPage;
@@ -60,5 +62,10 @@ public class LightningSkinFactory implements ISkinFactory {
     @Override
     public final AbstractImportAccountPage importAccountPage() {
         return new LightningImportAccountPage();
+    }
+
+    @Override
+    public final AbstractAccountListPage accountListPage() {
+        return new LightningImportAccountListPage();
     }
 }

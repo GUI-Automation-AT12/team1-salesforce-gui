@@ -3,6 +3,7 @@ package org.fundacionjala.salesforce.ui.skins;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.AbstractImportAccountPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.IAccountCreationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.IAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 
@@ -46,5 +47,13 @@ public interface ISkinFactory {
      * @return a AbstractImportAccountPage
      */
     AbstractImportAccountPage importAccountPage();
+
+
+    /**
+     * Returns accountListPage.
+     *
+     * @return a AbstractAccountListPage
+     */
+    AbstractAccountListPage accountListPage();
 }
 

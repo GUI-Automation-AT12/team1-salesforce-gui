@@ -22,10 +22,10 @@ Feature: Import Accounts
         | Records Processed | 6      |
         | Status            | Closed |
     When I click the "View Result" link to download file
+      And I click the "View Request" link to download file
     Then the downloaded file should not contain false Success and any errors
     When I store the Id of imported Accounts from the downloaded file
     Then the new Accounts should be in New This Week view at Account page
     Examples:
         | option      | matchContactBy | filePath                 |
         | CSV         | Email          | importAccountCSV.csv     |
-        | Outlook CSV | Email          | importAccountOutlook.csv |

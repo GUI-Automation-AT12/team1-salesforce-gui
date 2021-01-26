@@ -81,6 +81,5 @@ public class EditMappingPage extends BasePage {
 
     @Override
     protected void waitLoadPage() {
-
     }
 }

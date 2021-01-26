@@ -3,14 +3,18 @@ package org.fundacionjala.salesforce.cucumber.stepdefs;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fundacionjala.salesforce.ui.context.Context;
+import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.AbstractImportAccountPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.bulkDataLoadJobs.BulkDataLoadJobsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.editMapping.EditMappingPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +25,7 @@ public class ImportAccountStep {
     private AbstractImportAccountPage importAccount;
     private EditMappingPage editMappingPage;
     private BulkDataLoadJobsPage bulkDataLoadJobsPage;
+    private AbstractAccountListPage abstractAccountListPage;
     private Context context;
 
     /**
@@ -123,14 +128,35 @@ public class ImportAccountStep {
      * @throws IOException
      */
     @When("I store the Id of imported Accounts from the downloaded file")
-    public void storeTheIdOfImportedAccountsFromTheDownloadedFile() throws IOException {
-        context.setAccountIdList(bulkDataLoadJobsPage.accountIdList());
+    public void storeTheIdOfImportedAccountsFromTheDownloadedFile() throws IOException, InterruptedException {
+        context.setAccountList(bulkDataLoadJobsPage.accountResultList());
     }
 
     /**
      * Checks if the new Accounts should be in New This Week view at Account page.
      */
     @Then("the new Accounts should be in New This Week view at Account page")
-    public void newAccountsShouldBeInNewThisWeekViewAtAccountPage() {
+    public void newAccountsShouldBeInNewThisWeekViewAtAccountPage() throws MalformedURLException {
+        abstractAccountListPage = SkinManager.getInstance().getSkinFactory().accountListPage();
+        List<Map<String, String>> actual = abstractAccountListPage.getTableNewThisWeek();
+        List<Account> expected = context.getAccountList();
+        for (Account account : expected) {
+            boolean accountIsFound = false;
+            for (Map<String, String> element : actual) {
+                if (account.getId().contains(element.get("data-recordid"))) {
+                    SoftAssert softAssert = new SoftAssert();
+                    softAssert.assertEquals(account.getName(), element.get("Account Name"));
+                    softAssert.assertEquals(account.getPhone(), element.get("Phone"));
+                    softAssert.assertAll();
+                    accountIsFound = true;
+                    break;
+                }
+            }
+            if (!accountIsFound) {
+                SoftAssert softAssert = new SoftAssert();
+                softAssert.fail("Account expected " + account.getName() + ", but the account not found!");
+                softAssert.assertAll();
+            }
+        }
     }
 }

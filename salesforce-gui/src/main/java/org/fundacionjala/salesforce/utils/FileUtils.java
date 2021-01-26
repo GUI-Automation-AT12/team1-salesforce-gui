@@ -21,19 +21,26 @@ public final class FileUtils {
     /**
      * [SL] Gets a list of the all files inside a directory.
      *
-     * @param pathFile
-     * @return a list with the file paths
+     * @param pathFile      path of the folder
+     * @param name          name of the file
+     * @param expectedFiles number of files to return
+     * @return a list with the file names
      */
-    public static List<String> listOfFiles(final String pathFile) {
+    public static List<String> listOfFiles(final String pathFile, final String name, final int expectedFiles) {
         List<String> results = new ArrayList<String>();
         File[] files = new File(pathFile).listFiles();
-
+        int numberFiles = 0;
         for (File file : files) {
-            if (file.isFile()) {
+            if (file.isFile() && file.getName().contains(name.toLowerCase())) {
                 results.add(pathFile + file.getName());
+                numberFiles++;
             }
         }
-        return results;
+        if (numberFiles == expectedFiles) {
+            return results;
+        } else {
+            return new ArrayList<String>();
+        }
     }
 
     /**

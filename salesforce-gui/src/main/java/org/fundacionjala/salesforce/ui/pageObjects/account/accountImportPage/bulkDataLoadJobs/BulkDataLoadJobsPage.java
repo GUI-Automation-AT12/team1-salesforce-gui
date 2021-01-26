@@ -1,11 +1,14 @@
 package org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.bulkDataLoadJobs;
 
+import org.apache.commons.csv.CSVRecord;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
+import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
-import org.fundacionjala.salesforce.utils.CSVUtil;
+import org.fundacionjala.salesforce.utils.CSVParse;
 import org.fundacionjala.salesforce.utils.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,9 +22,9 @@ public class BulkDataLoadJobsPage extends BasePage {
     private static final By CONTEND_TABLE = By.xpath("//table[@class='detailList']/*/tr/td/span");
     private static final String DOWNLOAD_OPTION = "//a[text()='%s']";
     private static final String DOWNLOAD_PATH = System.getProperty("user.dir") + "/src/test/resources/tmp/";
-    private List<String> fileList;
+    private List<String> fileListResult;
+    private List<String> fileListRequest;
     private static final int WAIT_TIME = 3000;
-    private static final int NUMBER_THREE = 3;
 
 
     /**
@@ -60,11 +63,10 @@ public class BulkDataLoadJobsPage extends BasePage {
      */
     public boolean downloadedFileNotContainFalse() throws IOException, InterruptedException {
         Thread.sleep(WAIT_TIME);
-        fileList = FileUtils.listOfFiles(DOWNLOAD_PATH);
-        for (String file : fileList) {
-            List<String[]> contend = CSVUtil.readCSVFile(file);
-            for (String[] column : contend) {
-                if (column[1].contains("false") || column[NUMBER_THREE].length() > 2) {
+        fileListResult = FileUtils.listOfFiles(DOWNLOAD_PATH, "result", 1);
+        for (String file : fileListResult) {
+            for (CSVRecord record : CSVParse.getRecords(file)) {
+                if (record.get("Success").equals("false") || !record.get("Error").isEmpty()) {
                     return false;
                 }
             }
@@ -78,21 +80,39 @@ public class BulkDataLoadJobsPage extends BasePage {
      * @return a list
      * @throws IOException
      */
-    public List<String> accountIdList() throws IOException {
-        fileList = FileUtils.listOfFiles(DOWNLOAD_PATH);
-        List<String> accountIdList = new ArrayList<>();
-        for (int i = 0; i < fileList.size(); i++) {
-            List<String[]> contend = CSVUtil.readCSVFile(fileList.get(i));
-            for (String[] column : contend) {
-                accountIdList.add(column[0]);
+    public List<Account> accountResultList() throws IOException, InterruptedException {
+        Thread.sleep(WAIT_TIME);
+        fileListResult = FileUtils.listOfFiles(DOWNLOAD_PATH, "result", 1);
+        fileListRequest = FileUtils.listOfFiles(DOWNLOAD_PATH, "request", 1);
+        List<Account> accountList = new ArrayList<>();
+        for (int i = 0; i < fileListResult.size(); i++) {
+            List<CSVRecord> csvRecordsResult = CSVParse.getRecords(fileListResult.get(i));
+            List<CSVRecord> csvRecordsRequest = CSVParse.getRecords(fileListRequest.get(i));
+            for (int j = 0; j < csvRecordsResult.size(); j++) {
+                CSVRecord csvResult = csvRecordsResult.get(j);
+                CSVRecord csvRequest = csvRecordsRequest.get(j);
+                accountList.add(buildAccount(csvResult, csvRequest));
             }
-            FileUtils.deleteFile(fileList.get(i));
+            FileUtils.deleteFile(fileListResult.get(i));
         }
-        return accountIdList;
+        return accountList;
     }
 
+    private Account buildAccount(final CSVRecord csvResult, final CSVRecord csvRequest) {
+        Account account = new Account();
+        account.setId(csvResult.get("Id"));
+        account.setName(csvRequest.get("Name"));
+        account.setDescription(csvRequest.get("Description"));
+        account.setPhone(csvRequest.get("Phone"));
+        account.setSite(csvRequest.get("Website"));
+        return account;
+    }
+
+    /**
+     * [SL] Method wait to load BoardPage.
+     */
     @Override
     protected void waitLoadPage() {
-
+        getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(CONTEND_TABLE));
     }
 }

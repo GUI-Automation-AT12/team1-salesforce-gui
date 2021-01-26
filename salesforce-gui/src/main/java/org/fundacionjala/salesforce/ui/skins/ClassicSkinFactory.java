@@ -4,6 +4,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.Abs
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.ClassicImportAccountPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.ClassicAccountCreationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.ClassicAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.ClassicAccountListPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.ClassicAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.ClassicEditPersonalInformationPage;
@@ -60,5 +62,15 @@ public class ClassicSkinFactory implements ISkinFactory {
     @Override
     public final AbstractImportAccountPage importAccountPage() {
         return new ClassicImportAccountPage();
+    }
+
+    /**
+     * Returns accountListPage.
+     *
+     * @return a AbstractAccountListPage
+     */
+    @Override
+    public AbstractAccountListPage accountListPage() {
+        return new ClassicAccountListPage();
     }
 }

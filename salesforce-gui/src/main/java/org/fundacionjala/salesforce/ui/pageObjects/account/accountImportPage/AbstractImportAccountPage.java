@@ -6,7 +6,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.edi
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 
 /**
- * AbstractImportAccountPage is abstract class for the skins
+ * [SL] AbstractImportAccountPage is abstract class for the skins
  * of the import page.
  */
 public abstract class AbstractImportAccountPage extends BasePage {
@@ -14,7 +14,7 @@ public abstract class AbstractImportAccountPage extends BasePage {
     private final ChooseDataPage chooseDataPage = new ChooseDataPage();
 
     /**
-     * Gets ChooseDataPage.
+     * [SL] Gets ChooseDataPage.
      *
      * @return a instance of ChooseDataPage
      */
@@ -23,12 +23,12 @@ public abstract class AbstractImportAccountPage extends BasePage {
     }
 
     /**
-     * clicks in the button or link for open the import account.
+     * [SL] Clicks in the button or link for open the import account.
      */
     public abstract void clickImportElement();
 
     /**
-     * This abstract method is for the first step of the importation.
+     * [SL] This abstract method is for the first step of the importation.
      *
      * @param fieldEmail
      * @param filePath
@@ -37,14 +37,14 @@ public abstract class AbstractImportAccountPage extends BasePage {
     public abstract void chooseDataStep(String fieldEmail, String filePath, String option);
 
     /**
-     * This abstract method is for the second step of the importation.
+     * [SL] This abstract method is for the second step of the importation.
      *
      * @return a instance of EditMappingPage
      */
     public abstract EditMappingPage getEditMappingStep();
 
     /**
-     * This abstract method gets BulkDataLoadJobsPage.
+     * [SL] This abstract method gets BulkDataLoadJobsPage.
      *
      * @return a instance of BulkDataLoadJobsPage
      */
