@@ -19,7 +19,7 @@ import java.util.Map;
 public class BulkDataLoadJobsPage extends BasePage {
 
     private static final By HEADER_TABLE = By.xpath("//table[@class='detailList']/*/tr/th");
-    private static final By CONTEND_TABLE = By.xpath("//table[@class='detailList']/*/tr/td/span");
+    private static final By CONTENT_TABLE = By.xpath("//table[@class='detailList']/*/tr/td/span");
     private static final String DOWNLOAD_OPTION = "//a[text()='%s']";
     private static final String DOWNLOAD_PATH = System.getProperty("user.dir") + "/src/test/resources/tmp/";
     private List<String> fileListResult;
@@ -35,11 +35,11 @@ public class BulkDataLoadJobsPage extends BasePage {
     public Map<String, String> bulkDataLoadJobDetail() {
         Map<String, String> map = new HashMap<>();
         List<WebElement> headerList = getDriver().findElements(HEADER_TABLE);
-        List<WebElement> contendList = getDriver().findElements(CONTEND_TABLE);
+        List<WebElement> contentList = getDriver().findElements(CONTENT_TABLE);
 
         for (int i = 0; i < headerList.size(); i++) {
             String key = headerList.get(i).getText();
-            String value = contendList.get(i).getText();
+            String value = contentList.get(i).getText();
             map.put(key, value);
         }
         return map;
@@ -113,6 +113,6 @@ public class BulkDataLoadJobsPage extends BasePage {
      */
     @Override
     protected void waitLoadPage() {
-        getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(CONTEND_TABLE));
+        getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(CONTENT_TABLE));
     }
 }
