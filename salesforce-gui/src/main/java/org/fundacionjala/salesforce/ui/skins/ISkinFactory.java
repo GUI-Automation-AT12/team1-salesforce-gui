@@ -6,6 +6,9 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IA
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.IAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.AbstractOpportunitiesPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetailsPage.AbstractOpportunityDetailsPage;
 
 /**
  * [MR] Interface for Skin Factories classes.
@@ -48,6 +51,19 @@ public interface ISkinFactory {
      */
     AbstractImportAccountPage importAccountPage();
 
+    /**
+     * Returns Skin Factory's Opportunities Page.
+     *
+     * @return OpportunitiesPage
+     */
+    AbstractOpportunitiesPage getOpportunitiesPage();
+
+    /**
+     * Returns Skin Factory's Opportunity Creation Page.
+     *
+     * @return OpportunityCreationPage.
+     */
+    AbstractOpportunityCreationPage getOpportunityCreationPage();
 
     /**
      * Returns accountListPage.
@@ -55,5 +71,12 @@ public interface ISkinFactory {
      * @return a AbstractAccountListPage
      */
     AbstractAccountListPage accountListPage();
+
+    /**
+     * Returns Skin Factory's Opportunity Details Page.
+     *
+     * @return OpportunityDetailsPage.
+     */
+    AbstractOpportunityDetailsPage getOpportunityDetailsPage();
 }
 

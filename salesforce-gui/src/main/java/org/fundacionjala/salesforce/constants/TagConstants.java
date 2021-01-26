@@ -18,4 +18,5 @@ public final class TagConstants {
     public static final String INPUT_TAG = "input";
     public static final String TEXTAREA_TAG = "textarea";
     public static final String SLASH = "/";
+    public static final String DOUBLE_SLASH = "//";
 }

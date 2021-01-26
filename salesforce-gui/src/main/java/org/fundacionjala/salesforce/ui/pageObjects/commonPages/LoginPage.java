@@ -3,6 +3,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.commonPages;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * [MR] Class that represent Salesforce Login page.
@@ -42,6 +43,7 @@ public class LoginPage extends BasePage {
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(loginBtn));
     }
 }

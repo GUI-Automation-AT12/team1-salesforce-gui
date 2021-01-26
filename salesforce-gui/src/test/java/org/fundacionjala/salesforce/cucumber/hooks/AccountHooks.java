@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.cucumber.hooks;
 
 import io.cucumber.java.After;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.ui.context.Context;
@@ -12,7 +13,6 @@ import org.fundacionjala.salesforce.ui.entities.Account;
  */
 public class AccountHooks {
 
-    private static final int OK_STATUS_CODE = 200;
     private final Context context;
 
     /**
@@ -30,7 +30,7 @@ public class AccountHooks {
     @After(value = "@deleteAccount", order = 1)
     public void deleteAccount() {
         Response response = RequestManager.get("/Account/" + context.getAccount().getId());
-        if (response.statusCode() == OK_STATUS_CODE) {
+        if (response.statusCode() == HttpStatus.SC_OK) {
             RequestManager.delete("/Account/" + context.getAccount().getId());
         }
         WebDriverManager.getInstance().quit();

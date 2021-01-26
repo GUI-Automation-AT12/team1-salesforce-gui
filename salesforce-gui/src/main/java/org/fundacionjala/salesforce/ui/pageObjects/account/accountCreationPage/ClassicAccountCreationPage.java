@@ -10,6 +10,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IA
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.HashMap;
@@ -26,7 +27,6 @@ public class ClassicAccountCreationPage extends BasePage implements IAccountCrea
     private WebElement saveBtn;
 
     private String inputLocatorXpath = "//td[preceding-sibling::td/label[text()='%1$s']][1]//%2$s[@type='text']";
-
     private String selectLocatorXpath = "//td[preceding-sibling::td/label[text()='%s']][1]//select";
 
     private void clickSaveBtn() {
@@ -82,6 +82,7 @@ public class ClassicAccountCreationPage extends BasePage implements IAccountCrea
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(saveBtn));
     }
 }

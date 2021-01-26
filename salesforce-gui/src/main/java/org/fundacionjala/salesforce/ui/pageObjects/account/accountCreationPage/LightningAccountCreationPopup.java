@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.LightningAccountDetailsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.entities.Account;
@@ -9,6 +10,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.IA
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -18,18 +20,12 @@ import java.util.Set;
  */
 public class LightningAccountCreationPopup extends BasePage implements IAccountCreationPage {
 
-    private static final String INPUT_TYPE = "input";
-    private static final String TEXTAREA_TYPE = "textarea";
-
     @FindBy(xpath = "//span[.='Parent Account']/../../div//input")
     private WebElement parentAccountSearchBox;
 
     private String parentAccountXpath = "//div[.='%s'][contains(@class,'primaryLabel')]";
-
     private String dropdownLocatorXpath = "//span[.='%s' and @class='']/../../div";
-
     private String inputLocatorXpath = "//span[.='%1$s']/../../%2$s";
-
     private String selectedXpath = "//a[.='%s']";
 
     @FindBy(css = "button[title='Save']")
@@ -53,16 +49,20 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
 
     private HashMap<String, Runnable> composeMapStrategy(final Account account) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> fillTextBox("Account Name", INPUT_TYPE, account.getName()));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> fillTextBox("Account Site", INPUT_TYPE, account.getSite()));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> fillTextBox("Phone", INPUT_TYPE, account.getPhone()));
+        strategyMap.put(AccountConstants.NAME_KEY, () ->
+                fillTextBox("Account Name", TagConstants.INPUT_TAG, account.getName()));
+        strategyMap.put(AccountConstants.SITE_KEY, () ->
+                fillTextBox("Account Site", TagConstants.INPUT_TAG, account.getSite()));
+        strategyMap.put(AccountConstants.PHONE_KEY, () ->
+                fillTextBox("Phone", TagConstants.INPUT_TAG, account.getPhone()));
         strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
                 fillParentAccountTextBox(account.getParentAccount().getName()));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> fillDropdown("Rating", account.getRating()));
+        strategyMap.put(AccountConstants.RATING_KEY, () ->
+                fillDropdown("Rating", account.getRating()));
         strategyMap.put(AccountConstants.BILLING_CITY_KEY, () ->
-                fillTextBox("Billing City", INPUT_TYPE, account.getBillingCity()));
+                fillTextBox("Billing City", TagConstants.INPUT_TAG, account.getBillingCity()));
         strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
-                fillTextBox("Description", TEXTAREA_TYPE, account.getDescription()));
+                fillTextBox("Description", TagConstants.TEXTAREA_TAG, account.getDescription()));
         return strategyMap;
     }
 
@@ -92,6 +92,7 @@ public class LightningAccountCreationPopup extends BasePage implements IAccountC
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(saveBtn));
     }
 }

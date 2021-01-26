@@ -2,9 +2,11 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
+import org.fundacionjala.salesforce.constants.TagConstants;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
@@ -18,6 +20,8 @@ import java.util.function.Supplier;
 public class ClassicAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private String accountInfoXpath = "//td[preceding-sibling::td[text()='%1$s']][1]//%2$s";
+    private String opportunityToSearchXpath =
+            "//div[contains(@id,'RelatedOpportunityList_body')]//th/a[contains(@href, '%s')]";
 
     private String getTextFromTextDetail(final String fieldName, final String tagType) {
         return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
@@ -25,13 +29,16 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
         HashMap<String, Supplier<String>> strategyMap = new HashMap<>();
-        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromTextDetail("Account Name", "div"));
-        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromTextDetail("Rating", "div"));
-        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromTextDetail("Account Site", "div"));
-        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () -> getTextFromTextDetail("Description", "div"));
-        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () -> getTextFromTextDetail("Billing Address", "div"));
-        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromTextDetail("Parent Account", "a"));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromTextDetail("Phone", "div"));
+        strategyMap.put(AccountConstants.NAME_KEY, () -> getTextFromTextDetail("Account Name", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.RATING_KEY, () -> getTextFromTextDetail("Rating", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.SITE_KEY, () -> getTextFromTextDetail("Account Site", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.DESCRIPTION_KEY, () ->
+                getTextFromTextDetail("Description", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.BILLING_CITY_KEY, () ->
+                getTextFromTextDetail("Billing Address", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
+                getTextFromTextDetail("Parent Account", TagConstants.A_TAG));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromTextDetail("Phone", TagConstants.DIV_TAG));
         return strategyMap;
     }
 
@@ -60,7 +67,25 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
         return currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
     }
 
+    /**
+     * [MR] Search for an specific Opportunity in the Account Details Page.
+     *
+     * @param opportunityId to search
+     * @return true if the opportunity is present, otherwise returns false
+     */
     @Override
-    protected void waitLoadPage() {
+    public boolean isOpportunityInList(final String opportunityId) {
+        try {
+            getDriver().findElement(By.xpath(String.format(opportunityToSearchXpath, opportunityId)));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    @Override
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(
+                getDriver().findElement(By.cssSelector("[title='Edit']"))));
     }
 }
