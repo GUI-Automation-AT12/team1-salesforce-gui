@@ -37,7 +37,7 @@ public class LightningImportAccountListPage extends AbstractAccountListPage {
         GuiInteractioner.clickWebElement(newThisWeek);
 
         getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(billingState));
-        GuiInteractioner.loadDynamicTable(scroll);
+        GuiInteractioner.pageDown(scroll);
 
         List<Map<String, String>> elements = TableUtils.parseDynamicTableAsList(headerTable, contentTable,
                 rowId, "data-recordid");
