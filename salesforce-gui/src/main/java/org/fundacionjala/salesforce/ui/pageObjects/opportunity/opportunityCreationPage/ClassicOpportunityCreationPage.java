@@ -19,7 +19,6 @@ import java.util.Set;
 public class ClassicOpportunityCreationPage extends AbstractOpportunityCreationPage {
 
     private String inputLocatorXpath = "//td[preceding-sibling::td/label[text()='%1$s']][1]//%2$s[@type='text']";
-
     private String selectLocatorXpath = "//td[preceding-sibling::td/label[text()='%s']][1]//select";
 
     private void fillTextBox(final String labelName, final String tagType, final String textToFill) {

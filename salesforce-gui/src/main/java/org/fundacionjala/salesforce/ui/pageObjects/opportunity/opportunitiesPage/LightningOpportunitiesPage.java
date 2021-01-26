@@ -16,15 +16,10 @@ import java.util.Map;
 public class LightningOpportunitiesPage extends AbstractOpportunitiesPage {
 
     private static final String ROW_XPATH = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]";
-
     private String opportunityXpath = ROW_XPATH + "//th//a[@data-refid]";
-
     private String accountXpath = ROW_XPATH + "//td//a[@data-refid]";
-
     private String accountSiteXpath = ROW_XPATH + "//span[following-sibling::span[./button[contains(@title,'Site')]]]";
-
     private String stageXpath = ROW_XPATH + "//span/span[not(@data-aura-class) and @class='slds-truncate']";
-
     private String closeDateXPath = ROW_XPATH + "//span/span/span[@data-aura-class]";
 
     /**

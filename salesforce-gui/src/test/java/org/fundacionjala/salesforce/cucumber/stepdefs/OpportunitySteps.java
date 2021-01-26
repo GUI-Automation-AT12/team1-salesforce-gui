@@ -24,13 +24,11 @@ import static org.testng.Assert.assertTrue;
 public class OpportunitySteps {
 
     private Opportunity opportunity;
-
     private ISkinFactory skin = SkinManager.getInstance().getSkinFactory();
+    private String incorrectAssertionMessage = "The %1$s from %2$s does not match with the %1$s edited previously.";
 
     //Context
     private final Context context;
-
-    private String incorrectAssertionMessage = "The %1$s from %2$s does not match with the %1$s edited previously.";
 
     /**
      * Adds Dependency injection to share Context information.
@@ -98,7 +96,7 @@ public class OpportunitySteps {
      */
     @Then("the new Opportunity should be present in Account details")
     public void verifyThatTheNewOpportunityIsPresentInExistentAccountDetails() throws MalformedURLException {
-        PageTransporter.navigateToPage("ACCOUNT_DETAILS", opportunity.getAccount().getId());
+        PageTransporter.navigateToPage("ACCOUNT DETAILS", opportunity.getAccount().getId());
         assertTrue(skin.getAccountDetailsPage().isOpportunityInList(opportunity.getId()),
                 "The Opportunity: " + opportunity.getName() + " is not present in related Account details.");
     }

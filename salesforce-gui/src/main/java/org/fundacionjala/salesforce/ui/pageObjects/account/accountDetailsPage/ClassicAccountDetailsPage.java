@@ -20,7 +20,6 @@ import java.util.function.Supplier;
 public class ClassicAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private String accountInfoXpath = "//td[preceding-sibling::td[text()='%1$s']][1]//%2$s";
-
     private String opportunityToSearchXpath =
             "//div[contains(@id,'RelatedOpportunityList_body')]//th/a[contains(@href, '%s')]";
 
@@ -85,6 +84,8 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(
+                getDriver().findElement(By.cssSelector("[title='Edit']"))));
     }
 }

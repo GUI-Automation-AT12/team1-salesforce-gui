@@ -5,6 +5,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Map;
 
@@ -15,10 +16,6 @@ public abstract class AbstractOpportunitiesPage extends BasePage {
 
     @FindBy(css = "[title='New']")
     private WebElement newOpportunityBtn;
-
-    @Override
-    protected void waitLoadPage() {
-    }
 
     /**
      * [MR] Clicks the New Opportunity button.
@@ -40,4 +37,9 @@ public abstract class AbstractOpportunitiesPage extends BasePage {
      * @return opportunity's data as Map
      */
     public abstract Map<String, String> getOpportunityDataFromTable(String opportunityId);
+
+    @Override
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(newOpportunityBtn));
+    }
 }

@@ -15,12 +15,12 @@ public final class URLConstants {
         URL_LIGHTNING.put("HOME", "page/home");
         URL_LIGHTNING.put("ACCOUNTS", "o/Account/list");
         URL_LIGHTNING.put("OPPORTUNITIES", "o/Opportunity/list");
-        URL_LIGHTNING.put("ACCOUNT_DETAILS", "r/Account/%s/view");
+        URL_LIGHTNING.put("ACCOUNT DETAILS", "r/Account/%s/view");
         URL_CLASSIC.put("PERSONAL INFORMATION", "setup/personalInformationSetup.apexp");
         URL_CLASSIC.put("HOME", "home/home.jsp");
         URL_CLASSIC.put("ACCOUNTS", "001/o");
         URL_CLASSIC.put("OPPORTUNITIES", "006/o");
-        URL_CLASSIC.put("ACCOUNT_DETAILS", "%s");
+        URL_CLASSIC.put("ACCOUNT DETAILS", "%s");
     }
 
     /**

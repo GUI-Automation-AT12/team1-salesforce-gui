@@ -17,13 +17,9 @@ import java.util.Set;
  */
 public class LightningOpportunityCreationPopup extends AbstractOpportunityCreationPage {
 
-
     private String dropdownLocatorXpath = "//span[.='%s' and @class='']/../../div";
-
     private String inputLocatorXpath = "//label/span[.='%1$s']/../../%2$s";
-
     private String selectedXpath = "//a[.='%s']";
-
     private String fillToSearchXpath = "//div[.='%s'][contains(@class,'primaryLabel')]";
 
     private void fillTextBox(final String labelName, final String tagType, final String text) {

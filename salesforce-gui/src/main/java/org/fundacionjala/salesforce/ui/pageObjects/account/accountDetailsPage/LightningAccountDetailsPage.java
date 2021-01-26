@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private static final int ACCOUNT_STRING_SIZE = 8;
-
+    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
     private String opportunityToSearchXpath =
             "//div[contains(@class,'normal')]//article[.//span[@title='Opportunities']]//a[contains(@href,'%s')]";
 
@@ -32,8 +32,6 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
     private void clickDetailsTab() {
         GuiInteractioner.clickWebElement(detailsTab);
     }
-
-    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
 
     private String getTextFromDetail(final String fieldName, final String tagType) {
         return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
@@ -102,6 +100,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(detailsTab));
     }
 }

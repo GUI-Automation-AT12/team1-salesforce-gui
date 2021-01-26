@@ -8,6 +8,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.I
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +19,7 @@ import java.util.Map;
 public class ClassicAccountsPage extends BasePage implements IAccountsPage {
 
     private String accountNameXpath = "//th/a[contains(@href,'%s')]";
-
     private String accountBillingCityXpath = "//td[1][preceding-sibling::th/a[contains(@href,'%s')]]";
-
     private String accountPhoneXpath = "//td[2][preceding-sibling::th/a[contains(@href,'%s')]]";
 
     @FindBy(name = "new")
@@ -62,6 +61,7 @@ public class ClassicAccountsPage extends BasePage implements IAccountsPage {
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(newAccountBtn));
     }
 }

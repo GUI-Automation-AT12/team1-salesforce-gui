@@ -17,9 +17,7 @@ import java.util.Map;
 public class ClassicOpportunitiesPage extends AbstractOpportunitiesPage {
 
     private String opportunityXpath = "//th/a[contains(@href,'%s')]";
-
     private String accountXpath = "//td[1][preceding-sibling::th/a[contains(@href,'%s')]]/a";
-
     private String closeDateXpath = "//td[2][preceding-sibling::th/a[contains(@href,'%s')]]";
 
     /**

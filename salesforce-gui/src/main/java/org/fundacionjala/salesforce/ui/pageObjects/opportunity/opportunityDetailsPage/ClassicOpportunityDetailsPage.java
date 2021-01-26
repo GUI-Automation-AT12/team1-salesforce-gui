@@ -59,4 +59,10 @@ public class ClassicOpportunityDetailsPage extends AbstractOpportunityDetailsPag
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
     }
+
+    @Override
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(
+                getDriver().findElement(By.cssSelector("[title='Edit']"))));
+    }
 }

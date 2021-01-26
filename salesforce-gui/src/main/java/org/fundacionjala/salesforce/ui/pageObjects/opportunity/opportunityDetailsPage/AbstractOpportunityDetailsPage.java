@@ -9,9 +9,6 @@ import java.util.Set;
  * [MR] Class that represents Opportunity Details Page independent of the skin.
  */
 public abstract class AbstractOpportunityDetailsPage extends BasePage {
-    @Override
-    protected void waitLoadPage() {
-    }
 
     /**
      * [MR] Gets the Opportunity's ID from the URL.

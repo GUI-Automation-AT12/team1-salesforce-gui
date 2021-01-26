@@ -72,7 +72,7 @@ public class Opportunity {
             for (Account accountFromList : accountList) {
                 if (accountFromList.getName().equals(opportunityAccount)) {
                     this.account = accountFromList;
-                    return;
+                    break;
                 }
             }
         } catch (IOException e) {

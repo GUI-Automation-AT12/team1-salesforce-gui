@@ -20,21 +20,13 @@ import java.util.function.Supplier;
 public class LightningOpportunityDetailsPage extends AbstractOpportunityDetailsPage {
 
     private static final int OPPORTUNITY_STRING_SIZE = 12;
+    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
 
     @FindBy(xpath = "//ul[@role='tablist']/li[@title='Details']/a")
     private WebElement detailsTab;
 
-    @FindBy(css = "button[title='OK']")
-    private WebElement okBtn;
-
-    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
-
     private void clickDetailsTab() {
         GuiInteractioner.clickWebElement(detailsTab);
-    }
-
-    private void clickOkbtn() {
-        GuiInteractioner.clickWebElement(okBtn);
     }
 
     private String getTextFromDetail(final String fieldName, final String tagType) {
@@ -62,7 +54,6 @@ public class LightningOpportunityDetailsPage extends AbstractOpportunityDetailsP
     @Override
     public Map<String, String> getOpportunityDetails(final Set<String> fields) {
         clickDetailsTab();
-        //clickOkbtn();
         Map opportunityInfoMap = new HashMap<String, String>();
         fields.forEach(field -> opportunityInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return opportunityInfoMap;
@@ -79,5 +70,10 @@ public class LightningOpportunityDetailsPage extends AbstractOpportunityDetailsP
         String currentUrl = PageTransporter.getCurrentUrl();
         return currentUrl.
                 substring(currentUrl.indexOf("Opportunity/") + OPPORTUNITY_STRING_SIZE, currentUrl.indexOf("/view"));
+    }
+
+    @Override
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(detailsTab));
     }
 }

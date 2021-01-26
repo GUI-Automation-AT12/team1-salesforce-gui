@@ -6,6 +6,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetailsPage.AbstractOpportunityDetailsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Set;
 
@@ -13,10 +14,6 @@ import java.util.Set;
  * [MR] Class that represents Opportunity Creation Page independent of the skin.
  */
 public abstract class AbstractOpportunityCreationPage extends BasePage {
-
-    @Override
-    protected void waitLoadPage() {
-    }
 
     @FindBy(css = "[title='Save']")
     private WebElement saveBtn;
@@ -37,4 +34,9 @@ public abstract class AbstractOpportunityCreationPage extends BasePage {
      */
     public abstract AbstractOpportunityDetailsPage fillOpportunityInformation(
             Set formFields, Opportunity opportunity);
+
+    @Override
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(saveBtn));
+    }
 }
