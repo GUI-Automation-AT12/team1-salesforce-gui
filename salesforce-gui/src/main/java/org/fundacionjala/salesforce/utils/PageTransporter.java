@@ -67,10 +67,11 @@ public final class PageTransporter {
         String skinUrl;
         if ("classic".equals(SalesforceProperties.getInstance().getSkin())) {
             skinUrl = SalesforceProperties.getInstance().getClassicSkinUrl();
+            navigateTo(getInstanceUrl() + skinUrl + url + "?source=lex");
         } else {
             skinUrl = SalesforceProperties.getInstance().getLightningSkinUrl();
+            navigateTo(getInstanceUrl() + skinUrl + url);
         }
-        navigateTo(getInstanceUrl() + skinUrl + url);
     }
 
     /**
@@ -82,27 +83,40 @@ public final class PageTransporter {
         return WebDriverManager.getInstance().getWebDriver().getCurrentUrl();
     }
 
-    /**
-     * [SL] Navigate to specific page.
-     *
-     * @param page
-     * @throws MalformedURLException
-     */
-    public static void navigateToPage(final String page) throws MalformedURLException {
-        String skin = SalesforceProperties.getInstance().getSkin();
-        switch (skin) {
+    private static String getUrlOfPage(final String page) {
+        String url;
+        switch (SalesforceProperties.getInstance().getSkin()) {
             case GenericConstants.SKIN_CLASSIC:
                 if (getCurrentUrl().contains(GenericConstants.SKIN_LIGHTNING)) {
                     GuiInteractioner.clickWebElement(By.cssSelector(".profileTrigger"));
                     GuiInteractioner.clickWebElement(By.cssSelector(".switch-to-aloha"));
                 }
-                navigateToUrl(URLConstants.URL_CLASSIC.get(page) + "?source=lex");
-                break;
-            case GenericConstants.SKIN_LIGHTNING:
-                navigateToUrl(URLConstants.URL_LIGHTNING.get(page));
+                url = URLConstants.URL_CLASSIC.get(page);
                 break;
             default:
-                navigateToUrl(URLConstants.URL_LIGHTNING.get(page));
+                url = URLConstants.URL_LIGHTNING.get(page);
         }
+        return url;
+    }
+
+    /**
+     * [SL] Navigate to specific page.
+     *
+     * @param page to go
+     * @throws MalformedURLException
+     */
+    public static void navigateToPage(final String page) throws MalformedURLException {
+        navigateToUrl(getUrlOfPage(page));
+    }
+
+    /**
+     * [MR] Navigate to specific page receiving another argument to format.
+     *
+     * @param page to go
+     * @param argToFormat to replace in url
+     * @throws MalformedURLException
+     */
+    public static void navigateToPage(final String page, final String argToFormat) throws MalformedURLException {
+        navigateToUrl(String.format(getUrlOfPage(page), argToFormat));
     }
 }

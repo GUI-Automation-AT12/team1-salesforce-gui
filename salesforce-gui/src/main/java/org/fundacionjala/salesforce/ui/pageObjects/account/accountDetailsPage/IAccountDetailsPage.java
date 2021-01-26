@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public interface IAccountDetailsPage {
     /**
-     * Gets specific data from Account Details.
+     * [MR] Gets specific data from Account Details.
      *
      * @param fields to specify required data
      * @return Account Details as Map
@@ -16,9 +16,17 @@ public interface IAccountDetailsPage {
     Map<String, String> getAccountDetails(Set<String> fields);
 
     /**
-     * Gets Account Id from the URL.
+     * [MR] Gets Account Id from the URL.
      *
      * @return Account Id
      */
     String getAccountId();
+
+    /**
+     * [MR] Search for an specific Opportunity in the Account Details Page.
+     *
+     * @param opportunityId to search
+     * @return true if the opportunity is present, otherwise returns false
+     */
+    boolean isOpportunityInList(String opportunityId);
 }

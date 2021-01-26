@@ -197,7 +197,7 @@ public class Account {
         this.updatedFields = accountUpdatedFields;
     }
 
-    private HashMap<String, Runnable> composeMapStrategy(final Map<String, String> accountInfo) {
+    private HashMap<String, Runnable> composeStrategySetterMap(final Map<String, String> accountInfo) {
         HashMap<String, Runnable> strategyMap = new HashMap<>();
         strategyMap.put(AccountConstants.NAME_KEY, () -> setName(accountInfo.get(AccountConstants.NAME_KEY)));
         strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
@@ -217,7 +217,7 @@ public class Account {
      * @param accountInfo
      */
     public void setInformation(final Map accountInfo) {
-        HashMap<String, Runnable> strategyMap = composeMapStrategy(accountInfo);
+        HashMap<String, Runnable> strategyMap = composeStrategySetterMap(accountInfo);
         accountInfo.keySet().forEach(key -> strategyMap.get(key).run());
     }
 

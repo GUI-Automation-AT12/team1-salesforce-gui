@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.ui.context;
 
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.entities.EntitiesParser;
+import org.fundacionjala.salesforce.ui.entities.Opportunity;
 import org.fundacionjala.salesforce.ui.entities.User;
 
 import java.io.IOException;
@@ -17,6 +18,8 @@ public class Context {
     private Account account;
     private List<String> preconditionAccountsList;
     private int examplesCount ;
+
+    private Opportunity opportunity;
 
     /**
      * Constructor for Context class.
@@ -98,6 +101,24 @@ public class Context {
      * Decrement the Example Count in one.
      */
     public void reduceExamplesCount() {
-        this.examplesCount --;
+        this.examplesCount--;
+    }
+
+    /**
+     * Set Context's Opportunity to share into StepDef classes.
+     *
+     * @param contextOpportunity
+     */
+    public void setOpportunity(final Opportunity contextOpportunity) {
+        this.opportunity = contextOpportunity;
+    }
+
+    /**
+     * Gets Context's Opportunity.
+     *
+     * @return opportunity
+     */
+    public Opportunity getOpportunity() {
+        return opportunity;
     }
 }

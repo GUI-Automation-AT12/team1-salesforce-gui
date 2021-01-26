@@ -31,7 +31,7 @@ public class AccountSteps {
     private String incorrectAssertionMessage = "The %1$s from %2$s does not match with the %1$s edited previously.";
 
     /**
-     * Adds Dependency injection to share Context information.
+     * [MR] Adds Dependency injection to share Context information.
      * @param sharedContext
      */
     public AccountSteps(final Context sharedContext) {
@@ -39,12 +39,12 @@ public class AccountSteps {
     }
 
     /**
-     * Creates an account from UI and update related account entity.
+     * [MR] Creates an account from UI and update related account entity.
      *
      * @param accountInfo to create a new Account
      */
     @When("I create an Account with the following data")
-    public void createAnAccountWithTheFollowingData(final Map accountInfo) {
+    public void createAnAccount(final Map accountInfo) {
         //Updating Entity
         account = new Account();
         account.setInformation(accountInfo);
@@ -58,10 +58,10 @@ public class AccountSteps {
     }
 
     /**
-     * Makes assertions for Account Details and the recently account entity.
+     * [MR] Makes assertions for Account Details and the recently account entity.
      */
     @Then("Account's new data should be displayed at details")
-    public void accountSNewDataShouldBeDisplayedAtDetails() {
+    public void verifyAccountDataIsDisplayedAtDetails() {
         Map<String, String> actualAccountDetails = skin.getAccountDetailsPage().
                 getAccountDetails(account.getUpdatedFields());
         Map<String, String> expectedAccountDetails = account.getAccountInfo();
@@ -74,12 +74,12 @@ public class AccountSteps {
     }
 
     /**
-     * Makes assertions with the data from Accounts Table and the recently account entity.
+     * [MR] Makes assertions with the data from Accounts Table and the recently account entity.
      *
      * @throws MalformedURLException for invalid navigation
      */
     @Then("Account's new data should be displayed in Accounts table")
-    public void accountSNewDataShouldBeDisplayedInAccountsTable() throws MalformedURLException {
+    public void verifyAccountDataIsDisplayedInAccountsTable() throws MalformedURLException {
         PageTransporter.navigateToPage("ACCOUNTS");
         Map<String, String> actualTableData = skin.getAccountsPage().
                 getAccountDataFromTable(account.getId());
@@ -93,13 +93,13 @@ public class AccountSteps {
     }
 
     /**
-     * Makes assertions with the data gotten via API and the edited fields of the account entity.
+     * [MR] Makes assertions with the data gotten via API and the edited fields of the account entity.
      */
-    @Then("the gotten data via API about the Account should contain the new data")
-    public void theGottenDataAboutTheAccountViaAPIShouldContainTheNewData() {
+    @Then("the API response about the Account should contain the new data")
+    public void verifyThatTheApiResponseAboutTheAccountContainsTheNewData() {
         Response response = RequestManager.get("/Account/" + account.getId());
         Map<String, String> actualApiResponseData = ApiResponseDataExtractor
-                .getAccountDataFromApi(response, account.getUpdatedFields());
+                .getDataFromApi(response, account.getUpdatedFields());
         Map<String, String> expectedApiResponseData = account.getAccountInfo();
         SoftAssert softAssert = new SoftAssert();
         actualApiResponseData.forEach((field, actualValue) -> {
