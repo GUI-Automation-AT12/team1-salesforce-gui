@@ -21,13 +21,6 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetail
  */
 public class ClassicSkinFactory implements ISkinFactory {
 
-    private ClassicAccountsPage accountsPage = new ClassicAccountsPage();
-    private ClassicAccountCreationPage accountCreationPage =  new ClassicAccountCreationPage();
-    private ClassicAccountDetailsPage accountDetailsPage = new ClassicAccountDetailsPage();
-    private ClassicOpportunitiesPage opportunitiesPage = new ClassicOpportunitiesPage();
-    private ClassicOpportunityCreationPage opportunityCreationPage = new ClassicOpportunityCreationPage();
-    private ClassicOpportunityDetailsPage opportunityDetailsPage = new ClassicOpportunityDetailsPage();
-
     /**
      * [MR] Gets Classic Factory's Accounts Page.
      *
@@ -35,7 +28,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountsPage getAccountsPage() {
-        return accountsPage;
+        return new ClassicAccountsPage();
     }
 
     /**
@@ -45,7 +38,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountCreationPage getAccountCreationPage() {
-        return accountCreationPage;
+        return new ClassicAccountCreationPage();
     }
 
     /**
@@ -55,7 +48,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountDetailsPage getAccountDetailsPage() {
-        return accountDetailsPage;
+        return new ClassicAccountDetailsPage();
     }
 
     /**
@@ -89,7 +82,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunitiesPage getOpportunitiesPage() {
-        return opportunitiesPage;
+        return new ClassicOpportunitiesPage();
     }
 
     /**
@@ -99,7 +92,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityCreationPage getOpportunityCreationPage() {
-        return opportunityCreationPage;
+        return new ClassicOpportunityCreationPage();
     }
 
     /**
@@ -109,7 +102,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityDetailsPage getOpportunityDetailsPage() {
-        return opportunityDetailsPage;
+        return new ClassicOpportunityDetailsPage();
     }
 
 

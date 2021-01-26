@@ -30,7 +30,7 @@ public class LightningImportAccountListPage extends AbstractAccountListPage {
      * @throws MalformedURLException
      */
     public List<Map<String, String>> getTableNewThisWeek() throws MalformedURLException {
-        PageTransporter.navigateToPage("ACCOUNT PAGE");
+        PageTransporter.navigateToPage("ACCOUNTS");
         getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(dropDownButton));
 
         GuiInteractioner.clickWebElement(dropDownButton);

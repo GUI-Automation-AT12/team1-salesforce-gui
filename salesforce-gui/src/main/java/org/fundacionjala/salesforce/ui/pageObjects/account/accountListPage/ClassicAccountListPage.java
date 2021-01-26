@@ -28,7 +28,7 @@ public class ClassicAccountListPage extends AbstractAccountListPage {
      */
     @Override
     public List<Map<String, String>> getTableNewThisWeek() throws MalformedURLException {
-        PageTransporter.navigateToPage("ACCOUNT PAGE");
+        PageTransporter.navigateToPage("ACCOUNTS");
 
         GuiInteractioner.clickWebElement(dropDownButton);
         GuiInteractioner.clickWebElement(newThisWeek);
