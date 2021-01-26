@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * [SL] This class read a csv file.
  */
-public final class CSVParse {
+public final class CSVReader {
 
     /**
      * [SL] Constructor.
      */
-    private CSVParse() {
+    private CSVReader() {
 
     }
 
