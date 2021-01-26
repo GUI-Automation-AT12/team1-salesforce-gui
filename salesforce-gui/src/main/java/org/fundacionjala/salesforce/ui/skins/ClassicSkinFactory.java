@@ -5,6 +5,12 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.Cl
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.ClassicAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.ClassicEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.AbstractOpportunitiesPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.ClassicOpportunitiesPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.ClassicOpportunityCreationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetailsPage.AbstractOpportunityDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetailsPage.ClassicOpportunityDetailsPage;
 
 /**
  * [MR] Factory Class that provides page objects related to Classic Skin.
@@ -14,9 +20,12 @@ public class ClassicSkinFactory implements ISkinFactory {
     private ClassicAccountsPage accountsPage = new ClassicAccountsPage();
     private ClassicAccountCreationPage accountCreationPage =  new ClassicAccountCreationPage();
     private ClassicAccountDetailsPage accountDetailsPage = new ClassicAccountDetailsPage();
+    private ClassicOpportunitiesPage opportunitiesPage = new ClassicOpportunitiesPage();
+    private ClassicOpportunityCreationPage opportunityCreationPage = new ClassicOpportunityCreationPage();
+    private ClassicOpportunityDetailsPage opportunityDetailsPage = new ClassicOpportunityDetailsPage();
 
     /**
-     * Gets SkinFactory's Accounts Page.
+     * [MR] Gets Classic Factory's Accounts Page.
      *
      * @return AccountsPage
      */
@@ -26,7 +35,7 @@ public class ClassicSkinFactory implements ISkinFactory {
     }
 
     /**
-     * Gets SkinFactory's Account Creation Page.
+     * [MR] Gets Classic Factory's Account Creation Page.
      *
      * @return AccountCreationPage
      */
@@ -36,7 +45,7 @@ public class ClassicSkinFactory implements ISkinFactory {
     }
 
     /**
-     * Gets SkinFactory's Account Details Page.
+     * [MR] Gets Classic Factory's Account Details Page.
      *
      * @return AccountDetailsPage
      */
@@ -54,4 +63,36 @@ public class ClassicSkinFactory implements ISkinFactory {
     public AbstractEditPersonalInformationPage personalInformation() {
         return new ClassicEditPersonalInformationPage();
     }
+
+    /**
+     * [MR] Returns Classic Factory's Opportunities Page.
+     *
+     * @return OpportunitiesPage
+     */
+    @Override
+    public AbstractOpportunitiesPage getOpportunitiesPage() {
+        return opportunitiesPage;
+    }
+
+    /**
+     * [MR] Returns Classic Factory's Opportunity Creation Page.
+     *
+     * @return OpportunityCreationPage
+     */
+    @Override
+    public AbstractOpportunityCreationPage getOpportunityCreationPage() {
+        return opportunityCreationPage;
+    }
+
+    /**
+     * [MR] Returns Classic Factory's Opportunity Details Page.
+     *
+     * @return OpportunityDetailsPage
+     */
+    @Override
+    public AbstractOpportunityDetailsPage getOpportunityDetailsPage() {
+        return opportunityDetailsPage;
+    }
+
+
 }

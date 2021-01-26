@@ -8,6 +8,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.L
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -18,10 +20,8 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
 
     private String accountNameXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
             + "//a[@data-refid]";
-
     private String accountSiteXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
             + "/td[not(contains(@class,'lock'))]//span[contains(@data-aura-class,'OutputText')]";
-
     private String accountPhoneXpath = "//tr[count(//tr[.//a[contains(@href,'%s')]]/preceding-sibling::tr) + 1]"
             + "//span[contains(@data-aura-class,'OutputPhone')]";
 
@@ -63,6 +63,7 @@ public class LightningAccountsPage extends BasePage implements IAccountsPage {
     }
 
     @Override
-    protected void waitLoadPage() {
+    protected final void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOf(newAccountBtn));
     }
 }
