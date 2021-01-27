@@ -5,6 +5,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.Li
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.LightningAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.LightningEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.AbstractHomePage;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.LightningHomePage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.AbstractOpportunitiesPage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.LightningOpportunitiesPage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
@@ -17,12 +19,15 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetail
  */
 public class LightningSkinFactory implements ISkinFactory {
 
-    private LightningAccountsPage accountsPage = new LightningAccountsPage();
-    private LightningAccountCreationPopup accountCreationPopup = new LightningAccountCreationPopup();
-    private LightningAccountDetailsPage accountDetailsPage = new LightningAccountDetailsPage();
-    private LightningOpportunitiesPage opportunitiesPage = new LightningOpportunitiesPage();
-    private LightningOpportunityCreationPopup opportunityCreationPage = new LightningOpportunityCreationPopup();
-    private LightningOpportunityDetailsPage opportunityDetailsPage = new LightningOpportunityDetailsPage();
+    /**
+     * [MR] Returns Lightning Factory's Home Page.
+     *
+     * @return HomePage
+     */
+    @Override
+    public AbstractHomePage getHomePage() {
+        return new LightningHomePage();
+    }
 
     /**
      * [MR] Gets Lightning Factory's Accounts Page.
@@ -31,7 +36,7 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public LightningAccountsPage getAccountsPage() {
-        return accountsPage;
+        return new LightningAccountsPage();
     }
 
     /**
@@ -41,7 +46,7 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public LightningAccountCreationPopup getAccountCreationPage() {
-        return accountCreationPopup;
+        return new LightningAccountCreationPopup();
     }
 
     /**
@@ -51,7 +56,7 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public LightningAccountDetailsPage getAccountDetailsPage() {
-        return accountDetailsPage;
+        return new LightningAccountDetailsPage();
     }
 
     /**
@@ -71,7 +76,7 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunitiesPage getOpportunitiesPage() {
-        return opportunitiesPage;
+        return new LightningOpportunitiesPage();
     }
 
     /**
@@ -81,7 +86,7 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityCreationPage getOpportunityCreationPage() {
-        return opportunityCreationPage;
+        return new LightningOpportunityCreationPopup();
     }
 
     /**
@@ -91,6 +96,6 @@ public class LightningSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityDetailsPage getOpportunityDetailsPage() {
-        return opportunityDetailsPage;
+        return  new LightningOpportunityDetailsPage();
     }
 }

@@ -71,6 +71,24 @@ public class Context {
     }
 
     /**
+     * Set Context's Opportunity to share into StepDef classes.
+     *
+     * @param contextOpportunity
+     */
+    public void setOpportunity(final Opportunity contextOpportunity) {
+        this.opportunity = contextOpportunity;
+    }
+
+    /**
+     * Gets Context's Opportunity.
+     *
+     * @return opportunity
+     */
+    public Opportunity getOpportunity() {
+        return opportunity;
+    }
+
+    /**
      * Gets the Precondition Account List.
      *
      * @return Precondition Account List
@@ -102,23 +120,5 @@ public class Context {
      */
     public void reduceExamplesCount() {
         this.examplesCount--;
-    }
-
-    /**
-     * Set Context's Opportunity to share into StepDef classes.
-     *
-     * @param contextOpportunity
-     */
-    public void setOpportunity(final Opportunity contextOpportunity) {
-        this.opportunity = contextOpportunity;
-    }
-
-    /**
-     * Gets Context's Opportunity.
-     *
-     * @return opportunity
-     */
-    public Opportunity getOpportunity() {
-        return opportunity;
     }
 }
