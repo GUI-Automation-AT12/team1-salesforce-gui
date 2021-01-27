@@ -11,14 +11,20 @@ public final class GenericConstants {
 
     }
 
-    /** Encode/Decode GenericConstants. **/
+    /**
+     * Encode/Decode Constants.
+     **/
     public static final String INVALID_TEXT_ENCODE = "Invalid encode text.";
 
-    /** ASCII Printable. **/
+    /**
+     * ASCII Printable.
+     **/
     public static final int ASCII_PRINTABLE_START = 32;
     public static final int ASCII_PRINTABLE_END = 126;
 
-    /** Skin name. **/
+    /**
+     * Skin name.
+     **/
     public static final String SKIN_CLASSIC = "classic";
     public static final String SKIN_LIGHTNING = "lightning";
 }

@@ -8,6 +8,7 @@ import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.ui.context.Context;
+import org.fundacionjala.salesforce.ui.entities.Account;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,13 +19,13 @@ import java.util.List;
  */
 public class AccountHooks {
 
-    //Context
     private final Context context;
     private List<String> preconditionAccountsList = new ArrayList<>();
-    private int examplesCount ;
+    private static int examplesCount ;
 
     /**
      * Adds Dependency injection to share Context information.
+     *
      * @param sharedContext
      */
     public AccountHooks(final Context sharedContext) {
@@ -43,8 +44,8 @@ public class AccountHooks {
         WebDriverManager.getInstance().quit();
     }
 
-    @Before(value = "@createAccounts")
-    public void createAccounts() throws IOException {
+    @Before(value = "@createAccountsFromCsv")
+    public void createAccountsFromCsv() throws IOException {
         try {
             RequestManager.get("/Account/");
         } catch(IllegalArgumentException e) {
@@ -65,8 +66,8 @@ public class AccountHooks {
         }
     }
 
-    @After(value = "@deleteAccounts")
-    public void deleteAccounts() {
+    @After(value = "@deleteAccountsFromCsv")
+    public void deleteAccountsFromCsv() {
         System.out.println(examplesCount);
         if (examplesCount > 1) {
             examplesCount--;
@@ -101,5 +102,15 @@ public class AccountHooks {
             e.printStackTrace();
         }
         return content;
+    }
+
+    /**
+     * [SL] Hook that delete an Account saved in Context via API.
+     */
+    @After(value = "@deleteAccounts", order = 1)
+    public void deleteAccounts() {
+        for (Account account : context.getAccountList()) {
+            RequestManager.delete("/Account/" + account.getId());
+        }
     }
 }

@@ -23,7 +23,7 @@ public class PersonalInformationSteps {
      */
     @When("I edit my personal information with the following data")
     public void editMyPersonalInformationWithTheFollowingData(final Map<String, String> formData) {
-        personalInformation = SkinManager.getInstance().getSkinFactory().personalInformation();
+        personalInformation = SkinManager.getInstance().getSkinFactory().personalInformationPage();
         personalInformation.update(formData);
     }
 

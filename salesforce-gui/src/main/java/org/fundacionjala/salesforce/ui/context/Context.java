@@ -18,7 +18,7 @@ public class Context {
     private Account account;
     private List<String> preconditionAccountsList;
     private int examplesCount ;
-
+    private List<Account> accountList;
     private Opportunity opportunity;
 
     /**
@@ -26,6 +26,7 @@ public class Context {
      */
     public Context() {
         this.usersList = new ArrayList<>();
+        accountList = new ArrayList<>();
     }
 
     private void setUsersListFromJson() throws IOException {
@@ -68,6 +69,24 @@ public class Context {
      */
     public Account getAccount() {
         return this.account;
+    }
+
+    /**
+     * [SL] Gets Context's accountIds.
+     *
+     * @return account
+     */
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    /**
+     * Set accountIds.
+     *
+     * @param contextAccountIdList list with all account ids
+     */
+    public void setAccountList(final List<Account> contextAccountIdList) {
+        accountList.addAll(contextAccountIdList);
     }
 
     /**
