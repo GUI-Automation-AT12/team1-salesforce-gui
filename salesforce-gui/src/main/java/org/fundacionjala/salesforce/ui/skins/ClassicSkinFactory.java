@@ -1,7 +1,11 @@
 package org.fundacionjala.salesforce.ui.skins;
 
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.AbstractImportAccountPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountImportPage.ClassicImportAccountPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountCreationPage.ClassicAccountCreationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage.ClassicAccountDetailsPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.AbstractAccountListPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.ClassicAccountListPage;
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.ClassicAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.ClassicEditPersonalInformationPage;
@@ -17,13 +21,6 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetail
  */
 public class ClassicSkinFactory implements ISkinFactory {
 
-    private ClassicAccountsPage accountsPage = new ClassicAccountsPage();
-    private ClassicAccountCreationPage accountCreationPage =  new ClassicAccountCreationPage();
-    private ClassicAccountDetailsPage accountDetailsPage = new ClassicAccountDetailsPage();
-    private ClassicOpportunitiesPage opportunitiesPage = new ClassicOpportunitiesPage();
-    private ClassicOpportunityCreationPage opportunityCreationPage = new ClassicOpportunityCreationPage();
-    private ClassicOpportunityDetailsPage opportunityDetailsPage = new ClassicOpportunityDetailsPage();
-
     /**
      * [MR] Gets Classic Factory's Accounts Page.
      *
@@ -31,7 +28,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountsPage getAccountsPage() {
-        return accountsPage;
+        return new ClassicAccountsPage();
     }
 
     /**
@@ -41,7 +38,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountCreationPage getAccountCreationPage() {
-        return accountCreationPage;
+        return new ClassicAccountCreationPage();
     }
 
     /**
@@ -51,7 +48,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public ClassicAccountDetailsPage getAccountDetailsPage() {
-        return accountDetailsPage;
+        return new ClassicAccountDetailsPage();
     }
 
     /**
@@ -60,10 +57,24 @@ public class ClassicSkinFactory implements ISkinFactory {
      * @return a ClassicEditPersonalInformationPage
      */
     @Override
-    public AbstractEditPersonalInformationPage personalInformation() {
+    public final AbstractEditPersonalInformationPage personalInformationPage() {
         return new ClassicEditPersonalInformationPage();
     }
 
+    @Override
+    public final AbstractImportAccountPage importAccountPage() {
+        return new ClassicImportAccountPage();
+    }
+
+    /**
+     * Returns accountListPage.
+     *
+     * @return a AbstractAccountListPage
+     */
+    @Override
+    public AbstractAccountListPage accountListPage() {
+        return new ClassicAccountListPage();
+    }
     /**
      * [MR] Returns Classic Factory's Opportunities Page.
      *
@@ -71,7 +82,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunitiesPage getOpportunitiesPage() {
-        return opportunitiesPage;
+        return new ClassicOpportunitiesPage();
     }
 
     /**
@@ -81,7 +92,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityCreationPage getOpportunityCreationPage() {
-        return opportunityCreationPage;
+        return new ClassicOpportunityCreationPage();
     }
 
     /**
@@ -91,7 +102,7 @@ public class ClassicSkinFactory implements ISkinFactory {
      */
     @Override
     public AbstractOpportunityDetailsPage getOpportunityDetailsPage() {
-        return opportunityDetailsPage;
+        return new ClassicOpportunityDetailsPage();
     }
 
 

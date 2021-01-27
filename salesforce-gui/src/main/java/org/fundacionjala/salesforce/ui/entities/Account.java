@@ -39,7 +39,7 @@ public class Account {
      * @param accountId
      */
     public void setId(final String accountId) {
-        this.id = accountId;
+        this.id = accountId.replace("\"", "");
     }
 
     /**
