@@ -16,8 +16,6 @@ public class Context {
 
     private List<User> usersList;
     private Account account;
-    private List<String> preconditionAccountsList;
-    private int examplesCount ;
     private List<Account> accountList;
     private Opportunity opportunity;
 
@@ -32,7 +30,6 @@ public class Context {
     private void setUsersListFromJson() throws IOException {
         this.usersList = EntitiesParser.getUsersListFromJson();
         this.account = null;
-        this.preconditionAccountsList = new ArrayList<>();
     }
 
     /**
@@ -105,39 +102,5 @@ public class Context {
      */
     public Opportunity getOpportunity() {
         return opportunity;
-    }
-
-    /**
-     * Gets the Precondition Account List.
-     *
-     * @return Precondition Account List
-     */
-    public List<String> getPreconditionAccountsList() {
-        return preconditionAccountsList;
-    }
-
-    /**
-     * Gets the example count as integer.
-     *
-     * @return examplesCount
-     */
-    public int getExamplesCount() {
-        return examplesCount;
-    }
-
-    /**
-     * Sets the example count as integer.
-     *
-     * @param examplesCount
-     */
-    public void setExamplesCount(int examplesCount) {
-        this.examplesCount = examplesCount;
-    }
-
-    /**
-     * Decrement the Example Count in one.
-     */
-    public void reduceExamplesCount() {
-        this.examplesCount--;
     }
 }

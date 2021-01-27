@@ -7,12 +7,15 @@ import org.apache.http.HttpStatus;
 import org.fundacionjala.core.api.client.RequestManager;
 import org.fundacionjala.core.selenium.interaction.WebDriverManager;
 import org.fundacionjala.salesforce.api.ApiAuthenticator;
+import org.fundacionjala.salesforce.cucumber.stepdefs.LoginSteps;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Account;
+import org.fundacionjala.salesforce.utils.CSVReader;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * [MR] Hooks for scenarios related to Accounts.
@@ -20,8 +23,10 @@ import java.util.List;
 public class AccountHooks {
 
     private final Context context;
-    private List<String> preconditionAccountsList = new ArrayList<>();
-    private static int examplesCount ;
+    private final List<String> csvAccountsList = new ArrayList<>();
+    private static int examplesCount;
+    private static final int CHARS_TO_TRIM = 3;
+    private static final int EXAMPLE_QUANTITY = 3;
 
     /**
      * Adds Dependency injection to share Context information.
@@ -33,7 +38,7 @@ public class AccountHooks {
     }
 
     /**
-     * Hook that delete an Account saved in Context via API.
+     * [MR] Hook that delete an Account saved in Context via API.
      */
     @After(value = "@deleteAccount", order = 1)
     public void deleteAccount() {
@@ -44,64 +49,51 @@ public class AccountHooks {
         WebDriverManager.getInstance().quit();
     }
 
+    /**
+     * [MR] Hook that create many account from a Csv file through Salesforce API.
+     *
+     * @throws IOException
+     */
     @Before(value = "@createAccountsFromCsv")
     public void createAccountsFromCsv() throws IOException {
         try {
             RequestManager.get("/Account/");
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             String sourceFile = "src/test/resources/files/csv/preconditionAccounts.csv";
             RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(
                     context.getUserByAlias("Account Owner User")));
-            List<String[]> accountsList = readCSVFile(sourceFile);
-            for (String[] accountInfo : accountsList) {
-                String body = "{\n" +
-                        "\"Name\": \"" + accountInfo[0] + "\", \n" +
-                        "\"Site\": \"" + accountInfo[1] + "\", \n" +
-                        "\"Phone\": \"" + accountInfo[2] + "\" \n" +
-                        "}";
-                RequestManager.post("/Account/", body);
-                preconditionAccountsList.add(accountInfo[0]);
+            List<Map<String, String>> accountsList = CSVReader.getListOfMapsFromCsvFile(sourceFile);
+            for (Map<String, String> accountInfo : accountsList) {
+                String body = "{\n";
+                for (String key : accountInfo.keySet()) {
+                    body += "\"" + key + "\": \"" + accountInfo.get(key) + "\", \n";
+                }
+                body = body.substring(0, body.length() - CHARS_TO_TRIM) + "\n}";
+                Response response = RequestManager.post("/Account/", body);
+                if (response.getStatusCode() == HttpStatus.SC_CREATED) {
+                    csvAccountsList.add(response.jsonPath().getString("id"));
+                }
             }
-            examplesCount = 3;
+            examplesCount = EXAMPLE_QUANTITY;
         }
     }
 
+    /**
+     * [MR] Hook that delete many accounts created from a Csv file through Salesforce API.
+     */
     @After(value = "@deleteAccountsFromCsv")
     public void deleteAccountsFromCsv() {
-        System.out.println(examplesCount);
         if (examplesCount > 1) {
             examplesCount--;
         } else {
-            Response response = RequestManager.get("/Account/");
-            List<String> accountNames = response.jsonPath().getList("recentItems.Name");
-            List<String> accountIds = response.jsonPath().getList("recentItems.Id");
-            for (String accountName : accountNames) {
-                if(preconditionAccountsList.contains(accountName)) {
-                    int index = accountNames.indexOf(accountName);
-                    System.out.println("TO-DELETE " + accountIds.get(index));
-                    RequestManager.delete("/Account/" + accountIds.get(index));
-                    accountNames.remove(index);
-                    accountIds.remove(index);
-                }
+            for (String id : csvAccountsList) {
+                RequestManager.delete("/Account/" + id);
             }
+            examplesCount = 0;
+            csvAccountsList.clear();
+            LoginSteps.setLoggedFalse();
+            WebDriverManager.getInstance().quit();
         }
-    }
-
-    public static List<String[]> readCSVFile(final String filePath) throws IOException {
-        int count = 0;
-        List<String[]> content = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                if (count != 0) {
-                    content.add(line.split(","));
-                }
-                count++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return content;
     }
 
     /**
