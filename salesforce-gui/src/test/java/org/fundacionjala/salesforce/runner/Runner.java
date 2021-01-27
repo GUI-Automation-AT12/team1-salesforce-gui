@@ -14,9 +14,9 @@ import org.testng.annotations.DataProvider;
  * Cucumber TestNG runner class.
  */
 @CucumberOptions(
-        plugin = {"pretty", "json:build/cucumber-reports/Cucumber.json"},
-        features = {"src/test/resources/features/"},
-        glue = {"org.fundacionjala.salesforce.cucumber.stepdefs"}
+        features = {"src/test/resources/features"},
+        glue = {"org.fundacionjala.salesforce.cucumber"},
+        plugin = {"pretty", "json:build/cucumber-reports/Cucumber.json"}
 )
 
 public final class Runner extends AbstractTestNGCucumberTests {

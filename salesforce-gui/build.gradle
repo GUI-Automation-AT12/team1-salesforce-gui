@@ -59,10 +59,20 @@ test {
 }
 
 task executeBDDTests(type: Test) {
+    dependsOn assemble, testClasses
     useTestNG()
     options {
         useDefaultListeners = false
         jvmArgs = ['-Dcucumber.plugin=rerun:build/target/rerun.txt']
+    }
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty',
+                    '--plugin', 'json:build/cucumber-reports/Cucumber.json',
+                    '--glue', 'org.fundacionjala.salesforce.cucumber.stepdefs', 'src/test/resources/features/']
+        }
     }
     testLogging.showStandardStreams = true
     scanForTestClasses = false
@@ -79,17 +89,19 @@ task reRunBDDTests(type: Test) {
     scanForTestClasses = false
 }
 
-task cucumber() {
+task cucumber(type: Test) {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            def tags = "not @skipScenario"
-            args = ['--plugin', 'pretty',
+            args = ['--plugin', 'html:cucumber-report',
+                    '--plugin', 'json:cucumber.json',
+                    '--plugin', 'pretty',
                     '--plugin', 'json:build/cucumber-reports/Cucumber.json',
-                    '--tags', tags,
-                    '--glue', 'org.fundacionjala.salesforce.cucumber.stepdefs', 'src/test/resources/features/']
+                    '--plugin', 'rerun:build/cucumber/rerun.txt',
+                    '--glue', 'org.fundacionjala.salesforce.cucumber', 'src/test/resources/features',
+                    '--tags', 'not @skipScenario']
         }
     }
 }
