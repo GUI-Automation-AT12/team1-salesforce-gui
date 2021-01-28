@@ -33,6 +33,14 @@ public final class DateConverter {
             case "YESTERDAY":
                 calendar.add(Calendar.DAY_OF_YEAR, -1);
                 break;
+            case "NEXT WEEK":
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                break;
+            case "NEXT MONTH":
+                calendar.add(Calendar.MONTH, 1);
+            case "NEXT YEAR":
+                calendar.add(Calendar.YEAR, 1);
+                break;
             default:
                 throw new DateTimeException("Invalid String to parse to a valid day.");
         }
