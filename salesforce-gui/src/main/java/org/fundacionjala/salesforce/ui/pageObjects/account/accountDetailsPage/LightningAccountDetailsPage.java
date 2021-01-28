@@ -3,12 +3,12 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.constants.TagConstants;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountEditPage.AbstractAccountEditPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountEditPage.LightningAccountEditPage;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
@@ -22,19 +22,18 @@ import java.util.function.Supplier;
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private static final int ACCOUNT_STRING_SIZE = 8;
-    private String accountInfoXpath = "//span[.='%1$s']/../../div[2]//%2$s";
-    private String opportunityToSearchXpath =
+    private static final String ACCOUNT_INFO = "//span[.='%1$s']/../../div[2]//%2$s";
+    private static final String OPPORTUNITY_TO_SEARCH =
             "//div[contains(@class,'normal')]//article[.//span[@title='Opportunities']]//a[contains(@href,'%s')]";
-
-    @FindBy(xpath = "//ul[@role='tablist']/li[@title='Details']/a")
-    private WebElement detailsTab;
+    private static final By DETAIL_TAB = By.xpath("//ul[@role='tablist']/li[@title='Details']/a");
+    private static final By SLA_EDITION_BUTTON = By.xpath("//button[@title='Edit SLA Expiration Date']");
 
     private void clickDetailsTab() {
-        GuiInteractioner.clickWebElement(detailsTab);
+        GuiInteractioner.clickWebElement(DETAIL_TAB);
     }
 
     private String getTextFromDetail(final String fieldName, final String tagType) {
-        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
+        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(ACCOUNT_INFO, fieldName, tagType)));
     }
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
@@ -53,6 +52,11 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
                 TagConstants.A_TAG + TagConstants.SLASH + TagConstants.SPAN_TAG));
         strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone",
                 TagConstants.A_TAG));
+        strategyMap.put(AccountConstants.SLA_EXPIRATION, () ->
+                getTextFromDetail("SLA Expiration Date", TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
+        strategyMap.put(AccountConstants.LAST_MODIFIED_BY, () ->
+                getTextFromDetail("Last Modified By",
+                        TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
         return strategyMap;
     }
 
@@ -64,7 +68,12 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
      */
     @Override
     public Map<String, String> getAccountDetails(final Set<String> fields) {
-        clickDetailsTab();
+        try {
+            clickDetailsTab();
+        } catch (Exception e) {
+            clickDetailsTab();
+        }
+
         Map accountInfoMap = new HashMap<String, String>();
         fields.forEach(field -> accountInfoMap.put(field, composeStrategyGetterMap().get(field).get()));
         return accountInfoMap;
@@ -92,15 +101,30 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
     @Override
     public boolean isOpportunityInList(final String opportunityId) {
         try {
-            getDriver().findElement(By.xpath(String.format(opportunityToSearchXpath, opportunityId)));
+            getDriver().findElement(By.xpath(String.format(OPPORTUNITY_TO_SEARCH, opportunityId)));
             return true;
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
+    /**
+     * [SL] Gets an accountEditPage.
+     *
+     * @return a instance of LightningAccountEditPage
+     */
+
+    public AbstractAccountEditPage getAccountEditPage() {
+        clickDetailsTab();
+        GuiInteractioner.clickWebElement(SLA_EDITION_BUTTON);
+        return new LightningAccountEditPage();
+    }
+
+    /**
+     * Method wait to load BoardPage.
+     */
     @Override
-    protected final void waitLoadPage() {
-        getDriverWait().until(ExpectedConditions.visibilityOf(detailsTab));
+    protected void waitLoadPage() {
+        getDriverWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(DETAIL_TAB));
     }
 }

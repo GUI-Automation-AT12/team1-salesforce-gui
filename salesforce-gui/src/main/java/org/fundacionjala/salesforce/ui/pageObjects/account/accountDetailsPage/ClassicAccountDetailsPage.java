@@ -3,10 +3,13 @@ package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.constants.AccountConstants;
 import org.fundacionjala.salesforce.constants.TagConstants;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountEditPage.AbstractAccountEditPage;
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountEditPage.ClassicAccountEditPage;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
 import org.fundacionjala.salesforce.utils.PageTransporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
@@ -22,6 +25,7 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
     private String accountInfoXpath = "//td[preceding-sibling::td[text()='%1$s']][1]//%2$s";
     private String opportunityToSearchXpath =
             "//div[contains(@id,'RelatedOpportunityList_body')]//th/a[contains(@href, '%s')]";
+    private static final By EDIT_BUTTON = By.xpath("//input[@title='Edit']");
 
     private String getTextFromTextDetail(final String fieldName, final String tagType) {
         return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfoXpath, fieldName, tagType)));
@@ -39,6 +43,10 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
         strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () ->
                 getTextFromTextDetail("Parent Account", TagConstants.A_TAG));
         strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromTextDetail("Phone", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.SLA_EXPIRATION, () ->
+                getTextFromTextDetail("SLA Expiration Date", TagConstants.DIV_TAG));
+        strategyMap.put(AccountConstants.LAST_MODIFIED_BY, () ->
+                getTextFromTextDetail("Last Modified By", TagConstants.DIV_TAG));
         return strategyMap;
     }
 
@@ -83,9 +91,23 @@ public class ClassicAccountDetailsPage extends BasePage implements IAccountDetai
         }
     }
 
+    /**
+     * [SL] Gets an accountEditPage.
+     *
+     * @return a instance of LightningAccountEditPage
+     */
+    @Override
+    public AbstractAccountEditPage getAccountEditPage() {
+        GuiInteractioner.clickWebElement(EDIT_BUTTON);
+        return new ClassicAccountEditPage();
+    }
+
+    /**
+     * Method wait to load BoardPage.
+     */
     @Override
     protected final void waitLoadPage() {
-        getDriverWait().until(ExpectedConditions.visibilityOf(
-                getDriver().findElement(By.cssSelector("[title='Edit']"))));
+        WebElement element = getDriver().findElement(By.cssSelector("[title='Edit']"));
+        getDriverWait().until(ExpectedConditions.visibilityOf(element));
     }
 }
