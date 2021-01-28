@@ -69,7 +69,7 @@ public class AccountSteps {
         SoftAssert softAssert = new SoftAssert();
         actualAccountDetails.forEach((field, actualValue) -> {
             softAssert.assertTrue(actualValue.startsWith(expectedAccountDetails.get(field)),
-                    String.format(incorrectAssertionMessage, field, "Account Details Page"));
+            String.format(incorrectAssertionMessage, field, "Account Details Page"));
         });
         softAssert.assertAll();
     }
@@ -88,7 +88,7 @@ public class AccountSteps {
         SoftAssert softAssert = new SoftAssert();
         actualTableData.forEach((field, actualValue) -> {
             softAssert.assertEquals(actualValue, expectedTableData.get(field),
-                    String.format(incorrectAssertionMessage, field, "Account Table"));
+            String.format(incorrectAssertionMessage, field, "Account Table"));
         });
         softAssert.assertAll();
     }
@@ -106,10 +106,10 @@ public class AccountSteps {
         actualApiResponseData.forEach((field, actualValue) -> {
             if (!field.equals(AccountConstants.PARENT_ACCOUNT_KEY)) {
                 softAssert.assertEquals(actualValue, expectedApiResponseData.get(field),
-                        String.format(incorrectAssertionMessage, field, "Account API response"));
+                String.format(incorrectAssertionMessage, field, "Account API response"));
             } else {
                 softAssert.assertEquals(actualValue, account.getParentAccount().getId(),
-                        String.format(incorrectAssertionMessage, field, "Account API response"));
+                String.format(incorrectAssertionMessage, field, "Account API response"));
             }
         });
         softAssert.assertAll();

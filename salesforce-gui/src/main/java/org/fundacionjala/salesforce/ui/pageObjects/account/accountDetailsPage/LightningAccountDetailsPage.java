@@ -22,18 +22,18 @@ import java.util.function.Supplier;
 public class LightningAccountDetailsPage extends BasePage implements IAccountDetailsPage {
 
     private static final int ACCOUNT_STRING_SIZE = 8;
-    private static final String ACCOUNT_INFO = "//span[.='%1$s']/../../div[2]//%2$s";
-    private static final String OPPORTUNITY_TO_SEARCH =
+    private static By detailTab = By.xpath("//ul[@role='tablist']/li[@title='Details']/a");
+    private By slaEditionButton = By.xpath("//button[@title='Edit SLA Expiration Date']");
+    private String accountInfo = "//span[.='%1$s']/../../div[2]//%2$s";
+    private String opportunityToSearch =
             "//div[contains(@class,'normal')]//article[.//span[@title='Opportunities']]//a[contains(@href,'%s')]";
-    private static final By DETAIL_TAB = By.xpath("//ul[@role='tablist']/li[@title='Details']/a");
-    private static final By SLA_EDITION_BUTTON = By.xpath("//button[@title='Edit SLA Expiration Date']");
 
     private void clickDetailsTab() {
-        GuiInteractioner.clickWebElement(DETAIL_TAB);
+        GuiInteractioner.clickWebElement(detailTab);
     }
 
     private String getTextFromDetail(final String fieldName, final String tagType) {
-        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(ACCOUNT_INFO, fieldName, tagType)));
+        return GuiInteractioner.getTextFromWebElement(By.xpath(String.format(accountInfo, fieldName, tagType)));
     }
 
     private HashMap<String, Supplier<String>> composeStrategyGetterMap() {
@@ -50,13 +50,11 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
                 TagConstants.A_TAG + TagConstants.SLASH + TagConstants.DIV_TAG));
         strategyMap.put(AccountConstants.PARENT_ACCOUNT_KEY, () -> getTextFromDetail("Parent Account",
                 TagConstants.A_TAG + TagConstants.SLASH + TagConstants.SPAN_TAG));
-        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone",
-                TagConstants.A_TAG));
+        strategyMap.put(AccountConstants.PHONE_KEY, () -> getTextFromDetail("Phone", TagConstants.A_TAG));
         strategyMap.put(AccountConstants.SLA_EXPIRATION, () ->
                 getTextFromDetail("SLA Expiration Date", TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
         strategyMap.put(AccountConstants.LAST_MODIFIED_BY, () ->
-                getTextFromDetail("Last Modified By",
-                        TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
+                getTextFromDetail("Last Modified By", TagConstants.LIGHTNING_FORMATTED_TEXT_TAG));
         return strategyMap;
     }
 
@@ -101,7 +99,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
     @Override
     public boolean isOpportunityInList(final String opportunityId) {
         try {
-            getDriver().findElement(By.xpath(String.format(OPPORTUNITY_TO_SEARCH, opportunityId)));
+            getDriver().findElement(By.xpath(String.format(opportunityToSearch, opportunityId)));
             return true;
         } catch (NoSuchElementException e) {
             return false;
@@ -116,7 +114,7 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
 
     public AbstractAccountEditPage getAccountEditPage() {
         clickDetailsTab();
-        GuiInteractioner.clickWebElement(SLA_EDITION_BUTTON);
+        GuiInteractioner.clickWebElement(slaEditionButton);
         return new LightningAccountEditPage();
     }
 
@@ -125,6 +123,6 @@ public class LightningAccountDetailsPage extends BasePage implements IAccountDet
      */
     @Override
     protected void waitLoadPage() {
-        getDriverWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(DETAIL_TAB));
+        getDriverWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(detailTab));
     }
 }
