@@ -1,9 +1,7 @@
 package org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.components.resultsPanel;
 
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +26,5 @@ public class ClassicResultsPanel extends AbstractResultsPanel {
             resultList.add(result.getText());
         }
         return resultList;
-    }
-
-    @Override
-    protected final void waitLoadPage() {
-        try {
-            getDriverWait().until(ExpectedConditions.elementToBeClickable(results.get(results.size() - 1)));
-        } catch (StaleElementReferenceException e) {
-            getDriverWait().until(ExpectedConditions.elementToBeClickable(results.get(results.size() - 1)));
-        }
     }
 }

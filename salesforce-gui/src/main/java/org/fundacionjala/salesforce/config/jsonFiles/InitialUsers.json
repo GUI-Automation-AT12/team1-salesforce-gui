@@ -1,17 +1,17 @@
 [
     {
         "alias": "Account Owner User",
-        "clientId": "",
-        "clientSecret": "",
-        "username": "",
-        "password": ""
+        "clientId": "M01WRzlrQnQxNjhtZGFfX0tzYWUwVjZTQ2hNTF9VTXBrYkc5TUVyX3piRXRKZ2xtYXVoWWpqQ1VLVnlHWWdvSnpTWDFZSldvM3AwR3dfemlOWFNxMQ==",
+        "clientSecret": "NjFGQkQzREVGNjEyRENDMEM0RDE2NjY5NkUxMjQxMUFFN0VDMDA0ODYyNDYxMEE1RTI0OTNEQUYzMEJEQUU2QQ==",
+        "username": "mirko@fjala.com",
+        "password": "NzI0NDA0NDZtZnJy"
     },
     {
         "alias": "Opportunity Owner User",
-        "clientId": "",
-        "clientSecret": "",
-        "username": "",
-        "password": ""
+        "clientId": "M01WRzlrQnQxNjhtZGFfX0tzYWUwVjZTQ2hNTF9VTXBrYkc5TUVyX3piRXRKZ2xtYXVoWWpqQ1VLVnlHWWdvSnpTWDFZSldvM3AwR3dfemlOWFNxMQ==",
+        "clientSecret": "NjFGQkQzREVGNjEyRENDMEM0RDE2NjY5NkUxMjQxMUFFN0VDMDA0ODYyNDYxMEE1RTI0OTNEQUYzMEJEQUU2QQ==",
+        "username": "mirko@fjala.com",
+        "password": "NzI0NDA0NDZtZnJy"
     },
     {
         "alias": "Editable User",

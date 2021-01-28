@@ -2,6 +2,7 @@ package org.fundacionjala.salesforce.cucumber.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.fundacionjala.core.api.client.RequestManager;
@@ -22,11 +23,11 @@ import java.util.Map;
  */
 public class AccountHooks {
 
+    //Dependency Injection
     private final Context context;
-    private final List<String> csvAccountsList = new ArrayList<>();
-    private static int examplesCount;
+
     private static final int CHARS_TO_TRIM = 3;
-    private static final int EXAMPLE_QUANTITY = 3;
+    private static List<String> csvAccountsList = new ArrayList<>();
 
     /**
      * Adds Dependency injection to share Context information.
@@ -74,22 +75,20 @@ public class AccountHooks {
                     csvAccountsList.add(response.jsonPath().getString("id"));
                 }
             }
-            examplesCount = EXAMPLE_QUANTITY;
         }
     }
 
     /**
      * [MR] Hook that delete many accounts created from a Csv file through Salesforce API.
+     *
+     * @param scenario run before this hook
      */
     @After(value = "@deleteAccountsFromCsv")
-    public void deleteAccountsFromCsv() {
-        if (examplesCount > 1) {
-            examplesCount--;
-        } else {
+    public void deleteAccountsFromCsv(final Scenario scenario) {
+        if (scenario.getSourceTagNames().contains("@FinalExample")) {
             for (String id : csvAccountsList) {
                 RequestManager.delete("/Account/" + id);
             }
-            examplesCount = 0;
             csvAccountsList.clear();
             LoginSteps.setLoggedFalse();
             WebDriverManager.getInstance().quit();
@@ -97,7 +96,7 @@ public class AccountHooks {
     }
 
     /**
-     * [SL] Hook that delete an Account saved in Context via API.
+     * [SL] Hook that delete Accounts List saved in Context via API.
      */
     @After(value = "@deleteAccounts", order = 1)
     public void deleteAccounts() {

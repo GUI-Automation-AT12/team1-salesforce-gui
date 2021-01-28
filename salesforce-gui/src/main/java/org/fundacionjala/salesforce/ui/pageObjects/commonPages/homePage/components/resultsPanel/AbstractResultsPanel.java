@@ -9,10 +9,21 @@ import java.util.List;
  */
 public abstract class AbstractResultsPanel extends BasePage {
 
+    private static final int TIME_TO_SLEEP = 2000;
+
     /**
      * [MR] Gets text from results at inputting text at search text box.
      *
      * @return a List of inner text.
      */
     public abstract List<String> getResults();
+
+    @Override
+    protected final void waitLoadPage() {
+        try {
+            Thread.sleep(TIME_TO_SLEEP);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
