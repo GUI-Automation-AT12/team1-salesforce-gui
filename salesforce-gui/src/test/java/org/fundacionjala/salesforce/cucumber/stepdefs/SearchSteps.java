@@ -25,6 +25,7 @@ public class SearchSteps {
     private ISkinFactory skin = SkinManager.getInstance().getSkinFactory();
     private String textToSearch;
     private String textToSearchWithoutAsterisk;
+    private static final String NAME_KEY = "Account Name";
 
     //Pages
     private AbstractResultsPanel resultsPanel;
@@ -90,18 +91,19 @@ public class SearchSteps {
         expectedData.forEach(expectedResult -> {
             Map<String, String> actualResult = null;
             for (Map<String, String> map : actualData) {
-                if (map.get("Account Name").equals(expectedResult.get("Account Name"))) {
+                if (map.get(NAME_KEY).equals(expectedResult.get(NAME_KEY))) {
                     actualResult = map;
                 }
             }
             Map<String, String> finalActualResult = actualResult;
             if (finalActualResult == null) {
-                softAssert.fail("The expected result: " + expectedResult.get("Account Name")
+                softAssert.fail("The expected result: " + expectedResult.get(NAME_KEY)
                         + " is not present in the table.");
             } else {
                 expectedResult.forEach((key, value) -> {
-                    softAssert.assertEquals(finalActualResult.get(key), value, "The expected " + key + ": "
-                            + value + " and actual: " + finalActualResult.get(key) + " are different.");
+                    softAssert.assertEquals(finalActualResult.get(key), value,
+                            "The expected " + key + ": " + value + " and actual: " + finalActualResult.get(key)
+                                    + " are different for \"" + expectedResult.get(NAME_KEY) + "\" account.");
                 });
             }
         });
