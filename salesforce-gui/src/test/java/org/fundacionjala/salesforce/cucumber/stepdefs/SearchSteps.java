@@ -7,16 +7,21 @@ import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.componen
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.searchResultsPage.AbstractSearchResultsPage;
 import org.fundacionjala.salesforce.ui.skins.ISkinFactory;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
+import org.fundacionjala.salesforce.utils.CSVReader;
 import org.testng.asserts.SoftAssert;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * [MR] Class that contains Salesforce Searching Step Definitions.
  */
 public class SearchSteps {
 
+    private static final String SOURCE_DIR = "src/test/resources/files/csv/searchResults/";
     private ISkinFactory skin = SkinManager.getInstance().getSkinFactory();
     private String textToSearch;
     private String textToSearchWithoutAsterisk;
@@ -76,9 +81,30 @@ public class SearchSteps {
      * @param fileName for assert data
      */
     @Then("the result data in the {string} section should match with the {string}")
-    public void verifyResultDataInASectionShouldMatchWithTheCsvFile(final String section, final String fileName) {
-        System.out.println("Example: " + textToSearch);
+    public void verifyResultDataInASectionShouldMatchWithTheCsvFile(final String section, final String fileName)
+            throws IOException {
         List<Map<String, String>> actualData = resultsPage.getDataAsListOfMaps(section);
-        System.out.println(">>>END OF EXAMPLE<<<");
+        List<Map<String, String>> expectedData = CSVReader.getListOfMapsFromCsvFile(SOURCE_DIR + fileName);
+        assertEquals(actualData.size(), expectedData.size(), "The results quantity is different.");
+        SoftAssert softAssert = new SoftAssert();
+        expectedData.forEach(expectedResult -> {
+            Map<String, String> actualResult = null;
+            for (Map<String, String> map : actualData) {
+                if (map.get("Account Name").equals(expectedResult.get("Account Name"))) {
+                    actualResult = map;
+                }
+            }
+            Map<String, String> finalActualResult = actualResult;
+            if (finalActualResult == null) {
+                softAssert.fail("The expected result: " + expectedResult.get("Account Name")
+                        + " is not present in the table.");
+            } else {
+                expectedResult.forEach((key, value) -> {
+                    softAssert.assertEquals(finalActualResult.get(key), value, "The expected " + key + ": "
+                            + value + " and actual: " + finalActualResult.get(key) + " are different.");
+                });
+            }
+        });
+        softAssert.assertAll();
     }
 }

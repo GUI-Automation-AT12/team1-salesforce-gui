@@ -70,7 +70,6 @@ public class LightningSearchResultsPage extends AbstractSearchResultsPage {
             });
             listOfMaps.add(resultMap);
         });
-        System.out.println(listOfMaps.size() + " MAPS");
         return listOfMaps;
     }
 
