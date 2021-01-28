@@ -19,12 +19,14 @@ import java.util.Map;
 /**
  * [SL] This class read a csv file.
  */
-public final class CSVReader {
+public final class CSVUtils {
+
+    private static final int CHARS_TO_TRIM = 3;
 
     /**
      * [SL] Constructor.
      */
-    private CSVReader() {
+    private CSVUtils() {
 
     }
 
@@ -66,5 +68,26 @@ public final class CSVReader {
             e.printStackTrace();
         }
         return content;
+    }
+
+    /**
+     * [MR] Gets a list of Json Body as Strings from a csv file specified.
+     *
+     * @param filePath to get data
+     * @return a List of json body as Strings
+     * @throws IOException
+     */
+    public static List<String> getListOFJsonBodyFromCsvFile(final String filePath) throws IOException {
+        List<Map<String, String>> mapList = getListOfMapsFromCsvFile(filePath);
+        List<String> bodyList = new ArrayList<>();
+        for (Map<String, String> map : mapList) {
+            String body = "{\n";
+            for (String key : map.keySet()) {
+                body += "\"" + key + "\": \"" + map.get(key) + "\", \n";
+            }
+            body = body.substring(0, body.length() - CHARS_TO_TRIM) + "\n}";
+            bodyList.add(body);
+        }
+        return bodyList;
     }
 }

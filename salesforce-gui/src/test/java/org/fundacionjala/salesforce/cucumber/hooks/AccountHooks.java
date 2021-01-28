@@ -11,12 +11,11 @@ import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.cucumber.stepdefs.LoginSteps;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.utils.CSVReader;
+import org.fundacionjala.salesforce.utils.CSVUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * [MR] Hooks for scenarios related to Accounts.
@@ -26,7 +25,6 @@ public class AccountHooks {
     //Dependency Injection
     private final Context context;
 
-    private static final int CHARS_TO_TRIM = 3;
     private static List<String> csvAccountsList = new ArrayList<>();
 
     /**
@@ -63,13 +61,8 @@ public class AccountHooks {
             String sourceFile = "src/test/resources/files/csv/preconditionAccounts.csv";
             RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(
                     context.getUserByAlias("Account Owner User")));
-            List<Map<String, String>> accountsList = CSVReader.getListOfMapsFromCsvFile(sourceFile);
-            for (Map<String, String> accountInfo : accountsList) {
-                String body = "{\n";
-                for (String key : accountInfo.keySet()) {
-                    body += "\"" + key + "\": \"" + accountInfo.get(key) + "\", \n";
-                }
-                body = body.substring(0, body.length() - CHARS_TO_TRIM) + "\n}";
+            List<String> bodyList = CSVUtils.getListOFJsonBodyFromCsvFile(sourceFile);
+            for (String body : bodyList) {
                 Response response = RequestManager.post("/Account/", body);
                 if (response.getStatusCode() == HttpStatus.SC_CREATED) {
                     csvAccountsList.add(response.jsonPath().getString("id"));

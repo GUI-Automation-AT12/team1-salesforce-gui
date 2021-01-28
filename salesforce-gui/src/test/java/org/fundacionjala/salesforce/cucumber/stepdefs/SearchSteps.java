@@ -7,7 +7,7 @@ import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.componen
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.searchResultsPage.AbstractSearchResultsPage;
 import org.fundacionjala.salesforce.ui.skins.ISkinFactory;
 import org.fundacionjala.salesforce.ui.skins.SkinManager;
-import org.fundacionjala.salesforce.utils.CSVReader;
+import org.fundacionjala.salesforce.utils.CSVUtils;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class SearchSteps {
     public void verifyResultDataInASectionShouldMatchWithTheCsvFile(final String section, final String fileName)
             throws IOException {
         List<Map<String, String>> actualData = resultsPage.getDataAsListOfMaps(section);
-        List<Map<String, String>> expectedData = CSVReader.getListOfMapsFromCsvFile(SOURCE_DIR + fileName);
+        List<Map<String, String>> expectedData = CSVUtils.getListOfMapsFromCsvFile(SOURCE_DIR + fileName);
         assertEquals(actualData.size(), expectedData.size(), "The results quantity is different.");
         SoftAssert softAssert = new SoftAssert();
         expectedData.forEach(expectedResult -> {

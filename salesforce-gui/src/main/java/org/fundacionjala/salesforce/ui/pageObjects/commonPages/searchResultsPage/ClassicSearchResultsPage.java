@@ -67,8 +67,8 @@ public class ClassicSearchResultsPage extends AbstractSearchResultsPage {
                 });
                 listOfMaps.add(resultMap);
             });
-            if (GuiInteractioner.getTextFromWebElement(getDriver()
-                    .findElement(By.xpath(resultsCounterXpath))).contains("+")) {
+            WebElement resultCounter = getDriver().findElement(By.xpath(resultsCounterXpath));
+            if (GuiInteractioner.getTextFromWebElement(resultCounter).contains("+")) {
                 GuiInteractioner.clickWebElement(By.cssSelector(showMoreLinkCss));
             } else {
                 break;
