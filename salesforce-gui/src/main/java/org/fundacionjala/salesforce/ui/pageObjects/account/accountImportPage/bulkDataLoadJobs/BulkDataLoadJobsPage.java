@@ -4,7 +4,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.fundacionjala.core.selenium.interaction.GuiInteractioner;
 import org.fundacionjala.salesforce.ui.entities.Account;
 import org.fundacionjala.salesforce.ui.pageObjects.commonPages.BasePage;
-import org.fundacionjala.salesforce.utils.CSVReader;
+import org.fundacionjala.salesforce.utils.CSVUtils;
 import org.fundacionjala.salesforce.utils.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -65,7 +65,7 @@ public class BulkDataLoadJobsPage extends BasePage {
         Thread.sleep(WAIT_TIME);
         fileListResult = FileUtils.listOfFiles(DOWNLOAD_PATH, "result", 1);
         for (String file : fileListResult) {
-            for (CSVRecord record : CSVReader.getRecords(file)) {
+            for (CSVRecord record : CSVUtils.getRecords(file)) {
                 if (record.get("Success").equals("false") || !record.get("Error").isEmpty()) {
                     return false;
                 }
@@ -86,8 +86,8 @@ public class BulkDataLoadJobsPage extends BasePage {
         fileListRequest = FileUtils.listOfFiles(DOWNLOAD_PATH, "request", 1);
         List<Account> accountList = new ArrayList<>();
         for (int i = 0; i < fileListResult.size(); i++) {
-            List<CSVRecord> csvRecordsResult = CSVReader.getRecords(fileListResult.get(i));
-            List<CSVRecord> csvRecordsRequest = CSVReader.getRecords(fileListRequest.get(i));
+            List<CSVRecord> csvRecordsResult = CSVUtils.getRecords(fileListResult.get(i));
+            List<CSVRecord> csvRecordsRequest = CSVUtils.getRecords(fileListRequest.get(i));
             for (int j = 0; j < csvRecordsResult.size(); j++) {
                 CSVRecord csvResult = csvRecordsResult.get(j);
                 CSVRecord csvRequest = csvRecordsRequest.get(j);

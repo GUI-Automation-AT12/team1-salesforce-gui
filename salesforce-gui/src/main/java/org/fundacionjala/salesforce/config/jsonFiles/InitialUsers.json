@@ -7,6 +7,13 @@
         "password": ""
     },
     {
+        "alias": "Opportunity Owner User",
+        "clientId": "",
+        "clientSecret": "",
+        "username": "",
+        "password": ""
+    },
+    {
         "alias": "Editable User",
         "clientId": "",
         "clientSecret": "",

@@ -17,7 +17,6 @@ public class Context {
     private List<User> usersList;
     private Account account;
     private List<Account> accountList;
-
     private Opportunity opportunity;
 
     /**
