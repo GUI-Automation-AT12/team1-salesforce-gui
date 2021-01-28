@@ -104,6 +104,4 @@ public class ClassicSkinFactory implements ISkinFactory {
     public AbstractOpportunityDetailsPage getOpportunityDetailsPage() {
         return new ClassicOpportunityDetailsPage();
     }
-
-
 }
