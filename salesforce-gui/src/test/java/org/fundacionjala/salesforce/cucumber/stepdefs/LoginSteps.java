@@ -26,6 +26,8 @@ public class LoginSteps {
     //Entities
     private User user;
 
+    private static boolean logged = false;
+
     /**
      * Adds Dependency injection to share Context information.
      *
@@ -33,6 +35,29 @@ public class LoginSteps {
      */
     public LoginSteps(final Context sharedContext) {
         this.context = sharedContext;
+    }
+
+    /**
+     * [MR] Ask to know if a user is logged in Salesforce or not.
+     *
+     * @return true when is logged, otherwise returns false
+     */
+    public static boolean isLogged() {
+        return logged;
+    }
+
+    /**
+     * [MR] Sets logged variable as true.
+     */
+    public static void setLoggedTrue() {
+        logged = true;
+    }
+
+    /**
+     * [MR] Sets logged variable as false.
+     */
+    public static void setLoggedFalse() {
+        logged = false;
     }
 
     /**
@@ -53,12 +78,15 @@ public class LoginSteps {
         //Updating User Entity to get credentials
         user = context.getUserByAlias(userAlias);
 
+        if (!isLogged()) {
         //Set User Authentication to use Salesforce API in next steps
-        RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(user));
+            RequestManager.setRequestSpec(ApiAuthenticator.getLoggedReqSpec(user));
 
         //Login from UI
-        PageTransporter.navigateToLoginPage();
-        LoginPage loginPage = new LoginPage();
-        loginPage.login(user.getUsername(), DecodingUtils.base64Decode(user.getPassword()));
+            PageTransporter.navigateToLoginPage();
+            LoginPage loginPage = new LoginPage();
+            loginPage.login(user.getUsername(), DecodingUtils.base64Decode(user.getPassword()));
+            setLoggedTrue();
+        }
     }
 }

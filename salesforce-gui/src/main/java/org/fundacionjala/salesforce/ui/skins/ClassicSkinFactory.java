@@ -9,6 +9,8 @@ import org.fundacionjala.salesforce.ui.pageObjects.account.accountListPage.Class
 import org.fundacionjala.salesforce.ui.pageObjects.account.accountsPage.ClassicAccountsPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.AbstractEditPersonalInformationPage;
 import org.fundacionjala.salesforce.ui.pageObjects.PersonalInformation.ClassicEditPersonalInformationPage;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.AbstractHomePage;
+import org.fundacionjala.salesforce.ui.pageObjects.commonPages.homePage.ClassicHomePage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.AbstractOpportunitiesPage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunitiesPage.ClassicOpportunitiesPage;
 import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityCreationPage.AbstractOpportunityCreationPage;
@@ -20,6 +22,16 @@ import org.fundacionjala.salesforce.ui.pageObjects.opportunity.opportunityDetail
  * [MR] Factory Class that provides page objects related to Classic Skin.
  */
 public class ClassicSkinFactory implements ISkinFactory {
+
+    /**
+     * [MR] Returns Classic Factory's Home Page.
+     *
+     * @return HomePage
+     */
+    @Override
+    public AbstractHomePage getHomePage() {
+        return new ClassicHomePage();
+    }
 
     /**
      * [MR] Gets Classic Factory's Accounts Page.
