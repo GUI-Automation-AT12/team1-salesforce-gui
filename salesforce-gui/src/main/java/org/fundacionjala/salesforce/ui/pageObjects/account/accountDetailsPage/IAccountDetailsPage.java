@@ -1,5 +1,7 @@
 package org.fundacionjala.salesforce.ui.pageObjects.account.accountDetailsPage;
 
+import org.fundacionjala.salesforce.ui.pageObjects.account.accountEditPage.AbstractAccountEditPage;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -29,4 +31,11 @@ public interface IAccountDetailsPage {
      * @return true if the opportunity is present, otherwise returns false
      */
     boolean isOpportunityInList(String opportunityId);
+
+    /**
+     * [SL] Gets account edit page.
+     *
+     * @return AbstractAccountEditPage
+     */
+    AbstractAccountEditPage getAccountEditPage();
 }

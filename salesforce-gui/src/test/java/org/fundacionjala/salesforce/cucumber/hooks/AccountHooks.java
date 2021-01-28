@@ -11,9 +11,11 @@ import org.fundacionjala.salesforce.api.ApiAuthenticator;
 import org.fundacionjala.salesforce.cucumber.stepdefs.LoginSteps;
 import org.fundacionjala.salesforce.ui.context.Context;
 import org.fundacionjala.salesforce.ui.entities.Account;
-import org.fundacionjala.salesforce.utils.CSVUtils;
+import org.fundacionjala.salesforce.ui.entities.User;
+import org.fundacionjala.salesforce.utils.Setup;
 
 import java.io.IOException;
+import org.fundacionjala.salesforce.utils.CSVUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,8 +95,16 @@ public class AccountHooks {
      */
     @After(value = "@deleteAccounts", order = 1)
     public void deleteAccounts() {
-        for (Account account : context.getAccountList()) {
-            RequestManager.delete("/Account/" + account.getId());
-        }
+        Setup.deleteAccounts(context.getAccountList());
+    }
+
+    /**
+     * [SL] Hook that create an Accounts via API.
+     */
+    @Before(value = "@createAccount", order = 1)
+    public void createAccounts() throws IOException {
+        User user = context.getUserByAlias("Account Owner User");
+        List<Account> accounts = Setup.createAccounts(user);
+        context.setAccountList(accounts);
     }
 }
