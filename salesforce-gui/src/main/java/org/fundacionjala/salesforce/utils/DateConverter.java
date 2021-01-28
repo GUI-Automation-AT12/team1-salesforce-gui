@@ -34,7 +34,7 @@ public final class DateConverter {
                 calendar.add(Calendar.DAY_OF_YEAR, -1);
                 break;
             case "NEXT WEEK":
-                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                calendar.add(Calendar.DAY_OF_WEEK, 1);
                 break;
             case "NEXT MONTH":
                 calendar.add(Calendar.MONTH, 1);
