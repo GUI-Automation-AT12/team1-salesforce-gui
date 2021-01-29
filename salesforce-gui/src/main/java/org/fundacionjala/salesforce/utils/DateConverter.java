@@ -18,7 +18,8 @@ public final class DateConverter {
     }
 
     /**
-     * Convert a Text provided to a Date.
+     * [MR]Convert a Text provided to a Date.
+     *
      * @param text to parse
      * @return date
      */
@@ -48,7 +49,8 @@ public final class DateConverter {
     }
 
     /**
-     * Convert a date to a String formatted for salesforce.
+     * [MR]Convert a date to a String formatted for salesforce.
+     *
      * @param date to parse
      * @return formatted String
      */
@@ -57,15 +59,20 @@ public final class DateConverter {
     }
 
     /**
-     * Convert a String date to formatted String for Salesforce.
+     * [MR]Convert a String date to formatted String for Salesforce.
+     *
      * @param dateToParse as String
      * @param sourceFormat of the String
      * @return formatted String
      */
     public static String convertStringToFormattedText(final String dateToParse, final String sourceFormat) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat(sourceFormat);
-            return new SimpleDateFormat("d/M/yyyy").format(formatter.parse(dateToParse));
+            if (dateToParse == null) {
+                return null;
+            } else {
+                SimpleDateFormat formatter = new SimpleDateFormat(sourceFormat);
+                return new SimpleDateFormat("d/M/yyyy").format(formatter.parse(dateToParse));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
