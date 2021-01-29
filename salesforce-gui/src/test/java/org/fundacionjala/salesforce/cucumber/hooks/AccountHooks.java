@@ -47,7 +47,6 @@ public class AccountHooks {
         if (response.statusCode() == HttpStatus.SC_OK) {
             RequestManager.delete("/Account/" + context.getAccount().getId());
         }
-        WebDriverManager.getInstance().quit();
     }
 
     /**
