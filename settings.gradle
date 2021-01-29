@@ -1,0 +1,4 @@
+rootProject.name = 'gui-salesforce'
+
+include 'salesforce-core'
+include 'salesforce-gui'
