@@ -26,8 +26,6 @@ public final class ApiResponseDataExtractor {
         strategyMap.put(AccountConstants.DESCRIPTION_KEY, response.jsonPath().getString("Description"));
         strategyMap.put(OpportunityConstants.ACCOUNT_KEY, response.jsonPath().getString("AccountId"));
         strategyMap.put(OpportunityConstants.STAGE_KEY, response.jsonPath().getString("StageName"));
-        strategyMap.put(OpportunityConstants.CLOSE_DATE_KEY,
-                DateConverter.convertStringToFormattedText(response.jsonPath().getString("CloseDate"), "yyyy-MM-dd"));
         return strategyMap;
     }
 
